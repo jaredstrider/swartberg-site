@@ -357,14 +357,7 @@ footer p { max-width: 100ch; }
         <div class="pyrnote"><span>Base: most capacity, longest life</span><span>Top: highest quality, shortest life</span></div>
       </div>
     </div>
-    <div class="keyrow">
-      <span class="st measured"><i>●</i>Measured on our data</span>
-      <span class="st"><i>◐</i>Lead, re-test on exchange data</span>
-      
-      <span class="st failed"><i>×</i>Tested and rejected, or failed calibration; kept as the record</span>
-    </div>
     <div class="fams" id="fams"></div>
-    <p class="cap">Citations are listed so that each thesis can be checked. Working papers are marked as such. Candidates that require futures across markets, option history or digital-asset venues are researched as the data and accounts are put in place.</p>
   </section>
 
 
@@ -574,7 +567,7 @@ const FAM = [
     lead: 'Koijen, Moskowitz, Pedersen and Vrugt (2018)',
     glyph: '<path class="gh" d="M4,52 L216,52"/><path class="ln" d="M4,16 L216,16"/><path class="ink" d="M60,20 L60,48 M56,44 L60,48 L64,44 M140,20 L140,48 M136,44 L140,48 L144,44"/>',
     pays: 'Investors pay to borrow in low-yielding assets and to hedge. Carry collects that payment and gives some back in sharp, rare crashes.',
-    cands: [['G10 currency carry', 'Lustig, Roussanov and Verdelhan (2011), Review of Financial Studies', 'm'],],
+    cands: [],
     alloc: [1, .5, 0, .5],
     why: ['Carry earns steadily while risk appetite holds.', 'Rate moves in inflationary periods disturb carry; half size.', 'Carry crashes when investors cut risk (Brunnermeier, Nagel and Pedersen 2008); off.', 'Back at half size while volatility is still high.'] },
   { id: 'value', name: 'Value', group: 'prem', forces: ['infl', 'usd', 'curves', 'eq'],
@@ -582,7 +575,7 @@ const FAM = [
     lead: 'Asness, Moskowitz and Pedersen (2013)',
     glyph: '<path class="gh" d="M4,44 C80,38 150,32 216,28"/><path class="ln" d="M4,44 C26,30 42,10 66,10 S100,34 118,46 S150,58 166,40 S198,28 216,28"/>',
     pays: 'Prices overshoot away from fundamentals and return slowly. Holding the cheap asset is uncomfortable, and that discomfort is paid.',
-    cands: [['Currency value against purchasing power', 'Menkhoff, Sarno, Schmeling and Schrimpf (2017), Review of Financial Studies', 'm'],],
+    cands: [],
     alloc: [.5, .5, .5, 1],
     why: ['Value is slow; a steady half weight.', 'Half weight; the inflation evidence for value is mixed.', 'Half weight; cheap assets can get cheaper in stress.', 'Value and momentum move against each other; value carries the rebound that hurts momentum (Asness, Moskowitz and Pedersen 2013).'] },
   { id: 'vp', name: 'Volatility', group: 'prem', forces: ['vol', 'credit', 'eq'],
@@ -590,8 +583,7 @@ const FAM = [
     lead: 'Carr and Wu (2009)',
     glyph: '<path class="ln" d="M4,18 C50,12 90,22 130,16 S190,14 216,18"/><path class="ink" d="M4,46 C24,34 40,56 62,44 S100,34 120,48 S170,38 190,46 L216,42"/><path class="gh" d="M40,20 L40,48 M110,20 L110,46 M180,18 L180,44"/>',
     pays: 'Investors pay for insurance against falls. Selling part of it, within a written crash budget, collects the premium.',
-    cands: [['VIX futures roll-down with a term-structure filter', 'Simon and Campasano (2014), Journal of Derivatives; Johnson (2017), JFQA', 'm'],
-            ['Put-writing only when the variance premium is high', 'Bollerslev, Tauchen and Zhou (2009), RFS; Bondarenko (2014), Quarterly Journal of Finance', 'm'],],
+    cands: [],
     alloc: [1, .5, 0, 1],
     why: ['The premium is collected while VIX futures are in contango.', 'Half size while inflation shocks move volatility.', 'Off the day VIX futures invert (Johnson 2017).', 'Back on after five days of contango.'] },
   { id: 'trend', name: 'Trend following', group: 'beh', forces: ['rates', 'yld', 'oil', 'gold', 'usd', 'eq'],
@@ -599,7 +591,7 @@ const FAM = [
     lead: 'Moskowitz, Ooi and Pedersen (2012)',
     glyph: '<path class="gh" d="M4,58 C70,48 140,30 216,10"/><path class="ln" d="M4,58 L22,50 L32,55 L52,42 L64,47 L84,34 L96,39 L118,26 L130,30 L152,20 L166,24 L190,12 L216,6"/>',
     pays: 'Information spreads slowly and hedgers must trade whatever the price, so moves persist. The oldest documented effect in the book.',
-    cands: [['Time-series momentum, twelve months, volatility scaled', 'Moskowitz, Ooi and Pedersen (2012), Journal of Financial Economics', 'm'],],
+    cands: [],
     alloc: [1, 1, 1, .5],
     why: ['On in every state as the core of the book.', 'Trend and commodities have worked in high and rising inflation (Neville et al. 2021).', 'Trend has earned returns in large equity and bond drawdowns for a century (Hurst, Ooi and Pedersen 2017).', 'Trends reverse at turning points; half size in recoveries (Daniel and Moskowitz 2016).'] },
   { id: 'mom', name: 'Momentum', group: 'beh', forces: ['eq', 'news', 'curves'],
@@ -607,7 +599,7 @@ const FAM = [
     lead: 'Asness, Moskowitz and Pedersen (2013)',
     glyph: '<rect class="fs" x="8" y="48" width="26" height="12"/><rect class="fs" x="50" y="40" width="26" height="20"/><rect class="fs" x="92" y="32" width="26" height="28"/><rect class="fl" x="134" y="20" width="26" height="40"/><rect class="fl" x="176" y="8" width="26" height="52"/><path class="ink" d="M8,64 L210,64"/>',
     pays: 'Investors under-react to news, and hedgers rebalance into the close. Winners keep winning for a while.',
-    cands: [['Last-half-hour momentum on index futures', 'Gao, Han, Li and Zhou (2018), JFE; Baltussen, Da, Lammers and Martens (2021), JFE', 'c'],],
+    cands: [],
     alloc: [1, 1, .5, 0],
     why: ['On while trends in relative strength persist.', 'On; news-driven moves extend.', 'The intraday leg stays on; the cross-sectional leg halves.', 'Momentum crashes in rebounds after stress (Daniel and Moskowitz 2016); off.'] },
   { id: 'brk', name: 'Breakout', group: 'beh', forces: ['eq', 'vol', 'news'],
@@ -615,8 +607,7 @@ const FAM = [
     lead: 'George and Hwang (2004)',
     glyph: '<rect class="fs" x="4" y="28" width="124" height="24" stroke-dasharray="3 4"/><path class="ln" d="M4,40 L18,32 L32,48 L46,33 L60,47 L74,31 L88,46 L102,34 L118,44 L130,30 L150,18 L176,12 L216,4"/>',
     pays: 'Ranges break when positioning is forced to cover past a level everyone watches. Breakouts pay when volatility expands.',
-    cands: [['Noise-area intraday breakout', 'Zarattini, Aziz and Barbon (2024), working paper', 'c'],
-            ['Opening-range breakout', 'Zarattini and Aziz (2023), working paper', 'c']],
+    cands: [],
     alloc: [.5, 1, 1, .5],
     why: ['Quiet ranges give false breaks; half size.', 'On; inflation surprises move prices out of ranges.', 'Intraday momentum is strongest in high volatility (Gao et al. 2018).', 'Half size while ranges reset.'] },
   { id: 'mr', name: 'Mean reversion', group: 'beh', forces: ['eq', 'vol'],
@@ -624,7 +615,7 @@ const FAM = [
     lead: 'Nagel (2012)',
     glyph: '<path class="gh" d="M4,34 L216,34 M4,12 L216,12 M4,56 L216,56"/><path class="ln" d="M4,34 C16,8 30,8 42,34 S68,60 80,34 S106,10 118,34 S144,58 156,34 S182,14 194,34 L216,30"/>',
     pays: 'Traders who need to trade now pay those who provide liquidity, and pay most when markets are stressed.',
-    cands: [['Short-term reversal', 'Lehmann (1990), Quarterly Journal of Economics. No effect since 1990', 'x'],],
+    cands: [],
     alloc: [.5, .5, 1, 1],
     why: ['Half size; little is paid for liquidity in calm markets.', 'Half size.', 'Reversal returns rise with volatility as liquidity providers are paid more (Nagel 2012).', 'On while liquidity is still expensive.'] },
   { id: 'seas', name: 'Seasonal', group: 'str', forces: ['rates', 'eq', 'gold'],
@@ -640,8 +631,7 @@ const FAM = [
     lead: 'Makarov and Schoar (2020)',
     glyph: '<path class="ln" d="M4,10 C80,12 150,28 216,32"/><path class="ink" d="M4,58 C80,54 150,38 216,34"/><path class="gh" d="M30,12 L30,56 M90,16 L90,50 M150,26 L150,40"/>',
     pays: 'The same exposure is priced differently in two places. The return with the least risk per unit, and the first to close.',
-    cands: [['Crypto cash-and-carry on funding rates', 'Schmeling, Schrimpf and Todorov (2023), BIS working paper. On watch', 'm'],
-            ['Cross-venue crypto price gaps', 'Makarov and Schoar (2020), Journal of Financial Economics. Not tradable for us', 'x'],],
+    cands: [],
     alloc: [1, 1, 1, 1],
     why: ['On; capacity, not regime, is the limit.', 'On.', 'On; dislocations widen in stress.', 'On.'] },
 ];
@@ -674,7 +664,6 @@ document.getElementById('fams').innerHTML = FAM.map(f => `
     <div class="fh"><i class="sw"></i><h3>${f.name}</h3></div>
     <div class="grp">${GROUPS[f.group]}</div>
     <p class="pays">${esc(f.pays)}</p>
-    <ul class="cands">${f.cands.map(c => `<li><span class="cn">${esc(c[0])}</span><span class="ct">${esc(c[1])}</span><span class="st ${ST[c[2]][2]}"><i>${ST[c[2]][0]}</i>${ST[c[2]][1]}</span></li>`).join('')}</ul>
   </article>`).join('');
 
 /* ---------- heat table ---------- */
