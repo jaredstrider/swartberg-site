@@ -256,6 +256,22 @@ html.embed body { padding-inline: 0; }
 html.embed .top, html.embed footer, html.embed section:not(.hero),
 html.embed .hero > .eyebrow, html.embed .hero > h1, html.embed .hero > .lede, html.embed .hero > .stack { display: none !important; }
 html.embed .hero { padding-block: 0; border-bottom: 0; }
+/* phone mode for the book and the market cycle */
+.sleevelist { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 14px; padding: 12px 0 2px; font-size: 12px; }
+.sleevelist span { display: flex; align-items: center; gap: 7px; min-width: 0; }
+.sleevelist i { width: 9px; height: 9px; flex: none; background: var(--g); }
+.sleevelist b { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sleevelist small { font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; color: var(--subtle); margin-left: auto; flex: none; }
+.sleevelist span.off { opacity: .45; }
+@media (max-width: 620px) {
+  #web { height: clamp(360px, 108vw, 430px); }
+  .controls { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; scrollbar-width: none; }
+  .controls::-webkit-scrollbar { display: none; }
+  .controls .lbl, .chip { flex: none; white-space: nowrap; }
+  .sleevelist { display: grid; }
+  #cycle { min-width: 0; }
+  .readout .rc { font-size: 11px; }
+}
 footer { padding-block: 40px 56px; display: grid; gap: 12px; font-size: 12px; color: var(--subtle); border-top: 1px solid var(--ink); }
 footer p { max-width: 100ch; }
 
@@ -296,6 +312,7 @@ footer p { max-width: 100ch; }
       <div class="readout" id="readout"><span class="rs">Regime</span><span class="rn">Full book</span><span class="rc">All nine sleeves shown</span></div>
       <span class="hint">Move the pointer to turn the book</span>
     </div>
+    <div class="sleevelist" id="sleevelist" aria-label="The sleeves and their state in the regime shown"></div>
     <div class="webnote">
       <div class="legend">
         <span class="prem"><i class="sw"></i>Risk premia</span>
@@ -699,6 +716,7 @@ function setRegime(r) {
     rc.innerHTML = `<span><b>${n(1)}</b> on</span><span><b>${n(.5)}</b> half size</span><span><b>${n(0)}</b> off</span>`;
   }
   readout.classList.remove('flash'); void readout.offsetWidth; readout.classList.add('flash');
+  renderSleeveList(r);
   bump = 1;
   drawHeat(); drawBraid(); drawEngine(); drawChain(); drawCurves(); drawCycle();
   if (reduce) { FAM.forEach(f => lvl[f.id] = target(f)); drawWeb(); }
@@ -723,14 +741,14 @@ function build3D() {
 let S = {};
 function project() {
   const cy = Math.cos(rot.yaw), sy = Math.sin(rot.yaw), cp = Math.cos(rot.pitch), sp = Math.sin(rot.pitch);
-  const R = Math.min(W * (W < 620 ? 0.30 : 0.33), H * 0.40), D = 3.2;
+  const nar = W < 620, R = Math.min(W * (nar ? 0.42 : 0.33), H * (nar ? 0.36 : 0.40)), D = 3.2;
   S = {};
   for (const id in P3) {
     const [x, y, z] = P3[id];
     const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
     const y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
     const p = D / (D + z2);
-    S[id] = { x: W / 2 + x1 * R * p, y: H / 2 + 34 + y2 * R * p, p, z: z2, front: (1 - z2) / 2 };
+    S[id] = { x: W / 2 + x1 * R * p, y: H / 2 + (nar ? 22 : 34) + y2 * R * p, p, z: z2, front: (1 - z2) / 2 };
   }
 }
 function layout() {
@@ -762,12 +780,13 @@ function drawWeb() {
   });
   ctx.globalAlpha = 1;
   // nodes drawn back to front
-  const order = Object.keys(S).sort((a, b) => S[b].z - S[a].z);
+  const order = Object.keys(S).filter(k => k !== 'book').sort((a, b) => S[b].z - S[a].z).concat('book');   // the book is always drawn last, on top
   order.forEach(id => {
     const n = S[id];
     const force = FORCES.find(f => f.id === id), fam = FAM.find(f => f.id === id);
     if (force) {
       const s = 7 * n.p; ctx.globalAlpha = 0.35 + 0.65 * n.front; ctx.fillStyle = C.ink; ctx.fillRect(n.x - s / 2, n.y - s / 2, s, s);
+      if (!narrow) {
       ctx.font = `500 ${narrow ? 9 : 11}px "IBM Plex Mono", Menlo, monospace`; ctx.fillStyle = C.ink2; ctx.textBaseline = 'middle';
       const label = force.name.toUpperCase(), tw = ctx.measureText(label).width, dx = n.x - W / 2;
       let right = dx >= 0;
@@ -776,6 +795,7 @@ function drawWeb() {
       ctx.textAlign = centre ? 'center' : (right ? 'left' : 'right');
       const ly = Math.max(10, Math.min(H - 10, n.y + (centre ? (n.y < H / 2 ? -13 : 13) : 0)));
       ctx.fillText(label, n.x + (centre ? 0 : right ? 10 : -10), ly);
+      }
     } else if (fam) {
       const L = lvl[fam.id], s = (narrow ? 10 : 13) * n.p * (0.75 + 0.75 * L), col = gcol(fam.group);
       ctx.globalAlpha = 1;
@@ -789,8 +809,8 @@ function drawWeb() {
       ctx.globalAlpha = 0.3 + 0.7 * Math.max(L, 0.1);
       ctx.font = `${L > 0.9 && regime >= 0 ? 800 : 700} ${narrow ? 11 : 13}px Archivo, "Helvetica Neue", Arial, sans-serif`; ctx.fillStyle = C.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       const below = n.y >= S.book.y - 4, off = s / 2 + 12;
-      ctx.fillText(fam.name, n.x, n.y + (below ? off : -off));
-      if (regime >= 0) {
+      if (!narrow) ctx.fillText(fam.name, n.x, n.y + (below ? off : -off));
+      if (regime >= 0 && !narrow) {
         const w = ALLOC_WORD(fam.alloc[regime]).toUpperCase(); ctx.font = `500 ${narrow ? 9 : 10}px "IBM Plex Mono", Menlo, monospace`;
         const tw = ctx.measureText(w).width + 8, ty = n.y + (below ? off + 15 : -(off + 15));
         ctx.globalAlpha = 1;
@@ -1114,24 +1134,30 @@ const CYC = (() => {
   const bounds = []; let c = 0; segs.forEach(([r, n]) => { bounds.push([c, c + n, r]); c += n; });
   return { px: px.slice(1), st, vol, bounds, T: c };
 })();
-const CX0 = 20, CX1 = 980, cX = i => CX0 + i / (CYC.T - 1) * (CX1 - CX0);
-const cPriceTop = 34, cPriceH = 120, cVolTop = 170, cVolH = 40;
+let NARROW_CYC = false, CX0 = 20, CX1 = 980, CYW = 1000, CYH = 230, cPriceTop = 34, cPriceH = 120, cVolTop = 170, cVolH = 40;
+function cycleGeom() {   // a taller, shorter drawing on phones so the labels stay readable
+  NARROW_CYC = innerWidth < 620;
+  [CX0, CX1, CYW, CYH, cPriceTop, cPriceH, cVolTop, cVolH] = NARROW_CYC ? [10, 390, 400, 300, 44, 150, 225, 55] : [20, 980, 1000, 230, 34, 120, 170, 40];
+  document.getElementById('cycle').setAttribute('viewBox', `0 0 ${CYW} ${CYH}`);
+}
+const cX = i => CX0 + i / (CYC.T - 1) * (CX1 - CX0);
 const cLo = Math.min(...CYC.px), cHi = Math.max(...CYC.px), cY = v => cPriceTop + cPriceH - (v - cLo) / (cHi - cLo) * cPriceH;
 const vMax = Math.max(...CYC.vol), vY = v => cVolTop + cVolH - v / vMax * cVolH;
 function drawCycle() {
-  const svg = document.getElementById('cycle');
+  cycleGeom();
+  const svg = document.getElementById('cycle'), fs = NARROW_CYC ? 12 : 13, fm = NARROW_CYC ? 9 : 10;
   let o = '';
   CYC.bounds.forEach(([s, e, r]) => {
     const x = cX(s), w = cX(e - 1) - x + (CX1 - CX0) / CYC.T, sel = regime === r, dim = regime >= 0 && !sel;
     o += `<g class="band" data-regime="${r}"><rect x="${x.toFixed(1)}" y="${cPriceTop - 22}" width="${w.toFixed(1)}" height="${cVolTop + cVolH - cPriceTop + 22}" fill="${rcol(r)}" opacity="${dim ? 0.08 : r === 2 ? 0.22 : 0.42}"/>`;
     if (sel) o += `<rect x="${x.toFixed(1)}" y="${cPriceTop - 22}" width="${w.toFixed(1)}" height="4" fill="${C.mark}"/>`;
-    o += `<text x="${(x + 8).toFixed(1)}" y="${cPriceTop - 7}" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="${sel ? 800 : 700}" fill="${C.ink}" opacity="${dim ? 0.45 : 1}">${REGIMES[r].name}</text></g>`;
+    o += `<text x="${(x + (NARROW_CYC ? 4 : 8)).toFixed(1)}" y="${cPriceTop - 7}" font-family="Archivo, Arial, sans-serif" font-size="${fs}" font-weight="${sel ? 800 : 700}" fill="${C.ink}" opacity="${dim ? 0.45 : 1}">${NARROW_CYC ? RSHORT[r] : REGIMES[r].name}</text></g>`;
   });
   o += `<path d="${CYC.px.map((v, i) => `${i ? 'L' : 'M'}${cX(i).toFixed(1)},${cY(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${C.ink}" stroke-width="2" pointer-events="none"/>`;
   o += `<path d="M${cX(0)},${cVolTop + cVolH} ${CYC.vol.map((v, i) => `L${cX(i).toFixed(1)},${vY(v).toFixed(1)}`).join(' ')} L${cX(CYC.T - 1)},${cVolTop + cVolH} Z" fill="${C.sep}" opacity=".55" pointer-events="none"/>`;
   o += `<line x1="${CX0}" x2="${CX1}" y1="${cVolTop + cVolH}" y2="${cVolTop + cVolH}" stroke="${C.sep}" pointer-events="none"/>`;
-  o += `<text x="${CX0 + 4}" y="${cVolTop + 12}" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="${C.ink2}" pointer-events="none">REALISED VOLATILITY</text>`;
-  o += `<text x="${CX1 - 4}" y="${cPriceTop + 14}" text-anchor="end" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="${C.ink2}" pointer-events="none">PRICE</text>`;
+  o += `<text x="${CX0 + 4}" y="${cVolTop + 12}" font-family="IBM Plex Mono, Menlo, monospace" font-size="${fm}" fill="${C.ink2}" pointer-events="none">REALISED VOLATILITY</text>`;
+  o += `<text x="${CX1 - 4}" y="${cPriceTop + 14}" text-anchor="end" font-family="IBM Plex Mono, Menlo, monospace" font-size="${fm}" fill="${C.ink2}" pointer-events="none">PRICE</text>`;
   o += `<g id="cyHead" pointer-events="none"><line y1="${cPriceTop - 22}" y2="${cVolTop + cVolH}" x1="0" x2="0" stroke="${C.ink}" stroke-width="1.5"/><rect id="cyDot" x="-6" y="0" width="12" height="12" fill="${C.mark}" stroke="${C.ink}" stroke-width="1.5"/></g>`;
   svg.innerHTML = o;
   placeHead(headI);
@@ -1173,7 +1199,13 @@ function cycleTick() {
 
 function drawAll() { C = css(); drawCycle(); drawCalc(); drawChain(); drawCurves(); drawHeat(); drawBraid(); drawProof(); drawEngine(); layout(); drawWeb(); }
 build3D(); drawAll();
-addEventListener('resize', () => { layout(); drawWeb(); });
+addEventListener('resize', () => { layout(); drawWeb(); drawCycle(); });
+function renderSleeveList(r) {
+  const sl = document.getElementById('sleevelist'); if (!sl) return;
+  sl.innerHTML = FAM.map(f => { const a = r < 0 ? 1 : f.alloc[r]; return `<span class="${f.group}${r >= 0 && a === 0 ? ' off' : ''}"><i></i><b>${f.name}</b><small>${r < 0 ? '' : ALLOC_WORD(a).toUpperCase()}</small></span>`; }).join('');
+}
+renderSleeveList(-1);
+if (matchMedia('(hover: none)').matches) document.querySelector('.hint').textContent = 'Drag to turn the book';
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawAll);
 new MutationObserver(drawAll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 if (document.fonts) document.fonts.ready.then(() => { drawWeb(); drawBraid(); });
