@@ -1,1179 +1,349 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex">
-</head>
-<body>
 <meta charset="utf-8">
-<title>Swartberg Portfolio Vision</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swartberg Capital</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' width='64' height='64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Cpolygon points='8,50 28,14 38,32 44,22 56,50' fill='%23ffffff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,500;100,600;100,800;112,800&family=IBM+Plex+Mono:wght@400;500&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a long institutional brief on white paper, square corners, hairline rules, warm panels for diagrams; colour lives only in the three style groups and the yellow marker. */
-:root {
-  --ink: #000000; --ink-2: #333333; --subtle: #656560; --sep: #9b9b91;
-  --paper: #ffffff; --paper-warm: #f5f5eb; --paper-2: #fafaf4; --line: #d7d7cd;
-  --g-prem: #00a896; --g-beh: #8e50ed; --g-str: #ff4713; --mark: #ffce00;
-  --on: #000000; --on-fg: #ffffff; --half: #9b9b91; --half-fg: #000000; --off: #f5f5eb; --off-fg: #656560;
-  --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
-  --math: "STIX Two Text", "Cambria Math", "Times New Roman", serif;
-  --max: 1160px;
-  --step-1: 1.25rem; --step-2: 1.6rem; --step-3: 2.3rem; --step-4: clamp(2.5rem, 6vw, 4.6rem);
-}
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  color-scheme: dark; --ink: #ffffff; --ink-2: #d9d9d3; --subtle: #9b9b91; --sep: #7d7d73;
-  --paper: #000000; --paper-warm: #111110; --paper-2: #0a0a0a; --line: #333333;
-  --g-prem: #00a593; --g-beh: #9461f0; --g-str: #f2582a;
-  --on: #ffffff; --on-fg: #000000; --half: #656560; --half-fg: #ffffff; --off: #111110; --off-fg: #9b9b91;
-} }
-:root[data-theme="dark"] {
-  color-scheme: dark; --ink: #ffffff; --ink-2: #d9d9d3; --subtle: #9b9b91; --sep: #7d7d73;
-  --paper: #000000; --paper-warm: #111110; --paper-2: #0a0a0a; --line: #333333;
-  --g-prem: #00a593; --g-beh: #9461f0; --g-str: #f2582a;
-  --on: #ffffff; --on-fg: #000000; --half: #656560; --half-fg: #ffffff; --off: #111110; --off-fg: #9b9b91;
-}
-* { box-sizing: border-box; }
-body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.55; padding-inline: 20px; padding-block: 0; }
-.wrap { max-width: var(--max); margin: 0 auto; }
-h1, h2, h3 { font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
-h1 { font-size: var(--step-4); font-stretch: 112%; }
-h2 { font-size: var(--step-3); }
-h3 { font-size: var(--step-1); letter-spacing: -0.01em; }
-p { margin: 0; max-width: 65ch; }
-.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); display: flex; align-items: center; gap: 10px; }
-.eyebrow::before { content: ""; width: 10px; height: 10px; background: var(--mark); display: inline-block; }
-.muted { color: var(--subtle); }
-.num { font-variant-numeric: tabular-nums; }
-button { font: inherit; color: inherit; }
-:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.prem { --g: var(--g-prem); } .beh { --g: var(--g-beh); } .str { --g: var(--g-str); }
-
-.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 22px; border-bottom: 1px solid var(--line); }
-.top svg { height: 22px; width: auto; color: var(--ink); display: block; }
-.top .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); }
-
-section { padding-block: 72px; border-bottom: 1px solid var(--line); display: grid; gap: 28px; }
-section:last-of-type { border-bottom: 0; }
-.head { display: grid; gap: 14px; }
-.lede { font-size: var(--step-1); color: var(--ink-2); max-width: 62ch; }
-.sub { display: grid; gap: 10px; margin-top: 24px; }
-
-/* hero */
-.hero { padding-block: 56px 40px; gap: 22px; }
-.hero h1 { max-width: 20ch; }
-.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.controls .lbl { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); margin-right: 6px; }
-.chip { border: 1px solid var(--line); background: var(--paper); padding: 9px 15px; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: 0; position: relative; transition: background .2s, color .2s, border-color .2s; }
-.chip:hover { border-color: var(--ink); }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.chip[aria-pressed="true"]::after { content: ""; position: absolute; left: -1px; right: -1px; bottom: -5px; height: 4px; background: var(--mark); }
-.webbox { background: var(--paper-warm); position: relative; overflow: hidden; }
-#web { display: block; width: 100%; height: clamp(440px, 64vw, 660px); cursor: grab; touch-action: pan-y; }
-.readout { position: absolute; left: 20px; top: 18px; display: grid; gap: 4px; pointer-events: none; max-width: calc(100% - 40px); }
-.readout .rn { font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-.readout .rs { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); }
-.readout .rc { display: flex; gap: 14px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--ink-2); margin-top: 4px; }
-.readout .rc b { color: var(--ink); }
-.readout.flash .rn { animation: flash .6s ease-out; }
-@keyframes flash { from { transform: translateY(8px); opacity: .2; } to { transform: none; opacity: 1; } }
-.hint { position: absolute; right: 18px; bottom: 14px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); pointer-events: none; }
-.webnote { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--subtle); }
-.legend { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; color: var(--ink-2); }
-.legend span { display: inline-flex; align-items: center; gap: 8px; }
-.sw { width: 12px; height: 12px; display: inline-block; flex: none; background: var(--g); }
-.sw.ink { background: var(--ink); }
-
-/* mission */
-.mission { font-size: var(--step-2); font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; max-width: 36ch; }
-.mission b { font-weight: 800; }
-.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--ink); }
-@media (max-width: 760px) { .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.fact { padding: 18px 18px 18px 0; display: grid; gap: 4px; align-content: start; }
-.fact .n { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.02em; }
-.fact .t { font-size: 14px; color: var(--ink-2); max-width: 26ch; }
-
-/* styles grid */
-.styles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-@media (max-width: 900px) { .styles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .styles { grid-template-columns: 1fr; } }
-.tile { background: var(--paper); padding: 22px; display: grid; gap: 10px; align-content: start; min-width: 0; transition: background .25s; }
-.tile:hover { background: var(--paper-2); }
-.tile .glyph { width: 100%; max-width: 220px; height: 74px; display: block; color: var(--g); overflow: visible; }
-.tile .glyph .ln { fill: none; stroke: var(--g); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.tile .glyph .gh { fill: none; stroke: var(--sep); stroke-width: 1.2; stroke-dasharray: 3 4; }
-.tile .glyph .ink { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
-.tile .glyph .fl { fill: var(--g); }
-.tile .glyph .fs { fill: none; stroke: var(--sep); stroke-width: 1.2; }
-.tile:hover .glyph .ln, .tile:hover .glyph .ink { animation: draw 1.4s cubic-bezier(.3,.7,.2,1); }
-@keyframes draw { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
-.tile .tn { display: flex; align-items: center; gap: 10px; }
-.tile .grp { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); }
-.tile .edge { font-size: 14px; color: var(--ink-2); }
-.tile .by { font-size: 12px; color: var(--subtle); border-top: 1px solid var(--line); padding-top: 8px; }
-.tile .by b { color: var(--ink); font-weight: 600; }
-
-/* figures */
-.figure { background: var(--paper-warm); padding: 24px; display: grid; gap: 16px; align-content: start; min-width: 0; }
-.scrollx { overflow-x: auto; }
-#braid { display: block; width: 100%; min-width: 640px; height: auto; }
-.cap { font-size: 13px; color: var(--subtle); max-width: 80ch; }
-.tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--paper); padding: 8px 10px; font-size: 13px; line-height: 1.4; max-width: 300px; z-index: 10; }
-
-/* pyramid + sleeves */
-.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: center; }
-@media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
-.pyr { display: grid; gap: 4px; justify-items: center; }
-.pyr div { padding: 16px 12px; text-align: center; color: #fff; font-weight: 700; display: grid; gap: 2px; }
-.pyr small { font-weight: 400; font-size: 13px; opacity: 0.92; }
-.pyr .p3 { width: 46%; background: var(--g-str); }
-.pyr .p2 { width: 73%; background: var(--g-beh); }
-.pyr .p1 { width: 100%; background: var(--g-prem); }
-.pyrnote { display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); margin-top: 10px; }
-.fams { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-@media (max-width: 960px) { .fams { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .fams { grid-template-columns: 1fr; } }
-.fam { background: var(--paper); padding: 22px; display: grid; gap: 12px; align-content: start; min-width: 0; }
-.fam .fh { display: flex; align-items: center; gap: 10px; }
-.fam .grp { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); }
-.fam .pays { font-size: 14px; color: var(--ink-2); }
-.cands { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 12px; }
-.cands li { display: grid; gap: 3px; }
-.cands .cn { font-size: 14px; font-weight: 600; line-height: 1.35; }
-.cands .ct { font-size: 12px; color: var(--subtle); line-height: 1.4; }
-.cands li.more { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: var(--subtle); border-top: 1px dashed var(--line); padding-top: 8px; }
-.st { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; display: inline-flex; gap: 6px; align-items: center; color: var(--ink-2); }
-.st i { font-style: normal; font-size: 12px; }
-.st.measured, .st.failed { font-weight: 500; color: var(--ink); }
-.keyrow { display: flex; flex-wrap: wrap; gap: 18px; }
-
-/* proof */
-.proofs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-@media (max-width: 960px) { .proofs { grid-template-columns: 1fr; } }
-.proofs svg { width: 100%; height: auto; display: block; }
-.proofs h3 { font-size: 1.05rem; }
-.wf-test { animation: wfp 4.8s infinite; }
-@keyframes wfp { 0%, 14% { opacity: 1; } 22%, 100% { opacity: .45; } }
-.hurdles { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
-.hurdles th, .hurdles td { text-align: left; padding: 11px 16px 11px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-.hurdles thead th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); font-weight: 400; border-bottom: 1px solid var(--ink); }
-.hurdles td.v { font-family: var(--mono); font-weight: 500; white-space: nowrap; }
-.hurdles td.w { color: var(--ink-2); }
-
-/* ladder */
-.ladder { display: grid; border-top: 2px solid var(--ink); }
-.rung { display: grid; grid-template-columns: 44px minmax(0, 1.25fr) minmax(0, 1fr) minmax(120px, 1.1fr); gap: 16px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
-@media (max-width: 760px) { .rung { grid-template-columns: 36px minmax(0, 1fr) minmax(90px, .8fr); } .rung .who { display: none; } }
-.rung .rn { font-family: var(--mono); font-size: 13px; color: var(--subtle); }
-.rung .nm { font-weight: 700; }
-.rung .ds { font-size: 13px; color: var(--ink-2); }
-.rung .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--subtle); }
-.rung.top { background: var(--paper-warm); }
-.rung.top .rn { color: var(--ink); font-weight: 500; }
-.lane { display: flex; flex-wrap: wrap; gap: 5px; min-height: 16px; align-items: center; }
-.tok { width: 13px; height: 13px; background: var(--g); display: inline-block; }
-.tok.out { outline: 2px solid var(--g-str); outline-offset: 1px; }
-.ahl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 32px; background: var(--paper-warm); padding: 28px; }
-@media (max-width: 760px) { .ahl { grid-template-columns: 1fr; } }
-.ahl q { font-size: var(--step-1); font-weight: 600; line-height: 1.35; quotes: "\201C" "\201D"; }
-.ahl ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: var(--ink-2); font-size: 15px; }
-.rules { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-.rules.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-@media (max-width: 900px) { .rules, .rules.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .rules, .rules.four { grid-template-columns: 1fr; } }
-.rule { display: grid; gap: 8px; align-content: start; border-top: 2px solid var(--ink); padding-top: 14px; }
-.rule p { font-size: 15px; color: var(--ink-2); }
-
-/* engine */
-#engine { display: block; width: 100%; min-width: 760px; height: auto; }
-.heat { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 14px; }
-.heat th, .heat td { padding: 0; text-align: left; transition: opacity .3s; }
-.heat thead th { font-weight: 600; padding-bottom: 8px; }
-.heat thead button { background: none; border: 0; border-bottom: 3px solid transparent; padding: 4px 2px; cursor: pointer; font-weight: 700; font-size: 14px; text-align: left; }
-.heat thead button[aria-pressed="true"] { border-bottom-color: var(--mark); }
-.heat thead small { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.04em; color: var(--subtle); font-weight: 400; text-transform: uppercase; }
-.heat tbody th { padding: 2px 16px 2px 0; font-weight: 600; white-space: nowrap; }
-.heat tbody th span { display: inline-flex; align-items: center; gap: 8px; }
-.heat td { padding: 2px; }
-.heat .dim { opacity: .28; }
-.cell { display: block; padding: 10px 12px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; border: 2px solid transparent; cursor: default; }
-.cell.on { background: var(--on); color: var(--on-fg); }
-.cell.half { background: var(--half); color: var(--half-fg); }
-.cell.off { background: var(--off); color: var(--off-fg); }
-.heat td.sel .cell { border-color: var(--mark); }
-
-.stack { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px 18px; }
-.stack span::before { content: "■ "; color: var(--mark); }
-.m { font-family: var(--math); font-size: 1.08em; white-space: nowrap; }
-.m i { font-style: italic; }
-.frac { display: inline-grid; vertical-align: middle; text-align: center; margin: 0 2px; }
-.frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 3px 1px; }
-.frac > span:last-child { padding: 1px 3px 0; }
-.sq { border-top: 1px solid currentColor; padding: 0 2px; margin-left: 1px; }
-.eqs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-@media (max-width: 960px) { .eqs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .eqs { grid-template-columns: 1fr; } }
-.eq { background: var(--paper); padding: 22px; display: grid; gap: 12px; align-content: start; min-width: 0; }
-.eq .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); }
-.eq .f { font-family: var(--math); font-size: 1.3rem; line-height: 1.6; padding: 14px 0; border-block: 1px solid var(--line); overflow-x: auto; white-space: nowrap; }
-.eq .f i { font-style: italic; }
-.eq .f .l2 { display: block; font-size: 1.02rem; margin-top: 8px; }
-.calc .lr { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-.eq p { font-size: 14px; color: var(--ink-2); }
-.eq .src { font-size: 12px; color: var(--subtle); }
-.calc { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 32px; background: var(--paper-warm); padding: 28px; align-items: center; }
-@media (max-width: 860px) { .calc { grid-template-columns: 1fr; } }
-.calc label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
-.calc label span.v { font-family: var(--mono); font-weight: 500; }
-.calc input[type=range] { width: 100%; accent-color: var(--ink); }
-.calc .out { font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
-.calc svg { width: 100%; height: auto; display: block; }
-.mk { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; }
-@media (max-width: 900px) { .mk { grid-template-columns: 1fr; } }
-.mk svg { width: 100%; height: auto; display: block; }
-.tm { border-collapse: collapse; font-family: var(--mono); font-size: 12px; width: 100%; }
-.tm th, .tm td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
-.tm th:first-child { text-align: left; }
-.tm thead th { color: var(--subtle); font-weight: 400; }
-.tm td.d { font-weight: 500; color: var(--ink); background: var(--paper); }
-.tm tr.sel th, .tm tr.sel td { box-shadow: inset 0 -2px 0 var(--mark); }
-.mfs { display: grid; gap: 10px; font-family: var(--math); font-size: 1.08rem; }
-.mfs div { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
-.mfs i { font-style: italic; }
-.mfs small { font-family: var(--sans); font-size: 12px; color: var(--subtle); }
-#rcurve { width: 100%; min-width: 680px; height: auto; display: block; }
-.cycle { display: grid; gap: 10px; background: var(--paper-warm); padding: 20px 20px 16px; }
-.cyhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
-.cyhead .t { font-weight: 800; font-size: 1.05rem; }
-.cyhead .t small { display: block; font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); }
-#cycle { width: 100%; min-width: 640px; height: auto; display: block; }
-#cycle .band { cursor: pointer; }
-footer { padding-block: 40px 56px; display: grid; gap: 12px; font-size: 12px; color: var(--subtle); border-top: 1px solid var(--ink); }
-footer p { max-width: 100ch; }
-
-/* scroll-driven entrances: everything is visible at rest; browsers without support show it static */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .rise { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
-    .tilt { animation: tilt linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; transform-origin: 50% 100%; }
+  :root {
+    /* tokens: the BlackRock-measured system (black on white, warm greys, one accent as punctuation, square corners) */
+    --ink: #000000; --ink-2: #333333; --slate: #656560; --mute: #9b9b91;
+    --paper: #ffffff; --paper-2: #f5f5eb; --line: #d7d7cd;
+    --navy: #000000; --accent: #00cfba; --accent-ink: #000000; --amber: #ffce00;
+    --good: #008b5c; --bad: #c00b28; --warn: #ff8200;
+    --term-bg: #000000; --term-panel: #111110; --term-line: #333333; --term-text: #ffffff; --term-mute: #9b9b91; --term-amber: #ffce00;
+    --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --serif: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
+    --max: 1120px;
   }
-}
-@keyframes rise { from { opacity: .3; transform: translateY(32px) scale(.985); } to { opacity: 1; transform: none; } }
-@keyframes tilt { from { opacity: .4; transform: perspective(1200px) rotateX(14deg) translateY(40px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .tile .glyph *, .wf-test { animation: none !important; } }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ink: #ffffff; --ink-2: #d9d9d3; --slate: #9b9b91; --mute: #7d7d73;
+      --paper: #000000; --paper-2: #111110; --line: #333333;
+      --navy: #ffffff; --accent: #00cfba; --accent-ink: #ffffff; --amber: #ffce00;
+      --good: #2fb37f; --bad: #e0506a; --warn: #ff8200;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ink: #ffffff; --ink-2: #d9d9d3; --slate: #9b9b91; --mute: #7d7d73;
+    --paper: #000000; --paper-2: #111110; --line: #333333;
+    --navy: #ffffff; --accent: #00cfba; --accent-ink: #ffffff; --amber: #ffce00;
+    --good: #2fb37f; --bad: #e0506a; --warn: #ff8200;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.5; font-feature-settings: "tnum"; font-variation-settings: "wdth" 100; }
+  a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding-inline: 20px; }
+  h1, h2 { font-family: var(--display); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance; margin: 0; color: var(--ink); }
+  h1 { font-weight: 800; font-variation-settings: "wdth" 80; line-height: 1.05; }
+  h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2rem, 4.5vw, 3.4rem); }
+  h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
+  h3 { font-size: 1.2rem; }
+  p { margin: 0; max-width: 68ch; }
+  .eyebrow { font-family: var(--sans); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .eyebrow::before { content: ""; width: 12px; height: 12px; background: var(--accent); flex: none; }
+  .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  /* nav */
+  .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+  .brand:hover { text-decoration: none; }
+  .menu { display: flex; gap: 6px; flex-wrap: wrap; }
+  .menu button { font: 500 0.88rem var(--sans); color: var(--ink); background: transparent; border: 0; border-bottom: 2px solid transparent; padding: 20px 12px; border-radius: 0; cursor: pointer; }
+  .menu button:hover { border-bottom-color: var(--line); }
+  .menu button[aria-current="page"] { border-bottom-color: var(--ink); font-weight: 600; }
+  .menu button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* views */
+  .view { display: none; }
+  .view.active { display: block; }
+  section { padding-block: 56px; border-bottom: 1px solid var(--line); }
+  .grid { display: grid; gap: 24px; }
+  .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 800px) { .g2, .g3 { grid-template-columns: 1fr; } }
+
+  .hero { padding-block: 88px 64px; }
+  .hero .lede { font-size: 1.15rem; color: var(--slate); margin-top: 22px; }
+  .hero .facts { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 36px; }
+  .fact .n { font-family: var(--display); font-weight: 800; font-size: 2.6rem; color: var(--ink); letter-spacing: -0.02em; line-height: 1; }
+  .fact .l { color: var(--slate); font-size: 0.85rem; }
+
+  .btn { display: inline-block; background: var(--ink); color: var(--paper); font: 600 0.92rem var(--sans); padding: 13px 22px; border: 1px solid var(--ink); border-radius: 0; cursor: pointer; }
+  .btn:hover { background: var(--ink-2); }
+  .pill { display: inline-block; font: 600 0.7rem var(--sans); letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 0; border: 1px solid var(--sep, var(--line)); color: var(--slate); }
+  .pill.v { color: var(--good); border-color: color-mix(in srgb, var(--good) 45%, transparent); }
+  .pill.r { color: var(--ink); border-color: var(--ink); }
+  .pill.p { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 45%, transparent); }
+  .pill.x { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 45%, transparent); }
+
+  .card { border: 0; border-top: 1px solid var(--ink); border-radius: 0; padding: 20px 0; background: transparent; }
+  .card h3 { margin-bottom: 8px; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 12px; }
+  .card .src { font-size: 0.82rem; color: var(--slate); margin-top: 10px; }
+  .card .src a { word-break: break-word; }
+  .steps { counter-reset: s; display: grid; gap: 14px; }
+  .step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+  .step .k { font-family: var(--display); font-weight: 700; font-size: 1.2rem; color: var(--ink); border-top: 2px solid var(--ink); padding-top: 6px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); font-weight: 600; }
+  td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .tbl { overflow-x: auto; border-top: 1px solid var(--ink); border-radius: 0; }
+  .note { border-left: 2px solid var(--ink); padding: 12px 16px; background: var(--paper-2); font-size: 0.92rem; color: var(--ink-2); }
+  .note b { color: var(--ink); }
+  .small { font-size: 0.85rem; color: var(--slate); }
+  .letterhead { border: 1px solid var(--line); border-radius: 0; padding: 36px; background: var(--paper); }
+  .letterhead .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid var(--ink); padding-bottom: 18px; }
+  .letterhead address { font-style: normal; font-size: 0.82rem; color: var(--slate); text-align: right; line-height: 1.5; }
+  .letterhead .body { font-family: var(--serif); margin-top: 22px; color: var(--ink-2); }
+  .letterhead .foot { margin-top: 30px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 0.72rem; color: var(--mute); }
+  footer { padding-block: 40px; color: var(--slate); font-size: 0.82rem; }
+  footer p { max-width: 90ch; }
+
+  /* terminal */
+  .term { background: var(--term-bg); color: var(--term-text); font-family: var(--mono); font-size: 0.82rem; padding-block: 18px 40px; }
+  .term .bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 8px 0 14px; border-bottom: 1px solid var(--term-line); }
+  .term .bar .t { color: var(--term-amber); font-weight: 500; letter-spacing: 0.08em; }
+  .term .bar .s { color: var(--term-mute); }
+  .tgrid { display: grid; gap: 12px; grid-template-columns: repeat(12, minmax(0, 1fr)); margin-top: 14px; }
+  .panel { background: var(--term-panel); border: 1px solid var(--term-line); border-radius: 0; padding: 12px 14px; min-width: 0; }
+  .panel h4 { margin: 0 0 10px; font: 500 0.72rem var(--mono); letter-spacing: 0.12em; color: var(--term-amber); text-transform: uppercase; display: flex; justify-content: space-between; gap: 8px; }
+  .panel h4 .tag { color: var(--term-mute); letter-spacing: 0.06em; font-weight: 400; }
+  .c12 { grid-column: span 12; } .c8 { grid-column: span 8; } .c6 { grid-column: span 6; } .c4 { grid-column: span 4; } .c3 { grid-column: span 3; }
+  @media (max-width: 900px) { .c8, .c6, .c4, .c3 { grid-column: span 12; } }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .tile { background: var(--term-bg); border: 1px solid var(--term-line); border-radius: 0; padding: 8px 10px; }
+  .tile .k { color: var(--term-mute); font-size: 0.7rem; letter-spacing: 0.06em; }
+  .tile .v { font-size: 1rem; margin-top: 2px; }
+  .up { color: #58c48c; } .dn { color: #ef7a6c; } .flat { color: var(--term-text); }
+  .regime { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .rbox { border: 1px solid var(--term-line); border-radius: 0; padding: 10px; }
+  .rbox .k { color: var(--term-mute); font-size: 0.7rem; letter-spacing: 0.06em; }
+  .rbox .v { font-size: 1.05rem; margin-top: 2px; }
+  .term table { font-family: var(--mono); font-size: 0.78rem; }
+  .term th { color: var(--term-mute); border-bottom: 1px solid var(--term-line); letter-spacing: 0.08em; }
+  .term td { border-bottom: 1px solid var(--term-line); }
+  .term .tbl { border-color: var(--term-line); }
+  .feed li { list-style: none; padding: 7px 0; border-bottom: 1px dashed var(--term-line); display: grid; grid-template-columns: 58px 1fr; gap: 10px; }
+  .feed { padding: 0; margin: 0; }
+  .feed .ts { color: var(--term-mute); }
+  .spark { width: 100%; height: 56px; display: block; }
+  .switch { display: inline-flex; align-items: center; gap: 6px; }
+  .switch i { width: 28px; height: 14px; border-radius: 999px; background: #2b3543; position: relative; display: inline-block; }
+  .switch i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 10px; height: 10px; border-radius: 50%; background: #8a93a1; }
+  .switch.on i { background: #1f5c3f; } .switch.on i::after { left: 16px; background: #58c48c; }
+  .badge-sample { color: #000; background: var(--term-amber); font-weight: 600; padding: 2px 7px; border-radius: 0; font-size: 0.68rem; letter-spacing: 0.08em; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 
-<div class="wrap">
-  <header class="top">
-    <span aria-label="Swartberg Capital"><svg xmlns="http://www.w3.org/2000/svg" viewBox="44 -724 8426 921" aria-hidden="true" focusable="false"><g fill="currentColor"><path d="M360.0 12Q295.0 12 238.0 0.5Q181.0 -11 137.5 -37.0Q94.0 -63 69.0 -105.5Q44.0 -148 44.0 -210Q44.0 -214 44.0 -219.0Q44.0 -224 45.0 -227H218.0Q218.0 -224 217.5 -219.5Q217.0 -215 217.0 -212Q217.0 -180 233.5 -160.5Q250.0 -141 280.0 -132.5Q310.0 -124 350.0 -124Q372.0 -124 391.0 -126.0Q410.0 -128 425.0 -133.0Q440.0 -138 451.5 -145.5Q463.0 -153 468.5 -163.5Q474.0 -174 474.0 -188Q474.0 -211 456.5 -226.0Q439.0 -241 409.5 -251.0Q380.0 -261 343.0 -270.0Q306.0 -279 266.0 -289.0Q226.0 -299 189.0 -314.0Q152.0 -329 122.5 -352.0Q93.0 -375 75.5 -409.5Q58.0 -444 58.0 -493Q58.0 -547 81.0 -586.5Q104.0 -626 144.5 -651.0Q185.0 -676 238.0 -687.5Q291.0 -699 351.0 -699Q410.0 -699 461.5 -687.0Q513.0 -675 553.0 -649.5Q593.0 -624 615.5 -585.5Q638.0 -547 639.0 -493V-481H467.0V-488Q467.0 -511 454.5 -528.5Q442.0 -546 417.0 -556.5Q392.0 -567 355.0 -567Q318.0 -567 292.5 -560.0Q267.0 -553 253.5 -540.0Q240.0 -527 240.0 -509Q240.0 -487 257.5 -473.0Q275.0 -459 305.0 -449.0Q335.0 -439 372.0 -430.5Q409.0 -422 448.5 -412.5Q488.0 -403 525.0 -388.5Q562.0 -374 592.0 -351.5Q622.0 -329 639.5 -296.0Q657.0 -263 657.0 -216Q657.0 -134 618.5 -84.0Q580.0 -34 512.5 -11.0Q445.0 12 360.0 12Z"/><path d="M863.0 0 686.0 -527H861.0L916.0 -309Q921.0 -292 926.5 -267.5Q932.0 -243 937.5 -220.0Q943.0 -197 947.0 -182H953.0Q959.0 -204 964.0 -227.0Q969.0 -250 974.5 -272.0Q980.0 -294 984.0 -310L1038.0 -527H1206.0L1261.0 -309Q1265.0 -295 1270.0 -272.0Q1275.0 -249 1281.0 -225.0Q1287.0 -201 1291.0 -182H1298.0Q1301.0 -199 1306.5 -221.0Q1312.0 -243 1318.0 -266.5Q1324.0 -290 1328.0 -307L1384.0 -527H1543.0L1366.0 0H1202.0L1147.0 -211Q1143.0 -229 1137.0 -252.0Q1131.0 -275 1126.0 -297.0Q1121.0 -319 1117.0 -335H1113.0Q1111.0 -324 1106.5 -305.0Q1102.0 -286 1096.5 -262.0Q1091.0 -238 1083.0 -212L1027.0 0Z"/><path d="M1736.0 12Q1703.0 12 1671.5 5.5Q1640.0 -1 1614.5 -17.5Q1589.0 -34 1574.0 -63.0Q1559.0 -92 1559.0 -136Q1559.0 -193 1583.0 -229.0Q1607.0 -265 1652.5 -285.5Q1698.0 -306 1762.5 -314.0Q1827.0 -322 1907.0 -322V-355Q1907.0 -378 1898.0 -393.5Q1889.0 -409 1871.5 -417.5Q1854.0 -426 1825.0 -426Q1799.0 -426 1779.5 -420.0Q1760.0 -414 1750.0 -402.5Q1740.0 -391 1740.0 -375V-366H1580.0Q1579.0 -371 1579.0 -374.5Q1579.0 -378 1579.0 -384Q1579.0 -431 1608.5 -466.0Q1638.0 -501 1693.0 -520.0Q1748.0 -539 1826.0 -539Q1899.0 -539 1953.5 -521.0Q2008.0 -503 2039.5 -466.0Q2071.0 -429 2071.0 -369V-144Q2071.0 -127 2080.5 -117.0Q2090.0 -107 2104.0 -107H2138.0V-6Q2127.0 -1 2103.5 5.5Q2080.0 12 2047.0 12Q2013.0 12 1987.5 3.5Q1962.0 -5 1945.5 -20.5Q1929.0 -36 1923.0 -57H1916.0Q1897.0 -37 1871.5 -21.0Q1846.0 -5 1812.5 3.5Q1779.0 12 1736.0 12ZM1797.0 -101Q1821.0 -101 1841.0 -108.0Q1861.0 -115 1875.5 -127.5Q1890.0 -140 1898.5 -158.0Q1907.0 -176 1907.0 -197V-232Q1850.0 -232 1809.0 -224.0Q1768.0 -216 1746.0 -199.0Q1724.0 -182 1724.0 -156Q1724.0 -137 1733.5 -124.5Q1743.0 -112 1759.0 -106.5Q1775.0 -101 1797.0 -101Z"/><path d="M2193.0 0V-527H2328.0L2340.0 -446H2347.0Q2359.0 -473 2376.5 -494.5Q2394.0 -516 2419.5 -528.0Q2445.0 -540 2476.0 -540Q2494.0 -540 2509.0 -536.5Q2524.0 -533 2531.0 -529V-386H2479.0Q2448.0 -386 2424.5 -377.5Q2401.0 -369 2386.0 -351.5Q2371.0 -334 2364.0 -309.0Q2357.0 -284 2357.0 -251V0Z"/><path d="M2773.0 12Q2722.0 12 2686.5 -3.5Q2651.0 -19 2633.5 -50.0Q2616.0 -81 2616.0 -125V-408H2547.0V-527H2621.0L2655.0 -681H2779.0V-527H2882.0V-408H2779.0V-165Q2779.0 -137 2790.0 -122.0Q2801.0 -107 2830.0 -107H2882.0V-5Q2869.0 -1 2849.5 3.5Q2830.0 8 2810.0 10.0Q2790.0 12 2773.0 12Z"/><path d="M3278.0 12Q3227.0 12 3184.0 -9.0Q3141.0 -30 3115.0 -73H3108.0L3096.0 0H2962.0V-724H3126.0V-473H3132.0Q3148.0 -494 3170.5 -509.0Q3193.0 -524 3221.0 -531.5Q3249.0 -539 3281.0 -539Q3346.0 -539 3394.0 -509.0Q3442.0 -479 3468.0 -418.5Q3494.0 -358 3494.0 -265Q3494.0 -170 3468.0 -109.0Q3442.0 -48 3393.5 -18.0Q3345.0 12 3278.0 12ZM3227.0 -116Q3264.0 -116 3286.5 -130.5Q3309.0 -145 3319.0 -174.0Q3329.0 -203 3329.0 -245V-280Q3329.0 -323 3319.0 -352.0Q3309.0 -381 3286.5 -396.0Q3264.0 -411 3227.0 -411Q3200.0 -411 3180.5 -401.0Q3161.0 -391 3148.5 -373.0Q3136.0 -355 3130.5 -330.0Q3125.0 -305 3125.0 -275V-251Q3125.0 -210 3135.5 -179.5Q3146.0 -149 3168.5 -132.5Q3191.0 -116 3227.0 -116Z"/><path d="M3840.0 12Q3750.0 12 3687.0 -17.5Q3624.0 -47 3590.5 -108.0Q3557.0 -169 3557.0 -264Q3557.0 -357 3590.0 -418.0Q3623.0 -479 3685.0 -509.0Q3747.0 -539 3834.0 -539Q3920.0 -539 3979.5 -510.0Q4039.0 -481 4070.0 -421.0Q4101.0 -361 4101.0 -266V-231H3723.0Q3723.0 -189 3735.0 -160.0Q3747.0 -131 3772.0 -116.0Q3797.0 -101 3839.0 -101Q3864.0 -101 3883.0 -107.0Q3902.0 -113 3915.0 -124.5Q3928.0 -136 3935.0 -152.0Q3942.0 -168 3942.0 -188H4101.0Q4101.0 -140 4083.5 -102.5Q4066.0 -65 4032.0 -39.5Q3998.0 -14 3949.5 -1.0Q3901.0 12 3840.0 12ZM3724.0 -322H3934.0Q3934.0 -348 3927.5 -367.5Q3921.0 -387 3908.5 -400.0Q3896.0 -413 3878.5 -419.5Q3861.0 -426 3838.0 -426Q3802.0 -426 3778.0 -414.0Q3754.0 -402 3741.0 -379.0Q3728.0 -356 3724.0 -322Z"/><path d="M4189.0 0V-527H4324.0L4336.0 -446H4343.0Q4355.0 -473 4372.5 -494.5Q4390.0 -516 4415.5 -528.0Q4441.0 -540 4472.0 -540Q4490.0 -540 4505.0 -536.5Q4520.0 -533 4527.0 -529V-386H4475.0Q4444.0 -386 4420.5 -377.5Q4397.0 -369 4382.0 -351.5Q4367.0 -334 4360.0 -309.0Q4353.0 -284 4353.0 -251V0Z"/><path d="M4669.0 197Q4634.0 197 4603.0 181.5Q4572.0 166 4553.5 137.5Q4535.0 109 4535.0 71Q4535.0 29 4560.5 0.5Q4586.0 -28 4618.0 -42Q4595.0 -57 4580.5 -79.5Q4566.0 -102 4566.0 -130Q4566.0 -169 4595.0 -196.0Q4624.0 -223 4663.0 -232Q4627.0 -255 4604.5 -289.0Q4582.0 -323 4582.0 -365Q4582.0 -426 4614.5 -464.0Q4647.0 -502 4704.0 -520.5Q4761.0 -539 4834.0 -539Q4863.0 -539 4886.5 -536.5Q4910.0 -534 4929.0 -529Q4969.0 -553 4984.0 -579.0Q4999.0 -605 5000.0 -621H5143.0Q5143.0 -581 5129.0 -553.5Q5115.0 -526 5089.0 -509.0Q5063.0 -492 5027.0 -483Q5054.0 -461 5069.0 -430.5Q5084.0 -400 5084.0 -365Q5084.0 -308 5055.5 -269.5Q5027.0 -231 4977.0 -211.0Q4927.0 -191 4862.0 -191H4784.0Q4756.0 -191 4742.5 -182.5Q4729.0 -174 4729.0 -160Q4729.0 -147 4741.0 -137.5Q4753.0 -128 4782.0 -128H4985.0Q5062.0 -128 5103.0 -84.5Q5144.0 -41 5144.0 26Q5144.0 77 5116.0 115.5Q5088.0 154 5041.5 175.5Q4995.0 197 4938.0 197ZM4748.0 97H4921.0Q4938.0 97 4951.0 90.5Q4964.0 84 4971.5 72.5Q4979.0 61 4979.0 46Q4979.0 21 4963.0 8.0Q4947.0 -5 4924.0 -5H4748.0Q4725.0 -5 4709.5 8.5Q4694.0 22 4694.0 45Q4694.0 68 4709.5 82.5Q4725.0 97 4748.0 97ZM4833.0 -287Q4876.0 -287 4899.5 -307.0Q4923.0 -327 4923.0 -365Q4923.0 -404 4899.5 -423.5Q4876.0 -443 4833.0 -443Q4792.0 -443 4768.0 -423.5Q4744.0 -404 4744.0 -365Q4744.0 -340 4754.0 -322.5Q4764.0 -305 4784.0 -296.0Q4804.0 -287 4833.0 -287Z"/><path d="M5833.0 12Q5728.0 12 5655.0 -26.5Q5582.0 -65 5543.5 -143.5Q5505.0 -222 5505.0 -343Q5505.0 -522 5592.0 -610.0Q5679.0 -698 5834.0 -698Q5922.0 -698 5990.0 -669.5Q6058.0 -641 6096.5 -583.5Q6135.0 -526 6135.0 -439H6039.0Q6039.0 -499 6013.5 -538.0Q5988.0 -577 5942.0 -596.5Q5896.0 -616 5834.0 -616Q5762.0 -616 5710.0 -588.0Q5658.0 -560 5631.0 -501.5Q5604.0 -443 5604.0 -351V-330Q5604.0 -239 5631.0 -181.5Q5658.0 -124 5709.5 -97.0Q5761.0 -70 5834.0 -70Q5898.0 -70 5944.5 -89.0Q5991.0 -108 6016.5 -147.5Q6042.0 -187 6042.0 -247H6135.0Q6135.0 -158 6095.5 -101.0Q6056.0 -44 5988.0 -16.0Q5920.0 12 5833.0 12Z"/><path d="M6375.0 12Q6346.0 12 6317.0 5.0Q6288.0 -2 6263.0 -18.0Q6238.0 -34 6223.0 -62.5Q6208.0 -91 6208.0 -134Q6208.0 -188 6234.0 -223.0Q6260.0 -258 6306.5 -277.5Q6353.0 -297 6417.0 -304.5Q6481.0 -312 6556.0 -312V-372Q6556.0 -401 6546.0 -422.0Q6536.0 -443 6510.5 -454.5Q6485.0 -466 6438.0 -466Q6393.0 -466 6366.5 -454.5Q6340.0 -443 6329.5 -425.0Q6319.0 -407 6319.0 -385V-370H6234.0Q6233.0 -375 6233.0 -380.0Q6233.0 -385 6233.0 -392Q6233.0 -440 6259.5 -472.5Q6286.0 -505 6334.0 -521.5Q6382.0 -538 6444.0 -538Q6510.0 -538 6554.5 -519.0Q6599.0 -500 6621.5 -465.0Q6644.0 -430 6644.0 -381V-96Q6644.0 -77 6653.0 -69.5Q6662.0 -62 6675.0 -62H6714.0V-4Q6700.0 2 6683.0 6.5Q6666.0 11 6644.0 11Q6618.0 11 6601.0 0.5Q6584.0 -10 6575.0 -28.5Q6566.0 -47 6563.0 -70H6556.0Q6538.0 -45 6510.5 -26.5Q6483.0 -8 6449.0 2.0Q6415.0 12 6375.0 12ZM6397.0 -62Q6429.0 -62 6457.5 -72.0Q6486.0 -82 6508.0 -100.5Q6530.0 -119 6543.0 -145.0Q6556.0 -171 6556.0 -202V-246Q6475.0 -246 6418.0 -237.0Q6361.0 -228 6330.5 -205.0Q6300.0 -182 6300.0 -140Q6300.0 -113 6312.0 -96.0Q6324.0 -79 6346.0 -70.5Q6368.0 -62 6397.0 -62Z"/><path d="M6780.0 173V-526H6850.0L6859.0 -451H6866.0Q6893.0 -495 6935.0 -516.5Q6977.0 -538 7030.0 -538Q7096.0 -538 7142.0 -509.0Q7188.0 -480 7213.0 -418.5Q7238.0 -357 7238.0 -259Q7238.0 -167 7212.5 -106.5Q7187.0 -46 7141.0 -17.0Q7095.0 12 7034.0 12Q7000.0 12 6970.0 4.0Q6940.0 -4 6916.0 -21.5Q6892.0 -39 6874.0 -66H6868.0V173ZM7006.0 -65Q7055.0 -65 7086.0 -84.5Q7117.0 -104 7132.0 -145.5Q7147.0 -187 7147.0 -252V-273Q7147.0 -342 7131.0 -383.5Q7115.0 -425 7084.5 -443.0Q7054.0 -461 7009.0 -461Q6960.0 -461 6928.5 -439.5Q6897.0 -418 6882.5 -375.0Q6868.0 -332 6868.0 -270V-255Q6868.0 -200 6878.5 -163.5Q6889.0 -127 6908.5 -105.0Q6928.0 -83 6953.0 -74.0Q6978.0 -65 7006.0 -65Z"/><path d="M7339.0 -625V-723H7427.0V-625ZM7339.0 0V-526H7427.0V0Z"/><path d="M7679.0 12Q7638.0 12 7615.0 -3.5Q7592.0 -19 7582.0 -44.5Q7572.0 -70 7572.0 -99V-452H7504.0V-526H7574.0L7590.0 -673H7660.0V-526H7759.0V-452H7660.0V-112Q7660.0 -87 7669.0 -74.5Q7678.0 -62 7703.0 -62H7759.0V-4Q7749.0 1 7735.0 4.0Q7721.0 7 7706.5 9.5Q7692.0 12 7679.0 12Z"/><path d="M7977.0 12Q7948.0 12 7919.0 5.0Q7890.0 -2 7865.0 -18.0Q7840.0 -34 7825.0 -62.5Q7810.0 -91 7810.0 -134Q7810.0 -188 7836.0 -223.0Q7862.0 -258 7908.5 -277.5Q7955.0 -297 8019.0 -304.5Q8083.0 -312 8158.0 -312V-372Q8158.0 -401 8148.0 -422.0Q8138.0 -443 8112.5 -454.5Q8087.0 -466 8040.0 -466Q7995.0 -466 7968.5 -454.5Q7942.0 -443 7931.5 -425.0Q7921.0 -407 7921.0 -385V-370H7836.0Q7835.0 -375 7835.0 -380.0Q7835.0 -385 7835.0 -392Q7835.0 -440 7861.5 -472.5Q7888.0 -505 7936.0 -521.5Q7984.0 -538 8046.0 -538Q8112.0 -538 8156.5 -519.0Q8201.0 -500 8223.5 -465.0Q8246.0 -430 8246.0 -381V-96Q8246.0 -77 8255.0 -69.5Q8264.0 -62 8277.0 -62H8316.0V-4Q8302.0 2 8285.0 6.5Q8268.0 11 8246.0 11Q8220.0 11 8203.0 0.5Q8186.0 -10 8177.0 -28.5Q8168.0 -47 8165.0 -70H8158.0Q8140.0 -45 8112.5 -26.5Q8085.0 -8 8051.0 2.0Q8017.0 12 7977.0 12ZM7999.0 -62Q8031.0 -62 8059.5 -72.0Q8088.0 -82 8110.0 -100.5Q8132.0 -119 8145.0 -145.0Q8158.0 -171 8158.0 -202V-246Q8077.0 -246 8020.0 -237.0Q7963.0 -228 7932.5 -205.0Q7902.0 -182 7902.0 -140Q7902.0 -113 7914.0 -96.0Q7926.0 -79 7948.0 -70.5Q7970.0 -62 7999.0 -62Z"/><path d="M8382.0 0V-723H8470.0V0Z"/></g></svg>
-</span>
-    <span class="tag">Internal · Prepared 7 October 2026 · Not for distribution</span>
-  </header>
 
-  <section class="hero" aria-labelledby="h-hero">
-    <div class="eyebrow">The portfolio vision</div>
-    <h1 id="h-hero">One portfolio, built from nine sources of return.</h1>
-    <p class="lede">Swartberg Capital is a systematic research and trading firm in South Africa. We build one portfolio from nine strategy sleeves, each grounded in published research and each drawing on a different economic link, and we set the weight of each sleeve by the regime the market is in.</p>
-    <p class="stack"><span>Volatility-targeted</span><span>Correlation-budgeted</span><span>Walk-forward validated</span><span>Deflated-Sharpe gated</span><span>Regime-conditioned</span><span>Point-in-time data</span></p>
-    <div class="controls" role="group" aria-label="Show the book in a regime">
-      <span class="lbl">Show the book in</span>
-      <button class="chip" data-regime="-1" aria-pressed="true">Full book</button>
-      <button class="chip" data-regime="0" aria-pressed="false">Calm growth</button>
-      <button class="chip" data-regime="1" aria-pressed="false">Inflation rising</button>
-      <button class="chip" data-regime="2" aria-pressed="false">Stress</button>
-      <button class="chip" data-regime="3" aria-pressed="false">Recovery</button>
+<div style="border-bottom:1px solid var(--line);font-size:0.76rem"><div class="wrap" style="display:flex;justify-content:space-between;gap:12px;min-height:34px;align-items:center"><span class="mono" style="color:var(--slate)">Quantitative research and trading · South Africa</span><span style="color:var(--slate)"><a href="#" onclick="return false;" title="Client area: login to follow" style="text-decoration:none;color:inherit">Client login</a></span></div></div>
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="#home" onclick="show('home');return false;">
+      <svg viewBox="44 -724 8426 921" aria-label="Swartberg Capital" style="height:22px;width:auto"><g fill="currentColor"><path d="M360.0 12Q295.0 12 238.0 0.5Q181.0 -11 137.5 -37.0Q94.0 -63 69.0 -105.5Q44.0 -148 44.0 -210Q44.0 -214 44.0 -219.0Q44.0 -224 45.0 -227H218.0Q218.0 -224 217.5 -219.5Q217.0 -215 217.0 -212Q217.0 -180 233.5 -160.5Q250.0 -141 280.0 -132.5Q310.0 -124 350.0 -124Q372.0 -124 391.0 -126.0Q410.0 -128 425.0 -133.0Q440.0 -138 451.5 -145.5Q463.0 -153 468.5 -163.5Q474.0 -174 474.0 -188Q474.0 -211 456.5 -226.0Q439.0 -241 409.5 -251.0Q380.0 -261 343.0 -270.0Q306.0 -279 266.0 -289.0Q226.0 -299 189.0 -314.0Q152.0 -329 122.5 -352.0Q93.0 -375 75.5 -409.5Q58.0 -444 58.0 -493Q58.0 -547 81.0 -586.5Q104.0 -626 144.5 -651.0Q185.0 -676 238.0 -687.5Q291.0 -699 351.0 -699Q410.0 -699 461.5 -687.0Q513.0 -675 553.0 -649.5Q593.0 -624 615.5 -585.5Q638.0 -547 639.0 -493V-481H467.0V-488Q467.0 -511 454.5 -528.5Q442.0 -546 417.0 -556.5Q392.0 -567 355.0 -567Q318.0 -567 292.5 -560.0Q267.0 -553 253.5 -540.0Q240.0 -527 240.0 -509Q240.0 -487 257.5 -473.0Q275.0 -459 305.0 -449.0Q335.0 -439 372.0 -430.5Q409.0 -422 448.5 -412.5Q488.0 -403 525.0 -388.5Q562.0 -374 592.0 -351.5Q622.0 -329 639.5 -296.0Q657.0 -263 657.0 -216Q657.0 -134 618.5 -84.0Q580.0 -34 512.5 -11.0Q445.0 12 360.0 12Z"/><path d="M863.0 0 686.0 -527H861.0L916.0 -309Q921.0 -292 926.5 -267.5Q932.0 -243 937.5 -220.0Q943.0 -197 947.0 -182H953.0Q959.0 -204 964.0 -227.0Q969.0 -250 974.5 -272.0Q980.0 -294 984.0 -310L1038.0 -527H1206.0L1261.0 -309Q1265.0 -295 1270.0 -272.0Q1275.0 -249 1281.0 -225.0Q1287.0 -201 1291.0 -182H1298.0Q1301.0 -199 1306.5 -221.0Q1312.0 -243 1318.0 -266.5Q1324.0 -290 1328.0 -307L1384.0 -527H1543.0L1366.0 0H1202.0L1147.0 -211Q1143.0 -229 1137.0 -252.0Q1131.0 -275 1126.0 -297.0Q1121.0 -319 1117.0 -335H1113.0Q1111.0 -324 1106.5 -305.0Q1102.0 -286 1096.5 -262.0Q1091.0 -238 1083.0 -212L1027.0 0Z"/><path d="M1736.0 12Q1703.0 12 1671.5 5.5Q1640.0 -1 1614.5 -17.5Q1589.0 -34 1574.0 -63.0Q1559.0 -92 1559.0 -136Q1559.0 -193 1583.0 -229.0Q1607.0 -265 1652.5 -285.5Q1698.0 -306 1762.5 -314.0Q1827.0 -322 1907.0 -322V-355Q1907.0 -378 1898.0 -393.5Q1889.0 -409 1871.5 -417.5Q1854.0 -426 1825.0 -426Q1799.0 -426 1779.5 -420.0Q1760.0 -414 1750.0 -402.5Q1740.0 -391 1740.0 -375V-366H1580.0Q1579.0 -371 1579.0 -374.5Q1579.0 -378 1579.0 -384Q1579.0 -431 1608.5 -466.0Q1638.0 -501 1693.0 -520.0Q1748.0 -539 1826.0 -539Q1899.0 -539 1953.5 -521.0Q2008.0 -503 2039.5 -466.0Q2071.0 -429 2071.0 -369V-144Q2071.0 -127 2080.5 -117.0Q2090.0 -107 2104.0 -107H2138.0V-6Q2127.0 -1 2103.5 5.5Q2080.0 12 2047.0 12Q2013.0 12 1987.5 3.5Q1962.0 -5 1945.5 -20.5Q1929.0 -36 1923.0 -57H1916.0Q1897.0 -37 1871.5 -21.0Q1846.0 -5 1812.5 3.5Q1779.0 12 1736.0 12ZM1797.0 -101Q1821.0 -101 1841.0 -108.0Q1861.0 -115 1875.5 -127.5Q1890.0 -140 1898.5 -158.0Q1907.0 -176 1907.0 -197V-232Q1850.0 -232 1809.0 -224.0Q1768.0 -216 1746.0 -199.0Q1724.0 -182 1724.0 -156Q1724.0 -137 1733.5 -124.5Q1743.0 -112 1759.0 -106.5Q1775.0 -101 1797.0 -101Z"/><path d="M2193.0 0V-527H2328.0L2340.0 -446H2347.0Q2359.0 -473 2376.5 -494.5Q2394.0 -516 2419.5 -528.0Q2445.0 -540 2476.0 -540Q2494.0 -540 2509.0 -536.5Q2524.0 -533 2531.0 -529V-386H2479.0Q2448.0 -386 2424.5 -377.5Q2401.0 -369 2386.0 -351.5Q2371.0 -334 2364.0 -309.0Q2357.0 -284 2357.0 -251V0Z"/><path d="M2773.0 12Q2722.0 12 2686.5 -3.5Q2651.0 -19 2633.5 -50.0Q2616.0 -81 2616.0 -125V-408H2547.0V-527H2621.0L2655.0 -681H2779.0V-527H2882.0V-408H2779.0V-165Q2779.0 -137 2790.0 -122.0Q2801.0 -107 2830.0 -107H2882.0V-5Q2869.0 -1 2849.5 3.5Q2830.0 8 2810.0 10.0Q2790.0 12 2773.0 12Z"/><path d="M3278.0 12Q3227.0 12 3184.0 -9.0Q3141.0 -30 3115.0 -73H3108.0L3096.0 0H2962.0V-724H3126.0V-473H3132.0Q3148.0 -494 3170.5 -509.0Q3193.0 -524 3221.0 -531.5Q3249.0 -539 3281.0 -539Q3346.0 -539 3394.0 -509.0Q3442.0 -479 3468.0 -418.5Q3494.0 -358 3494.0 -265Q3494.0 -170 3468.0 -109.0Q3442.0 -48 3393.5 -18.0Q3345.0 12 3278.0 12ZM3227.0 -116Q3264.0 -116 3286.5 -130.5Q3309.0 -145 3319.0 -174.0Q3329.0 -203 3329.0 -245V-280Q3329.0 -323 3319.0 -352.0Q3309.0 -381 3286.5 -396.0Q3264.0 -411 3227.0 -411Q3200.0 -411 3180.5 -401.0Q3161.0 -391 3148.5 -373.0Q3136.0 -355 3130.5 -330.0Q3125.0 -305 3125.0 -275V-251Q3125.0 -210 3135.5 -179.5Q3146.0 -149 3168.5 -132.5Q3191.0 -116 3227.0 -116Z"/><path d="M3840.0 12Q3750.0 12 3687.0 -17.5Q3624.0 -47 3590.5 -108.0Q3557.0 -169 3557.0 -264Q3557.0 -357 3590.0 -418.0Q3623.0 -479 3685.0 -509.0Q3747.0 -539 3834.0 -539Q3920.0 -539 3979.5 -510.0Q4039.0 -481 4070.0 -421.0Q4101.0 -361 4101.0 -266V-231H3723.0Q3723.0 -189 3735.0 -160.0Q3747.0 -131 3772.0 -116.0Q3797.0 -101 3839.0 -101Q3864.0 -101 3883.0 -107.0Q3902.0 -113 3915.0 -124.5Q3928.0 -136 3935.0 -152.0Q3942.0 -168 3942.0 -188H4101.0Q4101.0 -140 4083.5 -102.5Q4066.0 -65 4032.0 -39.5Q3998.0 -14 3949.5 -1.0Q3901.0 12 3840.0 12ZM3724.0 -322H3934.0Q3934.0 -348 3927.5 -367.5Q3921.0 -387 3908.5 -400.0Q3896.0 -413 3878.5 -419.5Q3861.0 -426 3838.0 -426Q3802.0 -426 3778.0 -414.0Q3754.0 -402 3741.0 -379.0Q3728.0 -356 3724.0 -322Z"/><path d="M4189.0 0V-527H4324.0L4336.0 -446H4343.0Q4355.0 -473 4372.5 -494.5Q4390.0 -516 4415.5 -528.0Q4441.0 -540 4472.0 -540Q4490.0 -540 4505.0 -536.5Q4520.0 -533 4527.0 -529V-386H4475.0Q4444.0 -386 4420.5 -377.5Q4397.0 -369 4382.0 -351.5Q4367.0 -334 4360.0 -309.0Q4353.0 -284 4353.0 -251V0Z"/><path d="M4669.0 197Q4634.0 197 4603.0 181.5Q4572.0 166 4553.5 137.5Q4535.0 109 4535.0 71Q4535.0 29 4560.5 0.5Q4586.0 -28 4618.0 -42Q4595.0 -57 4580.5 -79.5Q4566.0 -102 4566.0 -130Q4566.0 -169 4595.0 -196.0Q4624.0 -223 4663.0 -232Q4627.0 -255 4604.5 -289.0Q4582.0 -323 4582.0 -365Q4582.0 -426 4614.5 -464.0Q4647.0 -502 4704.0 -520.5Q4761.0 -539 4834.0 -539Q4863.0 -539 4886.5 -536.5Q4910.0 -534 4929.0 -529Q4969.0 -553 4984.0 -579.0Q4999.0 -605 5000.0 -621H5143.0Q5143.0 -581 5129.0 -553.5Q5115.0 -526 5089.0 -509.0Q5063.0 -492 5027.0 -483Q5054.0 -461 5069.0 -430.5Q5084.0 -400 5084.0 -365Q5084.0 -308 5055.5 -269.5Q5027.0 -231 4977.0 -211.0Q4927.0 -191 4862.0 -191H4784.0Q4756.0 -191 4742.5 -182.5Q4729.0 -174 4729.0 -160Q4729.0 -147 4741.0 -137.5Q4753.0 -128 4782.0 -128H4985.0Q5062.0 -128 5103.0 -84.5Q5144.0 -41 5144.0 26Q5144.0 77 5116.0 115.5Q5088.0 154 5041.5 175.5Q4995.0 197 4938.0 197ZM4748.0 97H4921.0Q4938.0 97 4951.0 90.5Q4964.0 84 4971.5 72.5Q4979.0 61 4979.0 46Q4979.0 21 4963.0 8.0Q4947.0 -5 4924.0 -5H4748.0Q4725.0 -5 4709.5 8.5Q4694.0 22 4694.0 45Q4694.0 68 4709.5 82.5Q4725.0 97 4748.0 97ZM4833.0 -287Q4876.0 -287 4899.5 -307.0Q4923.0 -327 4923.0 -365Q4923.0 -404 4899.5 -423.5Q4876.0 -443 4833.0 -443Q4792.0 -443 4768.0 -423.5Q4744.0 -404 4744.0 -365Q4744.0 -340 4754.0 -322.5Q4764.0 -305 4784.0 -296.0Q4804.0 -287 4833.0 -287Z"/><path d="M5833.0 12Q5728.0 12 5655.0 -26.5Q5582.0 -65 5543.5 -143.5Q5505.0 -222 5505.0 -343Q5505.0 -522 5592.0 -610.0Q5679.0 -698 5834.0 -698Q5922.0 -698 5990.0 -669.5Q6058.0 -641 6096.5 -583.5Q6135.0 -526 6135.0 -439H6039.0Q6039.0 -499 6013.5 -538.0Q5988.0 -577 5942.0 -596.5Q5896.0 -616 5834.0 -616Q5762.0 -616 5710.0 -588.0Q5658.0 -560 5631.0 -501.5Q5604.0 -443 5604.0 -351V-330Q5604.0 -239 5631.0 -181.5Q5658.0 -124 5709.5 -97.0Q5761.0 -70 5834.0 -70Q5898.0 -70 5944.5 -89.0Q5991.0 -108 6016.5 -147.5Q6042.0 -187 6042.0 -247H6135.0Q6135.0 -158 6095.5 -101.0Q6056.0 -44 5988.0 -16.0Q5920.0 12 5833.0 12Z"/><path d="M6375.0 12Q6346.0 12 6317.0 5.0Q6288.0 -2 6263.0 -18.0Q6238.0 -34 6223.0 -62.5Q6208.0 -91 6208.0 -134Q6208.0 -188 6234.0 -223.0Q6260.0 -258 6306.5 -277.5Q6353.0 -297 6417.0 -304.5Q6481.0 -312 6556.0 -312V-372Q6556.0 -401 6546.0 -422.0Q6536.0 -443 6510.5 -454.5Q6485.0 -466 6438.0 -466Q6393.0 -466 6366.5 -454.5Q6340.0 -443 6329.5 -425.0Q6319.0 -407 6319.0 -385V-370H6234.0Q6233.0 -375 6233.0 -380.0Q6233.0 -385 6233.0 -392Q6233.0 -440 6259.5 -472.5Q6286.0 -505 6334.0 -521.5Q6382.0 -538 6444.0 -538Q6510.0 -538 6554.5 -519.0Q6599.0 -500 6621.5 -465.0Q6644.0 -430 6644.0 -381V-96Q6644.0 -77 6653.0 -69.5Q6662.0 -62 6675.0 -62H6714.0V-4Q6700.0 2 6683.0 6.5Q6666.0 11 6644.0 11Q6618.0 11 6601.0 0.5Q6584.0 -10 6575.0 -28.5Q6566.0 -47 6563.0 -70H6556.0Q6538.0 -45 6510.5 -26.5Q6483.0 -8 6449.0 2.0Q6415.0 12 6375.0 12ZM6397.0 -62Q6429.0 -62 6457.5 -72.0Q6486.0 -82 6508.0 -100.5Q6530.0 -119 6543.0 -145.0Q6556.0 -171 6556.0 -202V-246Q6475.0 -246 6418.0 -237.0Q6361.0 -228 6330.5 -205.0Q6300.0 -182 6300.0 -140Q6300.0 -113 6312.0 -96.0Q6324.0 -79 6346.0 -70.5Q6368.0 -62 6397.0 -62Z"/><path d="M6780.0 173V-526H6850.0L6859.0 -451H6866.0Q6893.0 -495 6935.0 -516.5Q6977.0 -538 7030.0 -538Q7096.0 -538 7142.0 -509.0Q7188.0 -480 7213.0 -418.5Q7238.0 -357 7238.0 -259Q7238.0 -167 7212.5 -106.5Q7187.0 -46 7141.0 -17.0Q7095.0 12 7034.0 12Q7000.0 12 6970.0 4.0Q6940.0 -4 6916.0 -21.5Q6892.0 -39 6874.0 -66H6868.0V173ZM7006.0 -65Q7055.0 -65 7086.0 -84.5Q7117.0 -104 7132.0 -145.5Q7147.0 -187 7147.0 -252V-273Q7147.0 -342 7131.0 -383.5Q7115.0 -425 7084.5 -443.0Q7054.0 -461 7009.0 -461Q6960.0 -461 6928.5 -439.5Q6897.0 -418 6882.5 -375.0Q6868.0 -332 6868.0 -270V-255Q6868.0 -200 6878.5 -163.5Q6889.0 -127 6908.5 -105.0Q6928.0 -83 6953.0 -74.0Q6978.0 -65 7006.0 -65Z"/><path d="M7339.0 -625V-723H7427.0V-625ZM7339.0 0V-526H7427.0V0Z"/><path d="M7679.0 12Q7638.0 12 7615.0 -3.5Q7592.0 -19 7582.0 -44.5Q7572.0 -70 7572.0 -99V-452H7504.0V-526H7574.0L7590.0 -673H7660.0V-526H7759.0V-452H7660.0V-112Q7660.0 -87 7669.0 -74.5Q7678.0 -62 7703.0 -62H7759.0V-4Q7749.0 1 7735.0 4.0Q7721.0 7 7706.5 9.5Q7692.0 12 7679.0 12Z"/><path d="M7977.0 12Q7948.0 12 7919.0 5.0Q7890.0 -2 7865.0 -18.0Q7840.0 -34 7825.0 -62.5Q7810.0 -91 7810.0 -134Q7810.0 -188 7836.0 -223.0Q7862.0 -258 7908.5 -277.5Q7955.0 -297 8019.0 -304.5Q8083.0 -312 8158.0 -312V-372Q8158.0 -401 8148.0 -422.0Q8138.0 -443 8112.5 -454.5Q8087.0 -466 8040.0 -466Q7995.0 -466 7968.5 -454.5Q7942.0 -443 7931.5 -425.0Q7921.0 -407 7921.0 -385V-370H7836.0Q7835.0 -375 7835.0 -380.0Q7835.0 -385 7835.0 -392Q7835.0 -440 7861.5 -472.5Q7888.0 -505 7936.0 -521.5Q7984.0 -538 8046.0 -538Q8112.0 -538 8156.5 -519.0Q8201.0 -500 8223.5 -465.0Q8246.0 -430 8246.0 -381V-96Q8246.0 -77 8255.0 -69.5Q8264.0 -62 8277.0 -62H8316.0V-4Q8302.0 2 8285.0 6.5Q8268.0 11 8246.0 11Q8220.0 11 8203.0 0.5Q8186.0 -10 8177.0 -28.5Q8168.0 -47 8165.0 -70H8158.0Q8140.0 -45 8112.5 -26.5Q8085.0 -8 8051.0 2.0Q8017.0 12 7977.0 12ZM7999.0 -62Q8031.0 -62 8059.5 -72.0Q8088.0 -82 8110.0 -100.5Q8132.0 -119 8145.0 -145.0Q8158.0 -171 8158.0 -202V-246Q8077.0 -246 8020.0 -237.0Q7963.0 -228 7932.5 -205.0Q7902.0 -182 7902.0 -140Q7902.0 -113 7914.0 -96.0Q7926.0 -79 7948.0 -70.5Q7970.0 -62 7999.0 -62Z"/><path d="M8382.0 0V-723H8470.0V0Z"/></g></svg>
+    </a>
+    <div class="menu" role="tablist">
+      <button onclick="show('home')" id="tab-home" aria-current="page">Overview</button>
+      <button onclick="show('approach')" id="tab-approach">How we work</button>
+      <button onclick="show('research')" id="tab-research">Notes</button>
+      <button onclick="show('firm')" id="tab-firm">Firm</button>
+      <button onclick="show('contact')" id="tab-contact">Contact</button>
     </div>
-    <div class="webbox">
-      <canvas id="web" role="img" aria-label="Three-dimensional network: twelve economic forces on the outer ring link to the nine strategy sleeves on the inner ring, which feed one portfolio at the centre. It turns as the pointer moves and as the page scrolls."></canvas>
-      <div class="readout" id="readout"><span class="rs">Regime</span><span class="rn">Full book</span><span class="rc">All nine sleeves shown</span></div>
-      <span class="hint">Move the pointer to turn the book</span>
-    </div>
-    <div class="webnote">
-      <div class="legend">
-        <span class="prem"><i class="sw"></i>Risk premia</span>
-        <span class="beh"><i class="sw"></i>Behavioural</span>
-        <span class="str"><i class="sw"></i>Structural</span>
-        <span><i class="sw ink"></i>Economic force</span>
-      </div>
-      <span>Outer ring: the economic forces. Inner ring: the sleeves that earn from them. Centre: the book.</span>
-    </div>
-    <div class="cycle">
-      <div class="cyhead">
-        <span class="t">How a market moves through regimes<small>Example cycle · the book above follows it · click a regime to hold it</small></span>
-        <button class="chip" id="playCycle" aria-pressed="true">Pause the cycle</button>
-      </div>
-      <div class="scrollx"><svg id="cycle" viewBox="0 0 1000 230" role="img" aria-label="Example market cycle: a price path moves through calm growth, inflation rising, stress, recovery and back to calm growth, with each regime shaded and realised volatility shown underneath."></svg></div>
-      <p class="cap">Illustration. A stylised market path, not market history. Each regime has its own drift and volatility: calm growth rises steadily, rising inflation trades sideways with more variation, stress falls quickly as volatility rises, recovery regains part of the fall with volatility still high, and calm growth then resumes below the previous peak. The book above follows the cycle and adjusts its sleeves as conditions change; pause it, or click a regime, to hold one.</p>
+  </div>
+</nav>
+
+<!-- ============ OVERVIEW ============ -->
+<div class="view active" id="view-home">
+  <section class="hero">
+    <div class="wrap">
+      <h1>A quantitative firm at heart. The edge is its people.</h1>
+      <p class="lede">Swartberg Capital is a systematic research and trading firm in South Africa, owned and run by its two principals. The principals design the research, read the evidence, and make every decision that matters. Artificial intelligence assists them, and it gives them the capacity to apply that discipline to more ideas, with more consistency, and with less of the day lost to routine. What we publish here describes how the firm works.</p>
+      <p style="margin-top:28px"><button class="btn" onclick="show('approach')">Read how we work</button></p>
     </div>
   </section>
 
-  <section aria-labelledby="h-mission">
-    <div class="eyebrow">The mission</div>
-    <h2 id="h-mission" class="mission rise">We research <b>many candidates</b> for each of <b>nine strategy sleeves</b>. Every candidate that meets our standard runs on simulated capital, continuously. In each sleeve the strongest evidence holds the <b>allocation</b>, and challengers continue to compete for it. The regime determines which sleeves the book runs. The principals decide every change to live capital.</h2>
-    <div class="facts rise">
-      <div class="fact"><span class="n num">9</span><span class="t">strategy sleeves, each a style with published research behind it</span></div>
-      <div class="fact"><span class="n num">3+</span><span class="t">candidates competing for each sleeve's allocation, with no ceiling</span></div>
-      <div class="fact"><span class="n num">10</span><span class="t">rungs on the research ladder from a published idea to live capital</span></div>
-      <div class="fact"><span class="n num">1</span><span class="t">allocation per sleeve, held on evidence and never by default</span></div>
+  <section style="background:var(--paper-2)">
+    <div class="wrap">
+      <div class="eyebrow">The portfolio</div>
+      <h2 style="margin-top:14px">One portfolio, built from nine sources of return</h2>
+      <p class="small" style="margin-top:10px;font-size:1rem;color:var(--slate);max-width:68ch">The book draws on nine strategy sleeves, each grounded in published research and each drawing on a different economic link. The weight of each sleeve follows the regime the market is in. Below, an example market moves through four regimes and the book adjusts with it. It is an illustration of method, not market history.</p>
+      <iframe id="book-embed" src="portfolio/?embed" title="The book across market regimes: an interactive illustration" loading="lazy"
+              style="display:block;width:100%;height:1180px;border:0;margin-top:24px;background:transparent"></iframe>
+      <p style="margin-top:20px"><a href="portfolio/">Read how the portfolio is built</a></p>
+    </div>
+  </section>
+  <script>
+    addEventListener("message", ev => {
+      const h = ev.data && ev.data.swartbergEmbedHeight;
+      if (h && ev.source === document.getElementById("book-embed").contentWindow) document.getElementById("book-embed").style.height = (h + 4) + "px";
+    });
+  </script>
+
+  <section>
+    <div class="wrap grid g2" style="align-items:start">
+      <div>
+        <div class="eyebrow">About the firm</div>
+        <h2 style="margin-top:14px">A standard of our own</h2>
+      </div>
+      <div>
+        <p>Swartberg Capital exists to find, in the published record of how markets behave, what survives testing on our own data, and to trade only that. The work is quantitative: every claim is tested, every outcome is measured, and nothing is asserted that the data has not supported. The judgement that directs the work belongs to the principals, and artificial intelligence extends their capacity to exercise it. What cannot meet the standard is removed, not softened. This is the way the firm is managed.</p>
+        <p style="margin-top:16px"><a href="#firm" onclick="show('firm');return false;">Read about the firm</a></p>
+      </div>
     </div>
   </section>
 
-
-  <section aria-labelledby="h-styles">
-    <div class="head">
-      <div class="eyebrow">What we trade</div>
-      <h2 id="h-styles">Nine strategy styles, each grounded in published research</h2>
-      <p class="lede">These are the styles of strategy we research and run. Each is documented in the academic record, some for close to a century, and each rests on a reason the return should persist: a counterparty who is slower, constrained, buying insurance or pricing the same exposure differently elsewhere. Our work is the construction of each signal, its sizing, and how the sleeves combine.</p>
-    </div>
-    <div class="styles" id="styles"></div>
-
-    <div class="sub">
-      <h3 style="font-size:var(--step-2)">Sources of return that rarely move together</h3>
-      <p class="lede" style="font-size:1.05rem">Every strategy has extended periods of weak returns. Styles that draw on different economic links tend to have them at different times, so the combined book is steadier than any one of its parts. Strategies that move together add leverage, not diversification, which is why we measure the correlation between sleeves every day. In numbers: with <span class="m"><i>N</i></span> sleeves of equal Sharpe ratio and average pairwise correlation <span class="m"><i>ρ̄</i></span>, the book's Sharpe ratio scales by <span class="m">√(<i>N</i> / (1 + (<i>N</i> − 1)<i>ρ̄</i>))</span>. Correlation, not the number of strategies, sets the benefit.</p>
-    </div>
-    <div class="figure tilt">
-      <div class="scrollx"><svg id="braid" viewBox="0 0 1000 470" role="img" aria-label="Braid diagram: nine sleeve strands weave across five regime periods; each strand is thick when the sleeve is on, thinner at half size and faint when off."></svg></div>
-      <p class="cap">Illustration. The regime sequence is an example and the strand widths follow the default switching table further down. It is not a forecast and it shows no performance. Thick: sleeve on. Medium: half size. Faint: off.</p>
+  <section style="background:var(--paper-2)">
+    <div class="wrap">
+      <div class="eyebrow">How we work</div>
+      <h2 style="margin-top:14px">Research, test, and manage risk</h2>
+      <p class="small" style="margin-top:10px;font-size:1rem;color:var(--slate)">Three disciplines, in that order. Each is applied by the principals to every idea the firm considers, and each answers to the evidence.</p>
+      <div class="grid g3" style="margin-top:28px">
+        <div class="card"><h3>Research</h3><p style="margin-top:8px">We begin with what has been published about how markets behave, and we keep every source. The principals decide what is worth reading and what enters the firm's thinking, and nothing enters without a citation that can be opened.</p></div><div class="card"><h3>Test</h3><p style="margin-top:8px">We test what we read against our own data, in the same way every time, under rules written down before the test begins, with the number of attempts kept on record. A result is measured, never asserted.</p></div><div class="card"><h3>Manage risk</h3><p style="margin-top:8px">Limits are set before anything else, by a function that does not do the research, and the principals are responsible for it. The size of a position follows the evidence and nothing else.</p></div>
+      </div>
+      <p style="margin-top:24px"><a href="#firm" onclick="show('firm');return false;">Read our standards</a></p>
     </div>
   </section>
 
-
-
-  <section aria-labelledby="h-fams">
-    <div class="two">
-      <div class="head">
-        <div class="eyebrow">The nine sleeves</div>
-        <h2 id="h-fams">Every sleeve states who is on the other side, and why the return persists</h2>
-        <p class="lede">A strategy without a published thesis does not enter the book.</p>
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">The hedge fund in the age of artificial intelligence</div>
+      <h2 style="margin-top:14px">People, discipline, and capacity</h2>
+      <div class="grid g3" style="margin-top:28px">
+        <div class="card"><h3>The people are the edge</h3><p style="margin-top:8px">What the firm knows, it knows because one of its principals judged the evidence sufficient, and what it does not know is said plainly. That judgement is not delegated.</p></div><div class="card"><h3>Quantitative discipline</h3><p style="margin-top:8px">The method is written down and applied the same way each time, to every idea, in the same order. A result is accepted on the evidence for it and on nothing else, and the record of what was tried travels with it.</p></div><div class="card"><h3>Capacity from artificial intelligence</h3><p style="margin-top:8px">Artificial intelligence assists the principals. It allows the same discipline to reach more ideas, more of the published record, and more of the day than two people could cover alone, and it returns the hours that routine would otherwise take. The research remains theirs, and so does the decision.</p></div>
       </div>
-      <div class="rise">
-        <div class="pyr" aria-label="Pyramid: risk premia at the base, behavioural strategies in the middle, structural inefficiencies at the top">
-          <div class="p3">Structural<small>Seasonal · Arbitrage</small></div>
-          <div class="p2">Behavioural<small>Trend · Momentum · Breakout · Mean reversion</small></div>
-          <div class="p1">Risk premia<small>Carry · Value · Volatility</small></div>
-        </div>
-        <div class="pyrnote"><span>Base: most capacity, longest life</span><span>Top: highest quality, shortest life</span></div>
-      </div>
-    </div>
-    <div class="fams" id="fams"></div>
-  </section>
-
-
-  <section aria-labelledby="h-maths">
-    <div class="head">
-      <div class="eyebrow">The arithmetic of the book</div>
-      <h2 id="h-maths">Every rule has an equation behind it</h2>
-      <p class="lede">The book is managed with a small set of formulas from the published literature. They determine how much evidence a strategy requires, how large it may be, and what diversification contributes.</p>
-    </div>
-    <div class="eqs">
-      <div class="eq rise"><span class="k">Risk-adjusted return</span><div class="f"><i>SR</i> = <span class="frac"><span><i>μ</i> − <i>r<sub>f</sub></i></span><span><i>σ</i></span></span> · √252</div><p>The annualised Sharpe ratio: mean excess daily return over its volatility. The common unit for every comparison in the book.</p><span class="src">Sharpe (1966, 1994)</span></div>
-      <div class="eq rise"><span class="k">Statistical significance</span><div class="f"><i>t</i> ≈ <i>SR</i> · √<i>T</i><sub>years</sub></div><p>Evidence grows with the square root of time. At a Sharpe ratio of 1, a t-statistic of 2 needs about four years of data; at 0.5, sixteen. New factors should clear <span class="m"><i>t</i> &gt; 3</span>.</p><span class="src">Harvey, Liu and Zhu (2016)</span></div>
-      <div class="eq rise"><span class="k">Deflated Sharpe ratio</span><div class="f"><i>DSR</i> = Φ(<i>z</i>)<span class="l2"><i>z</i> = <span class="frac"><span>(<i>SR̂</i> − <i>SR</i><sub>0</sub>)√(<i>T</i> − 1)</span><span>√(1 − <i>γ̂</i><sub>3</sub><i>SR̂</i> + ¼(<i>γ̂</i><sub>4</sub> − 1)<i>SR̂</i><sup>2</sup>)</span></span></span></div><p>The probability the true Sharpe ratio is positive after correcting for skew <span class="m"><i>γ</i><sub>3</sub></span>, kurtosis <span class="m"><i>γ</i><sub>4</sub></span>, and <span class="m"><i>SR</i><sub>0</sub></span>, the highest result expected by chance from the number of trials run.</p><span class="src">Bailey and López de Prado (2014)</span></div>
-      <div class="eq rise"><span class="k">Diversification</span><div class="f"><i>SR</i><sub>book</sub> ≈ <i>SR</i> · <span class="frac"><span>√<i>N</i></span><span>√(1 + (<i>N</i> − 1)<i>ρ̄</i>)</span></span></div><p>For <span class="m"><i>N</i></span> sleeves of equal Sharpe ratio and average correlation <span class="m"><i>ρ̄</i></span>. Nine uncorrelated sleeves triple the ratio; at <span class="m"><i>ρ̄</i> = 0.5</span> the gain is only a third. Try it below.</p><span class="src">Grinold and Kahn (2000); Carver (2015)</span></div>
-      <div class="eq rise"><span class="k">Volatility targeting</span><div class="f"><i>w<sub>i</sub></i> = <span class="frac"><span><i>σ</i>*</span><span><i>σ̂<sub>i</sub></i></span></span><span class="l2"><i>σ̂</i><sup>2</sup><sub><i>t</i></sub> = <i>λ</i> <i>σ̂</i><sup>2</sup><sub><i>t</i>−1</sub> + (1 − <i>λ</i>) <i>r</i><sup>2</sup><sub><i>t</i></sub></span></div><p>Each sleeve is sized to a common volatility target <span class="m"><i>σ</i>*</span>, using an exponentially weighted variance estimate that reacts to changing markets.</p><span class="src">Moreira and Muir (2017); RiskMetrics (1996)</span></div>
-      <div class="eq rise"><span class="k">Portfolio risk and risk contribution</span><div class="f"><i>σ<sub>p</sub></i> = √(<b>w</b><sup>⊤</sup><b>Σ</b><b>w</b>)<span class="l2"><i>RC<sub>i</sub></i> = <span class="frac"><span><i>w<sub>i</sub></i>(<b>Σ</b><b>w</b>)<i><sub>i</sub></i></span><span><i>σ<sub>p</sub></i></span></span></span></div><p>Book volatility from the covariance matrix <span class="m"><b>Σ</b></span>, shrunk toward a structured target. Each sleeve's risk contribution is measured and held near equal.</p><span class="src">Ledoit and Wolf (2004); Maillard, Roncalli and Teïletche (2010)</span></div>
-      <div class="eq rise"><span class="k">Cost speed limit</span><div class="f">turnover<sub>max</sub> = <span class="frac"><span><i>SR</i><sub>pre-cost</sub> / 3</span><span><i>c</i><sub>round trip</sub></span></span></div><p>Costs are measured in Sharpe units: commission plus slippage over the annualised volatility of the instrument. No sleeve may spend more than a third of its expected return on trading.</p><span class="src">Carver (2015), Systematic Trading</span></div>
-      <div class="eq rise"><span class="k">Position size ceiling</span><div class="f"><i>f</i>* = <span class="frac"><span><i>μ</i></span><span><i>σ</i><sup>2</sup></span></span>, &nbsp; <i>f</i> ≤ ½<i>f</i>*</div><p>The growth-optimal Kelly fraction overstates size whenever <span class="m"><i>μ</i></span> is estimated with error, which is always. We cap at half of it.</p><span class="src">Kelly (1956); Thorp (2006)</span></div>
-      <div class="eq rise"><span class="k">Tail risk</span><div class="f"><i>ES</i><sub>95</sub> = 𝔼[<i>L</i> | <i>L</i> ≥ <i>VaR</i><sub>95</sub>]</div><p>Expected shortfall: the average loss on the worst 5% of days, estimated on the bootstrapped distribution. It sees the shape of the tail that value at risk ignores.</p><span class="src">Acerbi and Tasche (2002)</span></div>
-    </div>
-    <div class="calc rise">
-      <div class="head" style="gap:16px">
-        <h3>What diversification is worth</h3>
-        <label for="calcN"><span class="lr"><span>Sleeves running, <span class="m"><i>N</i></span></span><span class="v" id="vN">9</span></span><input type="range" id="calcN" min="1" max="15" step="1" value="9"></label>
-        <label for="calcR"><span class="lr"><span>Average pairwise correlation, <span class="m"><i>ρ̄</i></span></span><span class="v" id="vR">0.10</span></span><input type="range" id="calcR" min="0" max="0.9" step="0.05" value="0.1"></label>
-        <div><div class="out" id="calcOut">2.24×</div><p class="muted" style="font-size:13px;margin-top:6px">Multiplier on a single sleeve's Sharpe ratio, assuming equal Sharpe ratios and equal risk. Arithmetic, not a forecast.</p></div>
-      </div>
-      <svg id="calcSvg" viewBox="0 0 560 300" role="img" aria-label="Line chart of the diversification multiplier against the number of sleeves for four correlation levels, with the current choice marked."></svg>
+      <p style="margin-top:24px"><a href="#approach" onclick="show('approach');return false;">Read how we work</a></p>
     </div>
   </section>
 
-  <section aria-labelledby="h-proof">
-    <div class="head">
-      <div class="eyebrow">How a strategy proves itself</div>
-      <h2 id="h-proof">Every test is designed to reject</h2>
-      <p class="lede">A backtest describes history; it does not establish a return. We accept a result only after it has survived tests designed to reject it: anchored walk-forward analysis and purged k-fold cross-validation with an embargo, permutation tests against shuffled data, combinatorially symmetric cross-validation to estimate the probability of backtest overfitting (PBO), and a block bootstrap of the outcome distribution we size for. Most candidates do not pass. That is the purpose of the standard.</p>
-    </div>
-    <div class="proofs">
-      <div class="figure rise">
-        <h3>Walk-forward folds</h3>
-        <svg viewBox="0 0 360 210" role="img" aria-label="Walk-forward diagram: six folds, each fitting on earlier history and testing on the next window; the last quarter of history is a sealed holdout." id="wf"></svg>
-        <p class="cap">Parameters are fitted in sample and tested on the next out-of-sample window, six times over. Observations whose labels overlap the test window are purged, with an embargo after it, so no information leaks across the boundary (López de Prado 2018). The last quarter of history is sealed and touched once.</p>
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Notes</div>
+      <h2 style="margin-top:14px">From the research desk</h2>
+      <p class="small" style="margin-top:10px;font-size:1rem;color:var(--slate)">We publish what we learn in doing this work well. The notes carry no performance, no forecasts, and no recommendations.</p>
+      <div class="grid g3" style="margin-top:28px">
+        <div class="card"><h3>Before we call anything validated</h3><p style="margin-top:8px">What has to be true before the firm will say a result holds, and why the number of things we tried is part of the answer.</p><p style="margin-top:12px"><a href="#research" onclick="show('research');return false;">Read the note on validation</a></p></div><div class="card"><h3>The cost of a trade</h3><p style="margin-top:8px">Much of what appears to be a result on a chart is returned to the market in trading costs. How we measure the cost of a trade before we count anything.</p><p style="margin-top:12px"><a href="#research" onclick="show('research');return false;">Read the note on costs</a></p></div><div class="card"><h3>Why we checked every source</h3><p style="margin-top:8px">The firm's research rests on 206 published sources. How we verified each one, what we corrected, and why anything that could not be confirmed was removed.</p><p style="margin-top:12px"><a href="#research" onclick="show('research');return false;">Read the note on sources</a></p></div>
       </div>
-      <div class="figure rise">
-        <h3>Against shuffled data</h3>
-        <svg viewBox="0 0 360 210" role="img" aria-label="Distribution diagram: results of the same rules on shuffled data form a bell shape; the strategy must sit beyond the 95th percentile." id="perm"></svg>
-        <p class="cap">A permutation test: the same rules on shuffled returns, thousands of times, trace the null distribution luck alone produces. The empirical p-value is the share of shuffled runs that match ours; we require <span class="m"><i>p</i> &lt; 0.05</span>.</p>
-      </div>
-      <div class="figure rise">
-        <h3>Distribution of outcomes</h3>
-        <svg viewBox="0 0 360 210" role="img" aria-label="Distribution diagram: worst drawdowns across resampled histories; sizing and the book stop are set at the 95th percentile, not the median." id="dd"></svg>
-        <p class="cap">A stationary block bootstrap resamples history in blocks, keeping volatility clustering and autocorrelation intact, and gives a distribution of maximum drawdowns. Size and the book's stop come from its tail (the 95th percentile and expected shortfall), not from the one path the backtest happened to take.</p>
-      </div>
-    </div>
-    <div class="sub">
-      <h3>The hurdles a candidate must clear out of sample</h3>
-      <p class="muted" style="font-size:14px">The firm's current thresholds, as recorded in our validation file and reviewed for each sleeve before launch. They are standards, not results.</p>
-    </div>
-    <div class="scrollx"><table class="hurdles">
-      <thead><tr><th scope="col">Test</th><th scope="col">Hurdle</th><th scope="col">Why it is there</th></tr></thead>
-      <tbody>
-        <tr><td>Deflated Sharpe ratio (DSR): probability the true Sharpe ratio is above zero, after trials, skew and kurtosis</td><td class="v">at least 95%</td><td class="w">The strongest of many variants is overstated by construction; deflation removes that effect before the result is assessed. Trials are counted as clusters of similar configurations, and we select the centre of the strongest cluster rather than its single strongest member.</td></tr>
-        <tr><td>Cost speed limit (Carver 2015)</td><td class="v">at most ⅓ of pre-cost Sharpe</td><td class="w">Turnover times round-trip cost, in Sharpe units. A return that must give up more than a third of itself to trading costs is too fragile to run.</td></tr>
-        <tr><td>Walk-forward windows positive after costs</td><td class="v">4 of 6</td><td class="w">One strong period can lift an average; the result must hold in most periods.</td></tr>
-        <tr><td>The combined book</td><td class="v">t of 3 or more</td><td class="w">Sleeves that pass are combined at equal risk, and the book must clear a higher bar than any single sleeve (Harvey, Liu and Zhu 2016).</td></tr>
-        <tr><td>Sealed holdout</td><td class="v">last 25%</td><td class="w">History the research never saw, used once.</td></tr>
-        <tr><td>Permutation test against shuffled returns</td><td class="v">p &lt; 0.05</td><td class="w">The result must beat what luck alone produces on the same rules.</td></tr>
-        <tr><td>Profit at twice the dealing costs</td><td class="v">still positive</td><td class="w">Executed prices are worse than quoted ones; a result that depends on perfect execution is not one we rely on.</td></tr>
-        <tr><td>Parameter stability under ±20% perturbation</td><td class="v">70% of neighbours</td><td class="w">Settings 20% either side must also hold, or the result reflects fitting rather than a durable effect.</td></tr>
-        <tr><td>In-sample to out-of-sample decay</td><td class="v">at most 50%</td><td class="w">A large drop out of sample is the signature of overfitting.</td></tr>
-        <tr><td>Profit factor · tail ratio</td><td class="v">1.3 · 1.0</td><td class="w">Gains must outweigh losses, and the largest losses must not outweigh the largest gains.</td></tr>
-        <tr><td>Drawdown consistency</td><td class="v">within the 95th percentile</td><td class="w">The worst drawdown must be no deeper than a strategy with the same Sharpe ratio and record length would expect (Magdon-Ismail et al. 2004). A fixed return-to-drawdown threshold penalises long records; this test addresses the question directly. MAR and Sortino are reported on every strategy.</td></tr>
-        <tr><td>Sample size</td><td class="v">200 trades</td><td class="w">Fewer trades cannot separate skill from noise; the standard error of a Sharpe estimate shrinks only with the square root of the sample.</td></tr>
-        <tr><td>Probability of backtest overfitting (PBO)</td><td class="v">reported</td><td class="w">How often the in-sample winner ranks below the median out of sample across combinatorial splits (Bailey, Borwein, López de Prado and Zhu 2017).</td></tr>
-        <tr><td>Paper drift flag</td><td class="v">50 trades, 2 weeks</td><td class="w">If paper results fall below the validated range for that long, the candidate goes back down the ladder.</td></tr>
-      </tbody>
-    </table></div>
-  </section>
-
-
-  <section aria-labelledby="h-ladder">
-    <div class="head">
-      <div class="eyebrow">The research ladder</div>
-      <h2 id="h-ladder">Many candidates, one allocation</h2>
-      <p class="lede">Our research process runs this ladder continuously, under rules the principals have written down. Artificial intelligence gives the principals the capacity to take every candidate through every test. A candidate advances one rung at a time and earns each test by passing the one before. Most do not progress. Those that reach the top compete for their sleeve's allocation, and the holder is replaced only by a challenger with clearly stronger evidence.</p>
-    </div>
-    <div class="ladder" id="ladder"></div>
-    <p class="cap">Illustration of the process. Each square is a candidate, coloured by style group; an outlined square has not passed a test and returns to research.</p>
-    <div class="ahl rise">
-      <div class="head" style="gap:10px">
-        <div class="eyebrow">Informed by Man AHL's published practice</div>
-        <q>Group challenge</q>
-        <span class="muted" style="font-size:13px">Man AHL's description of its research culture, in place of groupthink</span>
-      </div>
-      <ul>
-        <li>Models move from concept through back-testing into production on one codebase. Our ladder sets out that path, rung by rung.</li>
-        <li>Every proposal is challenged before it is accepted. Risk challenges each candidate at rung 8, before it reaches the principals.</li>
-        <li>Risk is independent of research. The function that challenges a strategy is never the function that built it.</li>
-        <li>Academic work informs the methods, as the Oxford-Man Institute does for Man. Every one of our styles begins with a published paper.</li>
-      </ul>
-    </div>
-    <div class="rules four">
-      <div class="rule rise"><h3>Rules first</h3><p>The rules are written down before the test. Parameters come from the first part of the history only, and the rest is used once, walking forward.</p></div>
-      <div class="rule rise"><h3>The strongest of many is overstated</h3><p>Selecting the strongest of many variants biases the result upwards. Every result carries the number of configurations tried, a deflated Sharpe ratio and the shuffled-data test.</p></div>
-      <div class="rule rise"><h3>Allocations change slowly</h3><p>Evidence builds with the square root of time: separating two good strategies takes years, not a quarter. A challenger takes the allocation only when its evidence is clearly stronger over a long period.</p></div>
-      <div class="rule rise"><h3>People decide</h3><p>Our systems test and report. No automated process places an order. Going live, and every change of allocation on live capital, is a decision of the principals, recorded with its evidence.</p></div>
+      <p style="margin-top:24px"><a href="#research" onclick="show('research');return false;">Read all notes</a></p>
     </div>
   </section>
 
-
-  <section aria-labelledby="h-engine">
-    <div class="head">
-      <div class="eyebrow">The regime engine</div>
-      <h2 id="h-engine">One record of the conditions we trade in</h2>
-      <p class="lede">News, fundamentals, market structure and macroeconomic series are brought together each morning. Published rules set the regime on three axes, so any call can be reproduced from the log. Artificial intelligence gives the principals capacity: it reads the day's sources and writes a cited briefing on what changed and why. A two-state hidden Markov model on index returns runs alongside as a cross-check (Hamilton 1989), and every series is stored point-in-time, as first published, so no backtest sees data before it existed. The principals approve the rotation, and the day is declared at 06:00: which sleeves run, at what size and in which direction. Any change during the day is a logged override, scored against the rule. Every scheduled job reports its last good run in the same morning brief, and one that falls silent is flagged the next day.</p>
+  <section style="background:var(--paper-2)">
+    <div class="wrap">
+      <h3>Learn more about Swartberg Capital</h3>
+      <p style="margin-top:10px"><a href="#firm" onclick="show('firm');return false;">About the firm</a> &nbsp;|&nbsp; <a href="#approach" onclick="show('approach');return false;">How we work</a> &nbsp;|&nbsp; <a href="#firm" onclick="show('firm');return false;">Our standards</a> &nbsp;|&nbsp; <a href="#research" onclick="show('research');return false;">Notes</a></p>
     </div>
-    <div class="figure tilt"><div class="scrollx"><svg id="engine" viewBox="0 0 1000 330" role="img" aria-label="Engine diagram: four input streams feed the rules-based regime state and the cited AI briefing; both go to the principals, who set each sleeve on, at half size or off."></svg></div></div>
-    <div class="head" style="gap:10px;margin-top:8px">
-      <h3>The regime model as a Markov chain</h3>
-      <p class="muted" style="font-size:14px;max-width:80ch">Regimes persist, then switch abruptly (Hamilton 1989; Ang and Timmermann 2012). We model the state as a hidden Markov chain: each day the market stays in its regime or moves to another with probability <span class="m"><i>p<sub>ij</sub></i></span>, and returns are drawn from that regime's own distribution. The probabilities below are illustrative; ours are estimated by maximum likelihood (the EM algorithm) on point-in-time data.</p>
-    </div>
-    <div class="mk">
-      <div class="figure rise"><svg id="chain" viewBox="0 0 520 400" role="img" aria-label="Markov chain diagram: four regime states with self-persistence loops and transition arrows labelled with daily probabilities."></svg></div>
-      <div class="figure rise" style="gap:18px">
-        <div class="scrollx"><table class="tm" id="tmat"></table></div>
-        <div class="mfs">
-          <div><span><i>P</i>(<i>s<sub>t</sub></i> = <i>j</i> | <i>s<sub>t</sub></i><sub>−1</sub> = <i>i</i>) = <i>p<sub>ij</sub></i></span><small>transition probability</small></div>
-          <div><span>𝔼[<i>D<sub>i</sub></i>] = 1 / (1 − <i>p<sub>ii</sub></i>)</span><small>expected days in regime</small></div>
-          <div><span><i>r<sub>t</sub></i> | <i>s<sub>t</sub></i> = <i>k</i> ~ 𝒩(<i>μ<sub>k</sub></i>, <i>σ</i><sup>2</sup><sub><i>k</i></sub>)</span><small>regime-dependent returns</small></div>
-          <div><span><i>ξ</i><sub><i>t</i>|<i>t</i></sub> ∝ <i>η<sub>t</sub></i> ⊙ (<b>P</b><sup>⊤</sup><i>ξ</i><sub><i>t</i>−1|<i>t</i>−1</sub>)</span><small>Hamilton filter</small></div>
-        </div>
-      </div>
-    </div>
-    <div class="figure tilt">
-      <div class="scrollx"><svg id="rcurve" viewBox="0 0 1000 400" role="img" aria-label="Regime curves: a simulated index path shaded by its most likely regime, and below it the filtered probability of each of the four regimes over time, stacked to one."></svg></div>
-      <p class="cap">Synthetic example. A market path simulated from the four-state model above, and the Hamilton filter's probability of each regime computed from its daily returns alone, the way the engine reads live data. It is not market history and shows no strategy performance. Hover for the day's probabilities.</p>
-    </div>
-
-    <div class="head" style="gap:10px">
-      <h3>Default switching by regime</h3>
-      <p class="muted" style="font-size:14px">Select a regime to see it across the page. Hover a cell for the published reason. The engine computes eight states; four are shown. Our own tests replace this default as they are completed.</p>
-    </div>
-    <div class="scrollx"><table class="heat" id="heat"></table></div>
-
   </section>
-
-  <section aria-labelledby="h-book">
-    <div class="head">
-      <div class="eyebrow">How the book is managed</div>
-      <h2 id="h-book">A standard of our own, written down in advance</h2>
-    </div>
-    <div class="figure tilt">
-      <h3>The drawdown plan</h3>
-      <svg viewBox="0 0 640 240" role="img" aria-label="Step chart: exposure is 100% up to a 5% drawdown, 75% to 10%, 50% to 15%, and zero beyond 15% until the principals decide." style="width:100%;height:auto;display:block">
-        <g font-family="IBM Plex Mono, Menlo, monospace" font-size="11" style="fill:var(--subtle)">
-          <text x="44" y="34" text-anchor="end">100%</text><text x="44" y="79" text-anchor="end">75%</text><text x="44" y="124" text-anchor="end">50%</text><text x="44" y="194" text-anchor="end">0%</text>
-          <text x="52" y="214">0%</text><text x="192" y="214" text-anchor="middle">5%</text><text x="332" y="214" text-anchor="middle">10%</text><text x="472" y="214" text-anchor="middle">15%</text><text x="612" y="234" text-anchor="end">fall from the book's peak</text>
-        </g>
-        <g style="stroke:var(--line)" stroke-width="1"><line x1="52" x2="612" y1="30" y2="30"/><line x1="52" x2="612" y1="75" y2="75"/><line x1="52" x2="612" y1="120" y2="120"/><line x1="52" x2="612" y1="190" y2="190"/></g>
-        <path d="M52,30 H192 V75 H332 V120 H472 V190 H612" fill="none" style="stroke:var(--ink)" stroke-width="3"/>
-        <path d="M136,75 H192 M276,120 H332 M416,190 H472" fill="none" style="stroke:var(--mark)" stroke-width="3" stroke-dasharray="5 4"/>
-        <rect x="466" y="184" width="12" height="12" style="fill:var(--mark);stroke:var(--ink)"/>
-        <text x="484" y="182" font-family="Archivo, Arial, sans-serif" font-size="12" font-weight="700" style="fill:var(--ink)">Principals decide</text>
-      </svg>
-      <p class="cap">Exposure steps down as the book falls from its peak and rebuilds only once the fall has recovered past the step by two points (dashed). The levels are the firm's written plan, not a forecast.</p>
-    </div>
-    <div class="rules">
-      <div class="rule rise"><h3>Equal risk contribution</h3><p>Every active sleeve is scaled to the same ex-ante volatility, <span class="m"><i>w<sub>i</sub></i> = <i>σ</i>* / <i>σ̂<sub>i</sub></i></span>, with <span class="m"><i>σ̂</i></span> from an exponentially weighted estimator. No sleeve can dominate the book's risk budget.</p></div>
-      <div class="rule rise"><h3>A correlation budget</h3><p>The covariance matrix is re-estimated daily with Ledoit–Wolf shrinkage, which steadies the estimate when history is short. When two sleeves start to co-move, one is cut back. One month of correlation is a prompt for review, not a verdict.</p></div>
-      <div class="rule rise"><h3>A speed limit on costs</h3><p>No sleeve spends more than a third of its pre-cost Sharpe ratio on costs, which caps annual turnover at <span class="m">(<i>SR</i>/3) / <i>c</i></span>, where <span class="m"><i>c</i></span> is the round-trip cost in Sharpe units (Carver 2015). It favours daily and weekly horizons over minutes.</p></div>
-      <div class="rule rise"><h3>Know who pays</h3><p>If we cannot state who is on the other side of a position and why the return should persist, we do not hold it. Every sleeve's thesis is in the published record.</p></div>
-      <div class="rule rise"><h3>Inefficiencies on top</h3><p>Mispricings earn the most per unit of risk, hold the least capacity and close the soonest. They sit above the core of the book, never in place of it.</p></div>
-      <div class="rule rise"><h3>Sized from the tail, not the average</h3><p>Size and the crash budget come from the 95th percentile of thousands of resampled drawdowns, never the median, and never above half the Kelly fraction. Expected shortfall at 95% is reported daily.</p></div>
-      <div class="rule rise"><h3>A drawdown plan written in advance</h3><p>Risk steps down to 75% at a 5% fall from the book's peak, 50% at 10%, and new risk stops at 15% until the principals decide. It rebuilds only after a genuine recovery, so that no decision is improvised during a drawdown (Grossman and Zhou 1993).</p></div>
-      <div class="rule rise"><h3>Smaller limits around known events</h3><p>Risk is halved the day before and the day of scheduled gap events: central-bank decisions, elections, referendums. A sleeve whose return arises from the event itself is exempt.</p></div>
-      <div class="rule rise"><h3>Exchange data only</h3><p>Research, paper trading and live trading run on exchange and index data. We do not use prices set by a broker that is also the counterparty to the trade.</p></div>
-    </div>
-    <p class="lede rise" style="margin-top:8px">That is how the book is managed.</p>
-  </section>
-
-  <footer>
-    <p><b>Internal working document of the principals of Swartberg Capital.</b> It describes how the firm intends to operate. It contains no performance, simulated or actual, and nothing in it is a forecast, a recommendation, advice, an offer or a solicitation. Diagrams are illustrations of method.</p>
-    <p>Swartberg Capital is not an authorised financial services provider under FAIS and is not registered with the FSCA. It manages no money for, gives no advice to and accepts no capital from any other person. Strategy citations refer to published academic work and are not evidence of results we will achieve.</p>
-  </footer>
 </div>
-<div class="tip" id="tip" hidden></div>
+
+<!-- ============ APPROACH ============ -->
+<div class="view" id="view-approach">
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Research process</div>
+      <h2 style="margin:10px 0 28px">The research process, gate by gate</h2>
+      <div class="steps">
+        <div class="step"><div class="k">01</div><div><h3>Idea from published work</h3><p>Academic and industry research, including working papers, journals, and central bank publications. We take the finding and the mechanism behind it, not a trading rule, and the principals decide which findings merit the firm's time.</p></div></div><div class="step"><div class="k">02</div><div><h3>Rules specified in advance</h3><p>Entry, exit, and position size are written precisely enough to be coded, so that the test and the trade follow the same rule. Size is set by a rule decided in advance, not adjusted on the day.</p></div></div><div class="step"><div class="k">03</div><div><h3>Tested on our own data</h3><p>Every simulated fill is taken at the next price that was actually available, with the spread quoted at that moment, commission, and any financing cost. No test is allowed a price that could not have been had.</p></div></div><div class="step"><div class="k">04</div><div><h3>Validation</h3><p>Each rule must pass a sealed holdout period it never saw, walk-forward testing by year, cross-validation designed to limit leakage, a correction for the number of attempts, permutation tests for any machine-learned filter, and cost stress above the quoted spread. The principals read the evidence and decide whether the result holds, and a rule that fails any one of these is set aside.</p></div></div><div class="step"><div class="k">05</div><div><h3>Eligibility</h3><p>Each line of research is tagged with the conditions in which its mechanism is present. A daily assessment, reviewed by the principals, decides what is eligible, and anything eligible but outside its own tested distribution is paused.</p></div></div><div class="step"><div class="k">06</div><div><h3>Paper, then live</h3><p>Each rule runs on a demo account first, because slippage is measured, not assumed. It goes live only once the fills have been measured, the result remains inside its validated distribution, and the principals have decided that it should.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="wrap grid g2">
+      <div>
+        <div class="eyebrow">Technology</div>
+        <h3 style="margin:10px 0">How artificial intelligence assists the principals</h3>
+        <p>Swartberg Capital is a quantitative firm, and its people are its edge. Artificial intelligence assists the principals in that work. It gives them capacity: the discipline set out on this page can be applied to more ideas, with more consistency, and with less of the day lost to routine. It does not set the question, weigh the evidence, or take the decision. Those remain with the principals, and every figure they see can be traced to the record it came from. The purpose of the technology is to give the principals more of their own time for the work that only they can do.</p>
+      </div>
+      <div>
+        <div class="eyebrow">Organisation</div>
+        <h3 style="margin:10px 0">Separation of duties</h3>
+        <p>Research proposes, validation tests, risk sets the size, execution fills, and the principals decide. Each function is kept separate from the others, every recommendation carries its provenance, and the decision at every gate is a person's. This is the way the research is run.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ RESEARCH ============ -->
+<div class="view" id="view-research">
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Notes</div>
+      <h2 style="margin:10px 0 24px">From the research desk</h2>
+      <div class="grid g2">
+        <div class="card"><h3>Why we checked every source</h3><p>The research behind the firm rests on 206 published papers, regulator texts, standards, and vendor documents. Every one was opened and checked against the claim it supports. All were found, a small number of dates and volume figures were corrected, and the rule stands that anything that cannot be confirmed is removed, not softened.</p></div><div class="card"><h3>Before we call anything validated</h3><p>A result has to survive more than one test before the firm will say it holds: a sealed period the rule never saw, costs at the level actually quoted, and a correction for how many things were tried before this one. The number of attempts is part of the answer, and we keep that count on record.</p></div><div class="card"><h3>The cost of a trade</h3><p>Much of what appears to be a result on a chart is returned to the market in trading costs. We measure the cost of a trade before we count anything, at the spread quoted at that moment rather than an average, and we test what happens when fills are worse than quoted.</p></div><div class="card"><h3>The fill that was not available</h3><p>Some bars only print once price has already moved through a level. A test that fills an order at that level is describing a trade that could not have been made. We simulate fills at the next available price instead, and the correction changes the conclusion.</p></div><div class="card"><h3>Size follows the evidence</h3><p>A modest result supports only a modest position, and sizing beyond it turns a sound rule into a wager, however good the statistics appear. Position size is decided by the evidence, by a function separate from the research, and it is capped. The principals answer for that function.</p></div><div class="card"><h3>The limits of price alone</h3><p>Features built from price contain less information than is commonly hoped. Our own tests reach that limit quickly, and the permutation tests say so. The next unit of understanding comes from new information, such as the calendar, related markets, and the order book, not from a larger model. Deciding where to look next is a judgement, and a person makes it.</p></div><div class="card"><h3>Local time</h3><p>Markets keep local hours, and the clock shifts twice a year. A test anchored in universal time samples part of the year and treats it as the whole. It is a small detail that changed a conclusion, which is why every rule we write that refers to the clock is anchored in the market's own time.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FIRM ============ -->
+<div class="view" id="view-firm">
+  <section>
+    <div class="wrap grid g2">
+      <div>
+        <div class="eyebrow">Firm</div>
+        <h2 style="margin:10px 0">What Swartberg Capital is</h2>
+        <p>Swartberg Capital is a systematic research and trading firm in South Africa, owned and run by its two principals. It is a quantitative firm at heart: claims are tested against our own data, outcomes are measured, and nothing is asserted that the evidence has not supported. The principals are the firm's edge. They design the research, read the evidence, and make every decision that matters, and artificial intelligence assists them by giving them the capacity to apply that discipline across more ideas with the same care. Data, models, and results are kept under version control, with every figure reproducible from the underlying tick data. This is the way the firm is owned and run.</p>
+        <h3 style="margin:26px 0 8px">On the name</h3>
+        <p>Swartberg is the black mountain range and pass of the Western Cape, a name in the same register as other South African investment firms. It was chosen from a screen of 85 candidates for domain availability, existing investment firms, company registers, and connotations. The .com and .co.za domains were available at the time of the screen. The name would be adopted formally only once a trademark search and a counsel clearance opinion are complete. The codename Quantum Fund was set aside because it is the name of George Soros's fund, still in use, and the word is a registered financial mark in several registers.</p>
+        <h3 style="margin:26px 0 8px">Standards we hold ourselves to</h3>
+        <p>This site shows no performance. Should the firm ever present results, it would do so with the disclosures a regulated manager would use: hypothetical results labelled as such, costs stated, and no simulated figure described as a return earned. A live record would be verified by an independent third party before it was shown to anyone, and the principals would stand behind every figure in it.</p>
+      </div>
+      <div class="letterhead" aria-label="Letterhead sample">
+        <div class="top">
+          <div class="brand"><svg viewBox="44 -724 8426 921" aria-label="Swartberg Capital" style="height:28px;width:auto"><g fill="currentColor"><path d="M360.0 12Q295.0 12 238.0 0.5Q181.0 -11 137.5 -37.0Q94.0 -63 69.0 -105.5Q44.0 -148 44.0 -210Q44.0 -214 44.0 -219.0Q44.0 -224 45.0 -227H218.0Q218.0 -224 217.5 -219.5Q217.0 -215 217.0 -212Q217.0 -180 233.5 -160.5Q250.0 -141 280.0 -132.5Q310.0 -124 350.0 -124Q372.0 -124 391.0 -126.0Q410.0 -128 425.0 -133.0Q440.0 -138 451.5 -145.5Q463.0 -153 468.5 -163.5Q474.0 -174 474.0 -188Q474.0 -211 456.5 -226.0Q439.0 -241 409.5 -251.0Q380.0 -261 343.0 -270.0Q306.0 -279 266.0 -289.0Q226.0 -299 189.0 -314.0Q152.0 -329 122.5 -352.0Q93.0 -375 75.5 -409.5Q58.0 -444 58.0 -493Q58.0 -547 81.0 -586.5Q104.0 -626 144.5 -651.0Q185.0 -676 238.0 -687.5Q291.0 -699 351.0 -699Q410.0 -699 461.5 -687.0Q513.0 -675 553.0 -649.5Q593.0 -624 615.5 -585.5Q638.0 -547 639.0 -493V-481H467.0V-488Q467.0 -511 454.5 -528.5Q442.0 -546 417.0 -556.5Q392.0 -567 355.0 -567Q318.0 -567 292.5 -560.0Q267.0 -553 253.5 -540.0Q240.0 -527 240.0 -509Q240.0 -487 257.5 -473.0Q275.0 -459 305.0 -449.0Q335.0 -439 372.0 -430.5Q409.0 -422 448.5 -412.5Q488.0 -403 525.0 -388.5Q562.0 -374 592.0 -351.5Q622.0 -329 639.5 -296.0Q657.0 -263 657.0 -216Q657.0 -134 618.5 -84.0Q580.0 -34 512.5 -11.0Q445.0 12 360.0 12Z"/><path d="M863.0 0 686.0 -527H861.0L916.0 -309Q921.0 -292 926.5 -267.5Q932.0 -243 937.5 -220.0Q943.0 -197 947.0 -182H953.0Q959.0 -204 964.0 -227.0Q969.0 -250 974.5 -272.0Q980.0 -294 984.0 -310L1038.0 -527H1206.0L1261.0 -309Q1265.0 -295 1270.0 -272.0Q1275.0 -249 1281.0 -225.0Q1287.0 -201 1291.0 -182H1298.0Q1301.0 -199 1306.5 -221.0Q1312.0 -243 1318.0 -266.5Q1324.0 -290 1328.0 -307L1384.0 -527H1543.0L1366.0 0H1202.0L1147.0 -211Q1143.0 -229 1137.0 -252.0Q1131.0 -275 1126.0 -297.0Q1121.0 -319 1117.0 -335H1113.0Q1111.0 -324 1106.5 -305.0Q1102.0 -286 1096.5 -262.0Q1091.0 -238 1083.0 -212L1027.0 0Z"/><path d="M1736.0 12Q1703.0 12 1671.5 5.5Q1640.0 -1 1614.5 -17.5Q1589.0 -34 1574.0 -63.0Q1559.0 -92 1559.0 -136Q1559.0 -193 1583.0 -229.0Q1607.0 -265 1652.5 -285.5Q1698.0 -306 1762.5 -314.0Q1827.0 -322 1907.0 -322V-355Q1907.0 -378 1898.0 -393.5Q1889.0 -409 1871.5 -417.5Q1854.0 -426 1825.0 -426Q1799.0 -426 1779.5 -420.0Q1760.0 -414 1750.0 -402.5Q1740.0 -391 1740.0 -375V-366H1580.0Q1579.0 -371 1579.0 -374.5Q1579.0 -378 1579.0 -384Q1579.0 -431 1608.5 -466.0Q1638.0 -501 1693.0 -520.0Q1748.0 -539 1826.0 -539Q1899.0 -539 1953.5 -521.0Q2008.0 -503 2039.5 -466.0Q2071.0 -429 2071.0 -369V-144Q2071.0 -127 2080.5 -117.0Q2090.0 -107 2104.0 -107H2138.0V-6Q2127.0 -1 2103.5 5.5Q2080.0 12 2047.0 12Q2013.0 12 1987.5 3.5Q1962.0 -5 1945.5 -20.5Q1929.0 -36 1923.0 -57H1916.0Q1897.0 -37 1871.5 -21.0Q1846.0 -5 1812.5 3.5Q1779.0 12 1736.0 12ZM1797.0 -101Q1821.0 -101 1841.0 -108.0Q1861.0 -115 1875.5 -127.5Q1890.0 -140 1898.5 -158.0Q1907.0 -176 1907.0 -197V-232Q1850.0 -232 1809.0 -224.0Q1768.0 -216 1746.0 -199.0Q1724.0 -182 1724.0 -156Q1724.0 -137 1733.5 -124.5Q1743.0 -112 1759.0 -106.5Q1775.0 -101 1797.0 -101Z"/><path d="M2193.0 0V-527H2328.0L2340.0 -446H2347.0Q2359.0 -473 2376.5 -494.5Q2394.0 -516 2419.5 -528.0Q2445.0 -540 2476.0 -540Q2494.0 -540 2509.0 -536.5Q2524.0 -533 2531.0 -529V-386H2479.0Q2448.0 -386 2424.5 -377.5Q2401.0 -369 2386.0 -351.5Q2371.0 -334 2364.0 -309.0Q2357.0 -284 2357.0 -251V0Z"/><path d="M2773.0 12Q2722.0 12 2686.5 -3.5Q2651.0 -19 2633.5 -50.0Q2616.0 -81 2616.0 -125V-408H2547.0V-527H2621.0L2655.0 -681H2779.0V-527H2882.0V-408H2779.0V-165Q2779.0 -137 2790.0 -122.0Q2801.0 -107 2830.0 -107H2882.0V-5Q2869.0 -1 2849.5 3.5Q2830.0 8 2810.0 10.0Q2790.0 12 2773.0 12Z"/><path d="M3278.0 12Q3227.0 12 3184.0 -9.0Q3141.0 -30 3115.0 -73H3108.0L3096.0 0H2962.0V-724H3126.0V-473H3132.0Q3148.0 -494 3170.5 -509.0Q3193.0 -524 3221.0 -531.5Q3249.0 -539 3281.0 -539Q3346.0 -539 3394.0 -509.0Q3442.0 -479 3468.0 -418.5Q3494.0 -358 3494.0 -265Q3494.0 -170 3468.0 -109.0Q3442.0 -48 3393.5 -18.0Q3345.0 12 3278.0 12ZM3227.0 -116Q3264.0 -116 3286.5 -130.5Q3309.0 -145 3319.0 -174.0Q3329.0 -203 3329.0 -245V-280Q3329.0 -323 3319.0 -352.0Q3309.0 -381 3286.5 -396.0Q3264.0 -411 3227.0 -411Q3200.0 -411 3180.5 -401.0Q3161.0 -391 3148.5 -373.0Q3136.0 -355 3130.5 -330.0Q3125.0 -305 3125.0 -275V-251Q3125.0 -210 3135.5 -179.5Q3146.0 -149 3168.5 -132.5Q3191.0 -116 3227.0 -116Z"/><path d="M3840.0 12Q3750.0 12 3687.0 -17.5Q3624.0 -47 3590.5 -108.0Q3557.0 -169 3557.0 -264Q3557.0 -357 3590.0 -418.0Q3623.0 -479 3685.0 -509.0Q3747.0 -539 3834.0 -539Q3920.0 -539 3979.5 -510.0Q4039.0 -481 4070.0 -421.0Q4101.0 -361 4101.0 -266V-231H3723.0Q3723.0 -189 3735.0 -160.0Q3747.0 -131 3772.0 -116.0Q3797.0 -101 3839.0 -101Q3864.0 -101 3883.0 -107.0Q3902.0 -113 3915.0 -124.5Q3928.0 -136 3935.0 -152.0Q3942.0 -168 3942.0 -188H4101.0Q4101.0 -140 4083.5 -102.5Q4066.0 -65 4032.0 -39.5Q3998.0 -14 3949.5 -1.0Q3901.0 12 3840.0 12ZM3724.0 -322H3934.0Q3934.0 -348 3927.5 -367.5Q3921.0 -387 3908.5 -400.0Q3896.0 -413 3878.5 -419.5Q3861.0 -426 3838.0 -426Q3802.0 -426 3778.0 -414.0Q3754.0 -402 3741.0 -379.0Q3728.0 -356 3724.0 -322Z"/><path d="M4189.0 0V-527H4324.0L4336.0 -446H4343.0Q4355.0 -473 4372.5 -494.5Q4390.0 -516 4415.5 -528.0Q4441.0 -540 4472.0 -540Q4490.0 -540 4505.0 -536.5Q4520.0 -533 4527.0 -529V-386H4475.0Q4444.0 -386 4420.5 -377.5Q4397.0 -369 4382.0 -351.5Q4367.0 -334 4360.0 -309.0Q4353.0 -284 4353.0 -251V0Z"/><path d="M4669.0 197Q4634.0 197 4603.0 181.5Q4572.0 166 4553.5 137.5Q4535.0 109 4535.0 71Q4535.0 29 4560.5 0.5Q4586.0 -28 4618.0 -42Q4595.0 -57 4580.5 -79.5Q4566.0 -102 4566.0 -130Q4566.0 -169 4595.0 -196.0Q4624.0 -223 4663.0 -232Q4627.0 -255 4604.5 -289.0Q4582.0 -323 4582.0 -365Q4582.0 -426 4614.5 -464.0Q4647.0 -502 4704.0 -520.5Q4761.0 -539 4834.0 -539Q4863.0 -539 4886.5 -536.5Q4910.0 -534 4929.0 -529Q4969.0 -553 4984.0 -579.0Q4999.0 -605 5000.0 -621H5143.0Q5143.0 -581 5129.0 -553.5Q5115.0 -526 5089.0 -509.0Q5063.0 -492 5027.0 -483Q5054.0 -461 5069.0 -430.5Q5084.0 -400 5084.0 -365Q5084.0 -308 5055.5 -269.5Q5027.0 -231 4977.0 -211.0Q4927.0 -191 4862.0 -191H4784.0Q4756.0 -191 4742.5 -182.5Q4729.0 -174 4729.0 -160Q4729.0 -147 4741.0 -137.5Q4753.0 -128 4782.0 -128H4985.0Q5062.0 -128 5103.0 -84.5Q5144.0 -41 5144.0 26Q5144.0 77 5116.0 115.5Q5088.0 154 5041.5 175.5Q4995.0 197 4938.0 197ZM4748.0 97H4921.0Q4938.0 97 4951.0 90.5Q4964.0 84 4971.5 72.5Q4979.0 61 4979.0 46Q4979.0 21 4963.0 8.0Q4947.0 -5 4924.0 -5H4748.0Q4725.0 -5 4709.5 8.5Q4694.0 22 4694.0 45Q4694.0 68 4709.5 82.5Q4725.0 97 4748.0 97ZM4833.0 -287Q4876.0 -287 4899.5 -307.0Q4923.0 -327 4923.0 -365Q4923.0 -404 4899.5 -423.5Q4876.0 -443 4833.0 -443Q4792.0 -443 4768.0 -423.5Q4744.0 -404 4744.0 -365Q4744.0 -340 4754.0 -322.5Q4764.0 -305 4784.0 -296.0Q4804.0 -287 4833.0 -287Z"/><path d="M5833.0 12Q5728.0 12 5655.0 -26.5Q5582.0 -65 5543.5 -143.5Q5505.0 -222 5505.0 -343Q5505.0 -522 5592.0 -610.0Q5679.0 -698 5834.0 -698Q5922.0 -698 5990.0 -669.5Q6058.0 -641 6096.5 -583.5Q6135.0 -526 6135.0 -439H6039.0Q6039.0 -499 6013.5 -538.0Q5988.0 -577 5942.0 -596.5Q5896.0 -616 5834.0 -616Q5762.0 -616 5710.0 -588.0Q5658.0 -560 5631.0 -501.5Q5604.0 -443 5604.0 -351V-330Q5604.0 -239 5631.0 -181.5Q5658.0 -124 5709.5 -97.0Q5761.0 -70 5834.0 -70Q5898.0 -70 5944.5 -89.0Q5991.0 -108 6016.5 -147.5Q6042.0 -187 6042.0 -247H6135.0Q6135.0 -158 6095.5 -101.0Q6056.0 -44 5988.0 -16.0Q5920.0 12 5833.0 12Z"/><path d="M6375.0 12Q6346.0 12 6317.0 5.0Q6288.0 -2 6263.0 -18.0Q6238.0 -34 6223.0 -62.5Q6208.0 -91 6208.0 -134Q6208.0 -188 6234.0 -223.0Q6260.0 -258 6306.5 -277.5Q6353.0 -297 6417.0 -304.5Q6481.0 -312 6556.0 -312V-372Q6556.0 -401 6546.0 -422.0Q6536.0 -443 6510.5 -454.5Q6485.0 -466 6438.0 -466Q6393.0 -466 6366.5 -454.5Q6340.0 -443 6329.5 -425.0Q6319.0 -407 6319.0 -385V-370H6234.0Q6233.0 -375 6233.0 -380.0Q6233.0 -385 6233.0 -392Q6233.0 -440 6259.5 -472.5Q6286.0 -505 6334.0 -521.5Q6382.0 -538 6444.0 -538Q6510.0 -538 6554.5 -519.0Q6599.0 -500 6621.5 -465.0Q6644.0 -430 6644.0 -381V-96Q6644.0 -77 6653.0 -69.5Q6662.0 -62 6675.0 -62H6714.0V-4Q6700.0 2 6683.0 6.5Q6666.0 11 6644.0 11Q6618.0 11 6601.0 0.5Q6584.0 -10 6575.0 -28.5Q6566.0 -47 6563.0 -70H6556.0Q6538.0 -45 6510.5 -26.5Q6483.0 -8 6449.0 2.0Q6415.0 12 6375.0 12ZM6397.0 -62Q6429.0 -62 6457.5 -72.0Q6486.0 -82 6508.0 -100.5Q6530.0 -119 6543.0 -145.0Q6556.0 -171 6556.0 -202V-246Q6475.0 -246 6418.0 -237.0Q6361.0 -228 6330.5 -205.0Q6300.0 -182 6300.0 -140Q6300.0 -113 6312.0 -96.0Q6324.0 -79 6346.0 -70.5Q6368.0 -62 6397.0 -62Z"/><path d="M6780.0 173V-526H6850.0L6859.0 -451H6866.0Q6893.0 -495 6935.0 -516.5Q6977.0 -538 7030.0 -538Q7096.0 -538 7142.0 -509.0Q7188.0 -480 7213.0 -418.5Q7238.0 -357 7238.0 -259Q7238.0 -167 7212.5 -106.5Q7187.0 -46 7141.0 -17.0Q7095.0 12 7034.0 12Q7000.0 12 6970.0 4.0Q6940.0 -4 6916.0 -21.5Q6892.0 -39 6874.0 -66H6868.0V173ZM7006.0 -65Q7055.0 -65 7086.0 -84.5Q7117.0 -104 7132.0 -145.5Q7147.0 -187 7147.0 -252V-273Q7147.0 -342 7131.0 -383.5Q7115.0 -425 7084.5 -443.0Q7054.0 -461 7009.0 -461Q6960.0 -461 6928.5 -439.5Q6897.0 -418 6882.5 -375.0Q6868.0 -332 6868.0 -270V-255Q6868.0 -200 6878.5 -163.5Q6889.0 -127 6908.5 -105.0Q6928.0 -83 6953.0 -74.0Q6978.0 -65 7006.0 -65Z"/><path d="M7339.0 -625V-723H7427.0V-625ZM7339.0 0V-526H7427.0V0Z"/><path d="M7679.0 12Q7638.0 12 7615.0 -3.5Q7592.0 -19 7582.0 -44.5Q7572.0 -70 7572.0 -99V-452H7504.0V-526H7574.0L7590.0 -673H7660.0V-526H7759.0V-452H7660.0V-112Q7660.0 -87 7669.0 -74.5Q7678.0 -62 7703.0 -62H7759.0V-4Q7749.0 1 7735.0 4.0Q7721.0 7 7706.5 9.5Q7692.0 12 7679.0 12Z"/><path d="M7977.0 12Q7948.0 12 7919.0 5.0Q7890.0 -2 7865.0 -18.0Q7840.0 -34 7825.0 -62.5Q7810.0 -91 7810.0 -134Q7810.0 -188 7836.0 -223.0Q7862.0 -258 7908.5 -277.5Q7955.0 -297 8019.0 -304.5Q8083.0 -312 8158.0 -312V-372Q8158.0 -401 8148.0 -422.0Q8138.0 -443 8112.5 -454.5Q8087.0 -466 8040.0 -466Q7995.0 -466 7968.5 -454.5Q7942.0 -443 7931.5 -425.0Q7921.0 -407 7921.0 -385V-370H7836.0Q7835.0 -375 7835.0 -380.0Q7835.0 -385 7835.0 -392Q7835.0 -440 7861.5 -472.5Q7888.0 -505 7936.0 -521.5Q7984.0 -538 8046.0 -538Q8112.0 -538 8156.5 -519.0Q8201.0 -500 8223.5 -465.0Q8246.0 -430 8246.0 -381V-96Q8246.0 -77 8255.0 -69.5Q8264.0 -62 8277.0 -62H8316.0V-4Q8302.0 2 8285.0 6.5Q8268.0 11 8246.0 11Q8220.0 11 8203.0 0.5Q8186.0 -10 8177.0 -28.5Q8168.0 -47 8165.0 -70H8158.0Q8140.0 -45 8112.5 -26.5Q8085.0 -8 8051.0 2.0Q8017.0 12 7977.0 12ZM7999.0 -62Q8031.0 -62 8059.5 -72.0Q8088.0 -82 8110.0 -100.5Q8132.0 -119 8145.0 -145.0Q8158.0 -171 8158.0 -202V-246Q8077.0 -246 8020.0 -237.0Q7963.0 -228 7932.5 -205.0Q7902.0 -182 7902.0 -140Q7902.0 -113 7914.0 -96.0Q7926.0 -79 7948.0 -70.5Q7970.0 -62 7999.0 -62Z"/><path d="M8382.0 0V-723H8470.0V0Z"/></g></svg></div>
+          <address>Systematic Research &amp; Trading<br>Private · Not for distribution<br>swartbergcapital.com</address>
+        </div>
+        <div class="body">
+          <p class="small" style="margin-bottom:12px">[Date]</p>
+          <p>Dear colleague,</p>
+          <p style="margin-top:10px">Thank you for your time this week. The note we discussed is attached. It describes how the firm works, the standard its principals hold themselves to, and the place of its people and its technology in that work.</p>
+        </div>
+        <div class="foot">Swartberg Capital. This letter is not an offer or solicitation. Hypothetical performance is not a track record.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ CONTACT ============ -->
+<div class="view" id="view-contact">
+  <section>
+    <div class="wrap grid g2" style="align-items:start">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2 style="margin-top:14px">Write to the principals</h2>
+        <p style="margin-top:14px">Swartberg Capital does not offer products or services to the public and does not accept capital from any other person. Correspondence about the firm's research, its standards, and the way it works is welcome, and it is read by the principals.</p>
+      </div>
+      <div>
+        <p><b>Jared van Heerden</b><br><span class="small">Director</span><br><a href="mailto:jared@swartbergcapital.com">jared@swartbergcapital.com</a></p><p style="margin-top:18px"><b>Jason Biddulph</b><br><span class="small">Director</span><br><a href="mailto:jason@swartbergcapital.com">jason@swartbergcapital.com</a></p>
+        <p style="margin-top:18px" class="small">South Africa. No office address is published.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Swartberg Capital is a private firm in South Africa, owned by its two principals. It is not an authorised financial services provider under the Financial Advisory and Intermediary Services Act (FAIS), is not registered with the Financial Sector Conduct Authority, and does not manage money for, advise, or accept capital from any other person. This website is provided for information only. Nothing on it constitutes investment advice, a recommendation, or an offer or solicitation to buy or sell any security, derivative, fund, strategy, or service in any jurisdiction where such an offer would be unlawful. The site presents no performance information, actual or hypothetical, and nothing on it should be read as a statement of results. Opinions expressed are those of the principals as at the date of writing and may change without notice. Trading involves risk, including the loss of capital. Readers rely on the information on this site at their own discretion. Swartberg Capital is a working name, and trademark clearance is in progress. © 2026 Swartberg Capital. All rights reserved.</p>
+  </div>
+</footer>
 
 <script>
-(() => {
-const REGIMES = [
-  { name: 'Calm growth', axes: 'risk on · low volatility' },
-  { name: 'Inflation rising', axes: 'inflation axis up' },
-  { name: 'Stress', axes: 'risk off · high volatility' },
-  { name: 'Recovery', axes: 'risk on · volatility falling' },
-];
-const GROUPS = { prem: 'Risk premium', beh: 'Behavioural', str: 'Structural' };
-const FORCES = [
-  { id: 'rates', name: 'Policy rates' }, { id: 'infl', name: 'Inflation' }, { id: 'usd', name: 'US dollar' },
-  { id: 'credit', name: 'Credit spreads' }, { id: 'oil', name: 'Oil' }, { id: 'gold', name: 'Gold' },
-  { id: 'eq', name: 'Equity indices' }, { id: 'vol', name: 'Volatility' }, { id: 'yld', name: 'Bond yields' },
-  { id: 'curves', name: 'Commodity curves' }, { id: 'news', name: 'News and earnings' }, { id: 'crypto', name: 'Crypto venues' },
-];
-// glyph: illustrative sketch of the mechanism (not data)
-const FAM = [
-  { id: 'carry', name: 'Carry', group: 'prem', forces: ['rates', 'usd', 'yld', 'curves'],
-    edge: 'Own the higher-yielding asset and fund it with the lower-yielding one; collect the gap.',
-    lead: 'Koijen, Moskowitz, Pedersen and Vrugt (2018)',
-    glyph: '<path class="gh" d="M4,52 L216,52"/><path class="ln" d="M4,16 L216,16"/><path class="ink" d="M60,20 L60,48 M56,44 L60,48 L64,44 M140,20 L140,48 M136,44 L140,48 L144,44"/>',
-    pays: 'Investors pay to borrow in low-yielding assets and to hedge. Carry collects that payment and gives some back in sharp, rare crashes.',
-    cands: [],
-    alloc: [1, .5, 0, .5],
-    why: ['Carry earns steadily while risk appetite holds.', 'Rate moves in inflationary periods disturb carry; half size.', 'Carry crashes when investors cut risk (Brunnermeier, Nagel and Pedersen 2008); off.', 'Back at half size while volatility is still high.'] },
-  { id: 'value', name: 'Value', group: 'prem', forces: ['infl', 'usd', 'curves', 'eq'],
-    edge: 'Buy what is cheap against fundamentals and wait for the price to come back.',
-    lead: 'Asness, Moskowitz and Pedersen (2013)',
-    glyph: '<path class="gh" d="M4,44 C80,38 150,32 216,28"/><path class="ln" d="M4,44 C26,30 42,10 66,10 S100,34 118,46 S150,58 166,40 S198,28 216,28"/>',
-    pays: 'Prices overshoot away from fundamentals and return slowly. Holding the cheap asset is uncomfortable, and that discomfort is paid.',
-    cands: [],
-    alloc: [.5, .5, .5, 1],
-    why: ['Value is slow; a steady half weight.', 'Half weight; the inflation evidence for value is mixed.', 'Half weight; cheap assets can get cheaper in stress.', 'Value and momentum move against each other; value carries the rebound that hurts momentum (Asness, Moskowitz and Pedersen 2013).'] },
-  { id: 'vp', name: 'Volatility', group: 'prem', forces: ['vol', 'credit', 'eq'],
-    edge: 'Sell part of the insurance investors pay a premium for, within a written loss budget.',
-    lead: 'Carr and Wu (2009)',
-    glyph: '<path class="ln" d="M4,18 C50,12 90,22 130,16 S190,14 216,18"/><path class="ink" d="M4,46 C24,34 40,56 62,44 S100,34 120,48 S170,38 190,46 L216,42"/><path class="gh" d="M40,20 L40,48 M110,20 L110,46 M180,18 L180,44"/>',
-    pays: 'Investors pay for insurance against falls. Selling part of it, within a written crash budget, collects the premium.',
-    cands: [],
-    alloc: [1, .5, 0, 1],
-    why: ['The premium is collected while VIX futures are in contango.', 'Half size while inflation shocks move volatility.', 'Off the day VIX futures invert (Johnson 2017).', 'Back on after five days of contango.'] },
-  { id: 'trend', name: 'Trend following', group: 'beh', forces: ['rates', 'yld', 'oil', 'gold', 'usd', 'eq'],
-    edge: 'Follow sustained moves in any market, long or short, sized to its volatility.',
-    lead: 'Moskowitz, Ooi and Pedersen (2012)',
-    glyph: '<path class="gh" d="M4,58 C70,48 140,30 216,10"/><path class="ln" d="M4,58 L22,50 L32,55 L52,42 L64,47 L84,34 L96,39 L118,26 L130,30 L152,20 L166,24 L190,12 L216,6"/>',
-    pays: 'Information spreads slowly and hedgers must trade whatever the price, so moves persist. The oldest documented effect in the book.',
-    cands: [],
-    alloc: [1, 1, 1, .5],
-    why: ['On in every state as the core of the book.', 'Trend and commodities have worked in high and rising inflation (Neville et al. 2021).', 'Trend has earned returns in large equity and bond drawdowns for a century (Hurst, Ooi and Pedersen 2017).', 'Trends reverse at turning points; half size in recoveries (Daniel and Moskowitz 2016).'] },
-  { id: 'mom', name: 'Momentum', group: 'beh', forces: ['eq', 'news', 'curves'],
-    edge: 'Rank markets by recent strength; hold the leaders against the laggards.',
-    lead: 'Asness, Moskowitz and Pedersen (2013)',
-    glyph: '<rect class="fs" x="8" y="48" width="26" height="12"/><rect class="fs" x="50" y="40" width="26" height="20"/><rect class="fs" x="92" y="32" width="26" height="28"/><rect class="fl" x="134" y="20" width="26" height="40"/><rect class="fl" x="176" y="8" width="26" height="52"/><path class="ink" d="M8,64 L210,64"/>',
-    pays: 'Investors under-react to news, and hedgers rebalance into the close. Winners keep winning for a while.',
-    cands: [],
-    alloc: [1, 1, .5, 0],
-    why: ['On while trends in relative strength persist.', 'On; news-driven moves extend.', 'The intraday leg stays on; the cross-sectional leg halves.', 'Momentum crashes in rebounds after stress (Daniel and Moskowitz 2016); off.'] },
-  { id: 'brk', name: 'Breakout', group: 'beh', forces: ['eq', 'vol', 'news'],
-    edge: 'Enter when price clears a level the market has been watching, as volatility expands.',
-    lead: 'George and Hwang (2004)',
-    glyph: '<rect class="fs" x="4" y="28" width="124" height="24" stroke-dasharray="3 4"/><path class="ln" d="M4,40 L18,32 L32,48 L46,33 L60,47 L74,31 L88,46 L102,34 L118,44 L130,30 L150,18 L176,12 L216,4"/>',
-    pays: 'Ranges break when positioning is forced to cover past a level everyone watches. Breakouts pay when volatility expands.',
-    cands: [],
-    alloc: [.5, 1, 1, .5],
-    why: ['Quiet ranges give false breaks; half size.', 'On; inflation surprises move prices out of ranges.', 'Intraday momentum is strongest in high volatility (Gao et al. 2018).', 'Half size while ranges reset.'] },
-  { id: 'mr', name: 'Mean reversion', group: 'beh', forces: ['eq', 'vol'],
-    edge: 'Provide liquidity to forced sellers and buyers; earn as prices return to fair levels.',
-    lead: 'Nagel (2012)',
-    glyph: '<path class="gh" d="M4,34 L216,34 M4,12 L216,12 M4,56 L216,56"/><path class="ln" d="M4,34 C16,8 30,8 42,34 S68,60 80,34 S106,10 118,34 S144,58 156,34 S182,14 194,34 L216,30"/>',
-    pays: 'Traders who need to trade now pay those who provide liquidity, and pay most when markets are stressed.',
-    cands: [],
-    alloc: [.5, .5, 1, 1],
-    why: ['Half size; little is paid for liquidity in calm markets.', 'Half size.', 'Reversal returns rise with volatility as liquidity providers are paid more (Nagel 2012).', 'On while liquidity is still expensive.'] },
-  { id: 'seas', name: 'Seasonal', group: 'str', forces: ['rates', 'eq', 'gold'],
-    edge: 'Hold only in the windows where scheduled flows push prices: overnight, before central-bank decisions, at month end.',
-    lead: 'Lucca and Moench (2015)',
-    glyph: [0,1,2,3,4,5,6,7,8,9,10,11].map(i => `<rect class="${i % 4 === 3 ? 'fl' : 'fs'}" x="${4 + i * 18}" y="${i % 4 === 3 ? 10 : 22}" width="13" height="${i % 4 === 3 ? 50 : 38}"/>`).join(''),
-    pays: 'Flows arrive on a calendar: overnight order imbalance, central-bank meetings, month-end pay and rebalancing.',
-    cands: [],
-    alloc: [1, 1, .5, 1],
-    why: ['On; calendar flows are steady.', 'On.', 'Half size; calendar effects are small against stressed volatility.', 'On.'] },
-  { id: 'arb', name: 'Arbitrage', group: 'str', forces: ['crypto', 'usd', 'eq'],
-    edge: 'Buy the same exposure where it is cheap and sell it where it is dear; earn as the gap closes.',
-    lead: 'Makarov and Schoar (2020)',
-    glyph: '<path class="ln" d="M4,10 C80,12 150,28 216,32"/><path class="ink" d="M4,58 C80,54 150,38 216,34"/><path class="gh" d="M30,12 L30,56 M90,16 L90,50 M150,26 L150,40"/>',
-    pays: 'The same exposure is priced differently in two places. The return with the least risk per unit, and the first to close.',
-    cands: [],
-    alloc: [1, 1, 1, 1],
-    why: ['On; capacity, not regime, is the limit.', 'On.', 'On; dislocations widen in stress.', 'On.'] },
-];
-const ST = { m: ['●', 'Measured on our data', 'measured'], c: ['◐', 'Lead, re-test on exchange data', ''], r: ['○', 'To research', ''], f: ['×', 'Failed calibration', 'failed'], x: ['×', 'Tested and rejected', 'failed'] };
-const ALLOC_WORD = a => a === 1 ? 'On' : a === 0.5 ? 'Half' : 'Off';
-const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-let regime = -1;
-const css = () => { const s = getComputedStyle(document.documentElement); const g = n => s.getPropertyValue(n).trim(); return { ink: g('--ink'), ink2: g('--ink-2'), sub: g('--subtle'), sep: g('--sep'), line: g('--line'), paper: g('--paper'), warm: g('--paper-warm'), prem: g('--g-prem'), beh: g('--g-beh'), str: g('--g-str'), mark: g('--mark') }; };
-let C = css();
-const gcol = g => C[g];
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const tip = document.getElementById('tip');
-function showTip(e, html) { tip.innerHTML = html; tip.hidden = false; tip.style.left = Math.min(e.clientX + 14, innerWidth - 320) + 'px'; tip.style.top = (e.clientY + 16) + 'px'; }
-function hideTip() { tip.hidden = true; }
-
-/* ---------- styles grid ---------- */
-document.getElementById('styles').innerHTML = FAM.map(f => `
-  <article class="tile rise ${f.group}">
-    <svg class="glyph" viewBox="0 0 220 66" aria-hidden="true">${f.glyph.replace(/class="(ln|ink)"/g, 'class="$1" pathLength="1"')}</svg>
-    <div class="tn"><i class="sw"></i><h3>${f.name}</h3></div>
-    <div class="grp">${GROUPS[f.group]}</div>
-    <p class="edge">${esc(f.edge)}</p>
-    <p class="by">Backed by <b>${esc(f.lead)}</b> and the work that followed</p>
-  </article>`).join('');
-
-/* ---------- sleeve cards ---------- */
-document.getElementById('fams').innerHTML = FAM.map(f => `
-  <article class="fam rise ${f.group}">
-    <div class="fh"><i class="sw"></i><h3>${f.name}</h3></div>
-    <div class="grp">${GROUPS[f.group]}</div>
-    <p class="pays">${esc(f.pays)}</p>
-  </article>`).join('');
-
-/* ---------- heat table ---------- */
-const heat = document.getElementById('heat');
-function drawHeat() {
-  const dim = i => regime >= 0 && regime !== i ? 'dim' : '';
-  heat.innerHTML = `<thead><tr><th scope="col"><span class="muted" style="font-weight:400;font-size:13px">Sleeve</span></th>${REGIMES.map((r, i) => `<th scope="col" class="${dim(i)}"><button data-regime="${i}" aria-pressed="${regime === i}">${r.name}<small>${r.axes}</small></button></th>`).join('')}</tr></thead>
-  <tbody>${FAM.map(f => `<tr><th scope="row"><span class="${f.group}"><i class="sw"></i>${f.name}</span></th>${f.alloc.map((a, i) => `<td class="${regime === i ? 'sel' : ''} ${dim(i)}"><span class="cell ${ALLOC_WORD(a).toLowerCase()}" data-f="${f.id}" data-r="${i}">${ALLOC_WORD(a)}</span></td>`).join('')}</tr>`).join('')}</tbody>`;
-}
-heat.addEventListener('pointermove', e => {
-  const c = e.target.closest('.cell'); if (!c) return hideTip();
-  const f = FAM.find(x => x.id === c.dataset.f), r = +c.dataset.r;
-  showTip(e, `<b>${f.name} · ${REGIMES[r].name}: ${ALLOC_WORD(f.alloc[r])}</b><br>${esc(f.why[r])}`);
-});
-heat.addEventListener('pointerleave', hideTip);
-
-/* ---------- regime selection shared across the page ---------- */
-const readout = document.getElementById('readout');
-function setRegime(r) {
-  regime = r;
-  document.querySelectorAll('.chip[data-regime]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.regime === r)));
-  const rn = readout.querySelector('.rn'), rc = readout.querySelector('.rc'), rs = readout.querySelector('.rs');
-  if (r < 0) { rs.textContent = 'Regime'; rn.textContent = 'Full book'; rc.innerHTML = 'All nine sleeves shown'; }
-  else {
-    const n = v => FAM.filter(f => f.alloc[r] === v).length;
-    rs.textContent = 'Regime · ' + REGIMES[r].axes; rn.textContent = REGIMES[r].name;
-    rc.innerHTML = `<span><b>${n(1)}</b> on</span><span><b>${n(.5)}</b> half size</span><span><b>${n(0)}</b> off</span>`;
+  function show(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + id));
+    document.querySelectorAll('.menu button').forEach(b => { if (b.id === 'tab-' + id) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+    try { history.replaceState(null, '', '#' + id); } catch (e) {}
+    window.scrollTo({ top: 0 });
   }
-  readout.classList.remove('flash'); void readout.offsetWidth; readout.classList.add('flash');
-  bump = 1;
-  drawHeat(); drawBraid(); drawEngine(); drawChain(); drawCurves(); drawCycle();
-  if (reduce) { FAM.forEach(f => lvl[f.id] = target(f)); drawWeb(); }
-}
-document.addEventListener('click', e => { const b = e.target.closest('[data-regime]'); if (b) { if (typeof stopPlay === 'function') stopPlay(); setRegime(+b.dataset.regime); } });
-
-/* ---------- the web: a 3D crown that turns with the pointer and the page ---------- */
-const cv = document.getElementById('web'), ctx = cv.getContext('2d');
-let W = 0, H = 0, P3 = {}, edges = [], parts = [], bump = 0;
-const lvl = {}; FAM.forEach(f => lvl[f.id] = 0.85);
-const target = f => regime < 0 ? 0.85 : f.alloc[regime] === 1 ? 1 : f.alloc[regime] === .5 ? 0.42 : 0.03;
-const rot = { yaw: 0.35, pitch: 0.42, ty: 0.35, tp: 0.42, auto: 0 };
-let hovering = false;
-function build3D() {
-  P3 = { book: [0, 0, 0] };
-  FORCES.forEach((f, i) => { const a = i * 2 * Math.PI / FORCES.length; P3[f.id] = [Math.cos(a), ((i % 3) - 1) * 0.34, Math.sin(a)]; });
-  FAM.forEach((f, i) => { const a = (i + 0.5) * 2 * Math.PI / FAM.length; P3[f.id] = [0.5 * Math.cos(a), (i % 2 ? 0.16 : -0.16), 0.5 * Math.sin(a)]; });
-  edges = [];
-  FAM.forEach(f => { f.forces.forEach(fo => edges.push({ a: fo, b: f.id, fam: f, toBook: false })); edges.push({ a: f.id, b: 'book', fam: f, toBook: true }); });
-  parts = edges.flatMap((e, i) => [0, 1, 2].map(k => ({ e, k, t: ((i * 0.137 + k * 0.33) % 1), s: 0.0022 + ((i * 7 + k * 3) % 5) * 0.0006 })));
-}
-let S = {};
-function project() {
-  const cy = Math.cos(rot.yaw), sy = Math.sin(rot.yaw), cp = Math.cos(rot.pitch), sp = Math.sin(rot.pitch);
-  const R = Math.min(W * (W < 620 ? 0.30 : 0.33), H * 0.40), D = 3.2;
-  S = {};
-  for (const id in P3) {
-    const [x, y, z] = P3[id];
-    const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
-    const y2 = y * cp - z1 * sp, z2 = y * sp + z1 * cp;
-    const p = D / (D + z2);
-    S[id] = { x: W / 2 + x1 * R * p, y: H / 2 + 34 + y2 * R * p, p, z: z2, front: (1 - z2) / 2 };
-  }
-}
-function layout() {
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
-function ctrl(p, q) { const mx = (p.x + q.x) / 2, my = (p.y + q.y) / 2; return { x: mx + (W / 2 - mx) * 0.16, y: my + (H / 2 - my) * 0.16 }; }
-function at(p, c, q, t) { const u = 1 - t; return { x: u * u * p.x + 2 * u * t * c.x + t * t * q.x, y: u * u * p.y + 2 * u * t * c.y + t * t * q.y }; }
-let clock = 0;
-function drawWeb() {
-  project();
-  ctx.clearRect(0, 0, W, H);
-  const narrow = W < 620;
-  // the world's own links: a faint lattice between forces
-  ctx.lineWidth = 1; ctx.strokeStyle = C.line;
-  FORCES.forEach((f, i) => { const p = S[f.id]; [1, 4].forEach(k => { const q = S[FORCES[(i + k) % FORCES.length].id], c = ctrl(p, q); ctx.globalAlpha = 0.35 + 0.65 * Math.min(p.front, q.front); ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.quadraticCurveTo(c.x, c.y, q.x, q.y); ctx.stroke(); }); });
-  // sleeve links, faint ones first
-  [...edges].sort((a, b) => lvl[a.fam.id] - lvl[b.fam.id]).forEach(e => {
-    const p = S[e.a], q = S[e.b], c = ctrl(p, q), L = lvl[e.fam.id], depth = 0.5 + 0.5 * Math.min(p.front, q.front);
-    ctx.globalAlpha = (0.05 + 0.75 * L) * depth; ctx.strokeStyle = gcol(e.fam.group);
-    ctx.lineWidth = e.toBook ? 0.8 + 4.2 * L : 0.6 + 1.6 * L;
-    ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.quadraticCurveTo(c.x, c.y, q.x, q.y); ctx.stroke();
-  });
-  // flow along the links
-  if (!reduce) parts.forEach(pt => {
-    const e = pt.e, L = lvl[e.fam.id]; if (L < 0.2 || pt.k > Math.round(L * 2.4)) return;
-    const p = S[e.a], q = S[e.b], c = ctrl(p, q), m = at(p, c, q, pt.t), sz = 2.2 + 2.4 * L;
-    ctx.globalAlpha = 0.3 + 0.7 * L; ctx.fillStyle = gcol(e.fam.group); ctx.fillRect(m.x - sz / 2, m.y - sz / 2, sz, sz);
-  });
-  ctx.globalAlpha = 1;
-  // nodes drawn back to front
-  const order = Object.keys(S).sort((a, b) => S[b].z - S[a].z);
-  order.forEach(id => {
-    const n = S[id];
-    const force = FORCES.find(f => f.id === id), fam = FAM.find(f => f.id === id);
-    if (force) {
-      const s = 7 * n.p; ctx.globalAlpha = 0.35 + 0.65 * n.front; ctx.fillStyle = C.ink; ctx.fillRect(n.x - s / 2, n.y - s / 2, s, s);
-      ctx.font = `500 ${narrow ? 9 : 11}px "IBM Plex Mono", Menlo, monospace`; ctx.fillStyle = C.ink2; ctx.textBaseline = 'middle';
-      const label = force.name.toUpperCase(), tw = ctx.measureText(label).width, dx = n.x - W / 2;
-      let right = dx >= 0;
-      if (right && n.x + 10 + tw > W - 8) right = false; else if (!right && n.x - 10 - tw < 8) right = true;
-      const centre = Math.abs(dx) < 30 && n.x - tw / 2 > 8 && n.x + tw / 2 < W - 8;
-      ctx.textAlign = centre ? 'center' : (right ? 'left' : 'right');
-      const ly = Math.max(10, Math.min(H - 10, n.y + (centre ? (n.y < H / 2 ? -13 : 13) : 0)));
-      ctx.fillText(label, n.x + (centre ? 0 : right ? 10 : -10), ly);
-    } else if (fam) {
-      const L = lvl[fam.id], s = (narrow ? 10 : 13) * n.p * (0.75 + 0.75 * L), col = gcol(fam.group);
-      ctx.globalAlpha = 1;
-      if (L > 0.9 && regime >= 0) { // pulse ring on sleeves the regime runs
-        const r = s * (1.1 + 0.5 * ((Math.sin(clock * 0.06 + fam.id.length) + 1) / 2));
-        ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.globalAlpha = 0.5; ctx.strokeRect(n.x - r, n.y - r, r * 2, r * 2); ctx.globalAlpha = 1;
-      }
-      ctx.fillStyle = C.warm; ctx.fillRect(n.x - s / 2 - 3, n.y - s / 2 - 3, s + 6, s + 6);
-      if (L < 0.1) { ctx.strokeStyle = C.sep; ctx.lineWidth = 1.5; ctx.strokeRect(n.x - s / 2, n.y - s / 2, s, s); }
-      else { ctx.globalAlpha = 0.35 + 0.65 * L; ctx.fillStyle = col; ctx.fillRect(n.x - s / 2, n.y - s / 2, s, s); }
-      ctx.globalAlpha = 0.3 + 0.7 * Math.max(L, 0.1);
-      ctx.font = `${L > 0.9 && regime >= 0 ? 800 : 700} ${narrow ? 11 : 13}px Archivo, "Helvetica Neue", Arial, sans-serif`; ctx.fillStyle = C.ink; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      const below = n.y >= S.book.y - 4, off = s / 2 + 12;
-      ctx.fillText(fam.name, n.x, n.y + (below ? off : -off));
-      if (regime >= 0) {
-        const w = ALLOC_WORD(fam.alloc[regime]).toUpperCase(); ctx.font = `500 ${narrow ? 9 : 10}px "IBM Plex Mono", Menlo, monospace`;
-        const tw = ctx.measureText(w).width + 8, ty = n.y + (below ? off + 15 : -(off + 15));
-        ctx.globalAlpha = 1;
-        if (fam.alloc[regime] === 1) { ctx.fillStyle = C.ink; ctx.fillRect(n.x - tw / 2, ty - 7, tw, 14); ctx.fillStyle = C.paper; }
-        else ctx.fillStyle = C.sub;
-        ctx.fillText(w, n.x, ty);
-      }
-      ctx.globalAlpha = 1;
-    } else { // the book
-      const bs = (narrow ? 50 : 66) * n.p * (1 + 0.12 * bump);
-      ctx.globalAlpha = 1; ctx.fillStyle = C.ink; ctx.fillRect(n.x - bs / 2, n.y - bs / 2, bs, bs);
-      ctx.fillStyle = C.mark; ctx.fillRect(n.x + bs / 2 - 10, n.y - bs / 2, 10, 10);
-      ctx.fillStyle = C.paper; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = `800 ${narrow ? 10 : 12}px Archivo, "Helvetica Neue", Arial, sans-serif`;
-      ctx.fillText('THE', n.x, n.y - 7); ctx.fillText('BOOK', n.x, n.y + 8);
-    }
-  });
-  ctx.globalAlpha = 1;
-}
-function tick() {
-  clock++;
-  FAM.forEach(f => { lvl[f.id] += (target(f) - lvl[f.id]) * 0.035; });
-  bump *= 0.9;
-  const heroTop = cv.getBoundingClientRect().top, scrollTilt = Math.max(-0.18, Math.min(0.28, (innerHeight * 0.35 - heroTop) / innerHeight * 0.8));
-  if (!hovering) { rot.auto += 0.0016; rot.ty = 0.35 + rot.auto; }
-  rot.yaw += (rot.ty - rot.yaw) * 0.06;
-  rot.pitch += ((rot.tp + scrollTilt) - rot.pitch) * 0.06;
-  parts.forEach(p => { p.t += p.s; if (p.t > 1) p.t -= 1; });
-  drawWeb();
-  requestAnimationFrame(tick);
-}
-cv.addEventListener('pointerenter', () => { hovering = true; });
-cv.addEventListener('pointerleave', () => { hovering = false; rot.tp = 0.42; hideTip(); });
-cv.addEventListener('pointermove', e => {
-  const r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
-  rot.ty = 0.35 + rot.auto + (x / W - 0.5) * 1.6;
-  rot.tp = 0.42 + (y / H - 0.5) * 0.45;
-  const near = id => Math.hypot(S[id].x - x, S[id].y - y);
-  const f = FAM.find(f => near(f.id) < 18), fo = !f && FORCES.find(o => near(o.id) < 14);
-  if (f) showTip(e, `<b>${f.name}</b> · ${GROUPS[f.group]}${regime >= 0 ? ' · ' + ALLOC_WORD(f.alloc[regime]) + ' in ' + REGIMES[regime].name : ''}<br>Draws on: ${f.forces.map(id => FORCES.find(o => o.id === id).name).join(', ')}`);
-  else if (fo) showTip(e, `<b>${fo.name}</b><br>Feeds: ${FAM.filter(x => x.forces.includes(fo.id)).map(x => x.name).join(', ')}`);
-  else hideTip();
-});
-
-/* ---------- braid ---------- */
-const SEQ = [0, 1, 2, 3, 0];
-let braidDrawnOnce = false;
-function drawBraid() {
-  const svg = document.getElementById('braid'), top = 56, seg = 760 / SEQ.length, x0 = 20, x1 = x0 + 760, lane = 40;
-  let out = `<defs><clipPath id="bclip"><rect id="bclipr" x="0" y="0" width="${braidDrawnOnce || reduce ? 1000 : 0}" height="470"/></clipPath></defs>`;
-  SEQ.forEach((r, i) => {
-    const x = x0 + i * seg, sel = regime === r;
-    out += `<rect x="${x}" y="${top - 14}" width="${seg}" height="${lane * 9 + 28}" fill="${sel ? C.paper : (i % 2 === 0 ? C.paper : C.warm)}" opacity="${sel ? 1 : 0.5}"/>`;
-    out += `<text x="${x + 8}" y="${top - 26}" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="${sel ? 800 : 600}" fill="${sel || regime < 0 ? C.ink : C.sub}">${REGIMES[r].name}</text>`;
-    if (sel) out += `<rect x="${x}" y="${top - 18}" width="${seg}" height="4" fill="${C.mark}"/>`;
-  });
-  const width = a => a === 1 ? 5 : a === .5 ? 2.5 : 1;
-  const yOf = (i, x) => top + lane * 4 + Math.sin((x - x0) / 760 * Math.PI * 3.2 + i * 0.7) * (lane * 2.6) * Math.cos(i * 0.45) + (i - 4) * lane * 0.55;
-  out += `<g clip-path="url(#bclip)">`;
-  FAM.forEach((f, i) => {
-    let prev = null;
-    for (let x = x0; x <= x1; x += 4) {
-      const k = Math.min(SEQ.length - 1, Math.floor((x - x0) / seg)), a = f.alloc[SEQ[k]];
-      const pt = [x, yOf(i, x)];
-      if (prev) {
-        const op = a === 0 ? 0.22 : (regime >= 0 && SEQ[k] !== regime ? 0.18 : 1);
-        out += `<line x1="${prev[0].toFixed(1)}" y1="${prev[1].toFixed(1)}" x2="${pt[0].toFixed(1)}" y2="${pt[1].toFixed(1)}" stroke="${gcol(f.group)}" stroke-width="${width(a)}" stroke-linecap="round" opacity="${op}"/>`;
-      }
-      prev = pt;
-    }
-  });
-  out += `</g>`;
-  const ends = FAM.map((f, i) => ({ f, y: yOf(i, x1) })).sort((a, b) => a.y - b.y);
-  for (let k = 1; k < ends.length; k++) if (ends[k].y - ends[k - 1].y < 18) ends[k].y = ends[k - 1].y + 18;
-  const shift = Math.max(0, ends[ends.length - 1].y - (top + lane * 9 + 6)); ends.forEach(e => e.y -= shift);
-  ends.forEach(e => {
-    const yr = yOf(FAM.indexOf(e.f), x1);
-    out += `<line x1="${x1 + 4}" y1="${yr.toFixed(1)}" x2="${x1 + 28}" y2="${e.y.toFixed(1)}" stroke="${C.line}" stroke-width="1"/>`;
-    out += `<rect x="${x1 + 32}" y="${(e.y - 5).toFixed(1)}" width="10" height="10" fill="${gcol(e.f.group)}"/>`;
-    out += `<text x="${x1 + 48}" y="${(e.y + 4.5).toFixed(1)}" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="600" fill="${C.ink}">${e.f.name}${regime >= 0 ? ' · ' + ALLOC_WORD(e.f.alloc[regime]) : ''}</text>`;
-  });
-  svg.innerHTML = out;
-  svg.onpointermove = ev => {
-    const r = svg.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 1000, y = (ev.clientY - r.top) / r.height * 470;
-    if (x < x0 || x > x1) return hideTip();
-    let best = null, bd = 14; FAM.forEach((f, i) => { const d = Math.abs(yOf(i, x) - y); if (d < bd) { bd = d; best = f; } });
-    if (!best) return hideTip();
-    const k = Math.min(SEQ.length - 1, Math.floor((x - x0) / seg)), rr = SEQ[k];
-    showTip(ev, `<b>${best.name} · ${REGIMES[rr].name}: ${ALLOC_WORD(best.alloc[rr])}</b><br>${esc(best.why[rr])}`);
-  };
-  svg.onpointerleave = hideTip;
-}
-// weave the strands in when the braid first scrolls into view
-(() => {
-  const svg = document.getElementById('braid');
-  if (reduce || !('IntersectionObserver' in window) || svg.getBoundingClientRect().top < innerHeight) { braidDrawnOnce = true; return; }
-  const io = new IntersectionObserver(es => {
-    if (!es.some(e => e.isIntersecting)) return;
-    io.disconnect(); const t0 = performance.now();
-    const step = now => { const k = Math.min(1, (now - t0) / 1800), r = document.getElementById('bclipr'); if (r) r.setAttribute('width', (1000 * (1 - Math.pow(1 - k, 3))).toFixed(0)); if (k < 1) requestAnimationFrame(step); else braidDrawnOnce = true; };
-    requestAnimationFrame(step);
-  }, { threshold: 0.25 });
-  io.observe(svg);
-})();
-
-/* ---------- proof figures ---------- */
-function drawProof() {
-  const T = (x, y, s, o = {}) => `<text x="${x}" y="${y}" font-family="${o.mono ? 'IBM Plex Mono, Menlo, monospace' : 'Archivo, Arial, sans-serif'}" font-size="${o.size || 11}" font-weight="${o.w || 400}" fill="${o.fill || C.ink2}" text-anchor="${o.anchor || 'start'}">${s}</text>`;
-  // walk-forward
-  let o = '';
-  for (let i = 0; i < 6; i++) {
-    const y = 18 + i * 24, fitW = 70 + i * 32;
-    o += `<rect x="16" y="${y}" width="${fitW}" height="16" fill="${C.line}"/>`;
-    o += `<rect class="wf-test" style="animation-delay:${(i * 0.8).toFixed(1)}s" x="${16 + fitW + 2}" y="${y}" width="30" height="16" fill="${C.ink}"/>`;
-  }
-  o += `<rect x="282" y="12" width="62" height="148" fill="${C.mark}" opacity=".9"/>${T(313, 90, 'SEALED', { mono: 1, anchor: 'middle', fill: '#000', w: 500 })}${T(313, 104, 'HOLDOUT', { mono: 1, anchor: 'middle', fill: '#000', w: 500 })}`;
-  o += `<line x1="16" y1="172" x2="344" y2="172" stroke="${C.sep}"/>${T(16, 188, 'earlier history', { mono: 1, size: 10 })}${T(344, 188, 'recent', { mono: 1, size: 10, anchor: 'end' })}`;
-  o += `<rect x="16" y="196" width="10" height="10" fill="${C.line}"/>${T(30, 205, 'fit', { mono: 1, size: 10 })}<rect x="64" y="196" width="10" height="10" fill="${C.ink}"/>${T(78, 205, 'test', { mono: 1, size: 10 })}`;
-  document.getElementById('wf').innerHTML = o;
-  // permutation null
-  o = ''; const n = 26, base = 160;
-  for (let i = 0; i < n; i++) {
-    const x = 16 + i * 10, z = (i - 11) / 4.2, h = 120 * Math.exp(-z * z / 2);
-    o += `<rect x="${x}" y="${(base - h).toFixed(1)}" width="8" height="${h.toFixed(1)}" fill="${i >= 19 ? C.sep : C.line}"/>`;
-  }
-  o += `<line x1="206" y1="20" x2="206" y2="${base}" stroke="${C.ink}" stroke-dasharray="3 3"/>${T(202, 30, '95% of shuffled', { mono: 1, size: 10, anchor: 'end' })}`;
-  o += `<line x1="318" y1="36" x2="318" y2="${base}" stroke="${C.ink}" stroke-width="3"/><rect x="312" y="30" width="12" height="12" fill="${C.mark}"/>${T(330, 40, 'ours', { mono: 1, size: 10, w: 500, fill: C.ink })}`;
-  o += `<line x1="16" y1="${base}" x2="344" y2="${base}" stroke="${C.sep}"/>${T(16, base + 18, 'result on shuffled data, many runs', { mono: 1, size: 10 })}`;
-  o += `<path d="M216,${base + 32} L306,${base + 32}" stroke="${C.ink}" fill="none"/><path d="M300,${base + 28} L306,${base + 32} L300,${base + 36}" stroke="${C.ink}" fill="none"/>${T(216, base + 48, 'must sit out here', { mono: 1, size: 10 })}`;
-  document.getElementById('perm').innerHTML = o;
-  // drawdown distribution (skewed)
-  o = '';
-  for (let i = 0; i < 26; i++) {
-    const x = 16 + i * 12, t = (i + 1) / 6, h = 130 * Math.pow(t, 1.6) * Math.exp(-(t - 1) * 1.6) / 1.0;
-    o += `<rect x="${x}" y="${(base - Math.min(h, 130)).toFixed(1)}" width="10" height="${Math.min(h, 130).toFixed(1)}" fill="${i >= 17 ? C.sep : C.line}"/>`;
-  }
-  o += `<line x1="92" y1="20" x2="92" y2="${base}" stroke="${C.ink}" stroke-dasharray="3 3"/>${T(96, 30, 'median', { mono: 1, size: 10 })}`;
-  o += `<line x1="222" y1="20" x2="222" y2="${base}" stroke="${C.ink}" stroke-width="3"/><rect x="216" y="14" width="12" height="12" fill="${C.mark}"/>${T(234, 24, '95th percentile:', { mono: 1, size: 10, w: 500, fill: C.ink })}${T(234, 38, 'size for this', { mono: 1, size: 10 })}`;
-  o += `<line x1="16" y1="${base}" x2="344" y2="${base}" stroke="${C.sep}"/>${T(16, base + 18, 'worst drawdown in resampled histories', { mono: 1, size: 10 })}${T(344, base + 34, 'deeper →', { mono: 1, size: 10, anchor: 'end' })}`;
-  document.getElementById('dd').innerHTML = o;
-}
-
-/* ---------- research ladder ---------- */
-const RUNGS = [
-  ['Thesis', 'A published paper and a named mechanism: who pays, and why.', 'Principals admit'],
-  ['Replication', "The paper's effect reproduced on our own data, before costs. Every new engine or agent first reproduces a known answer and finds nothing in shuffled data.", 'Research'],
-  ['Costs', 'Net of spread, commission, slippage and financing; positive at 2x costs and inside the cost speed limit.', 'Research'],
-  ['Walk-forward', 'Six purged, embargoed folds, at least four positive after costs; the centre of the winning cluster is selected.', 'Research'],
-  ['Permutation', 'Beats the null distribution of shuffled returns at p < 0.05.', 'Research'],
-  ['Hurdles', 'Deflated Sharpe probability of at least 95%, PBO reported, and the full hurdle table.', 'Research, checked by risk'],
-  ['Sealed holdout', 'The last quarter of history, touched once.', 'Research'],
-  ['Challenge', 'A structured debate: one agent argues for, one against, ending with the evidence that would change the verdict.', 'Risk, then principals'],
-  ['Paper league', 'Simulated money on exchange data; each day declared at 06:00; overrides logged and scored.', 'Runs continuously'],
-  ['Allocation', "Holds the sleeve's allocation, sized from the 95th-percentile drawdown. Live capital only on the principals' decision.", 'Principals decide'],
-];
-const ladder = document.getElementById('ladder');
-ladder.innerHTML = RUNGS.map((r, i) => i).reverse().map(i => `<div class="rung rise ${i === 9 ? 'top' : ''}"><span class="rn">${String(i + 1).padStart(2, '0')}</span><span><span class="nm">${RUNGS[i][0]}</span><br><span class="ds">${RUNGS[i][1]}</span></span><span class="who">${RUNGS[i][2]}</span><span class="lane" data-rung="${i}"></span></div>`).join('');
-const lanes = [...ladder.querySelectorAll('.lane')].sort((a, b) => a.dataset.rung - b.dataset.rung);
-const start = [5, 4, 3, 3, 2, 2, 1, 1, 2, 1], toks = [];
-let gi = 0;
-start.forEach((c, r) => { for (let k = 0; k < c; k++) { const t = document.createElement('i'); const f = FAM[(gi++ * 4) % FAM.length]; t.className = 'tok ' + f.group; t.title = f.name + ' candidate'; t.dataset.r = r; lanes[r].appendChild(t); toks.push(t); } });
-const PASS = [0.8, 0.6, 0.5, 0.45, 0.4, 0.35, 0.5, 0.6, 0.3];
-function moveTok(t, r) {
-  const a = t.getBoundingClientRect(); lanes[r].appendChild(t); t.dataset.r = r; const b = t.getBoundingClientRect();
-  t.animate([{ transform: `translate(${a.left - b.left}px, ${a.top - b.top}px)` }, { transform: 'none' }], { duration: 750, easing: 'cubic-bezier(.2,.8,.2,1)' });
-}
-function ladderStep() {
-  const cand = toks.filter(t => +t.dataset.r < 9 && !t.classList.contains('out'));
-  const t = cand[Math.floor(Math.random() * cand.length)]; if (!t) return;
-  const r = +t.dataset.r;
-  if (r === 8 && lanes[9].children.length >= 3) return;
-  if (Math.random() < PASS[r]) moveTok(t, r + 1);
-  else {
-    t.classList.add('out');
-    setTimeout(() => { t.classList.remove('out'); const a = t.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 350 }); a.onfinish = () => { moveTok(t, 0); t.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 350 }); }; }, 650);
-  }
-}
-if (!reduce) setInterval(() => { if (document.visibilityState === 'visible') ladderStep(); }, 1100);
-
-/* ---------- engine ---------- */
-function drawEngine() {
-  const s = document.getElementById('engine');
-  const ins = [['News', 'headlines, central banks'], ['Fundamentals', 'growth, inflation, earnings'], ['Technicals', 'trend, volatility, breadth'], ['Macro series', 'rates, credit, VIX curve']];
-  let o = '';
-  const flowDot = (d, dur, delay) => reduce ? '' : `<rect width="5" height="5" x="-2.5" y="-2.5" fill="${C.ink}"><animateMotion dur="${dur}s" begin="${delay}s" repeatCount="indefinite" path="${d}"/></rect>`;
-  ins.forEach(([t, d], i) => {
-    const y = 20 + i * 76;
-    o += `<rect x="10" y="${y}" width="200" height="60" fill="${C.paper}" stroke="${C.line}"/><text x="24" y="${y + 26}" font-family="Archivo, Arial, sans-serif" font-size="15" font-weight="700" fill="${C.ink}">${t}</text><text x="24" y="${y + 45}" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.ink2}">${d}</text>`;
-    [95, 235].forEach((ty, k) => { const d2 = `M210,${y + 30} C260,${y + 30} 260,${ty} 300,${ty}`; o += `<path d="${d2}" fill="none" stroke="${C.sep}" stroke-width="1"/>` + flowDot(d2, 2.4, (i * 0.5 + k * 1.1).toFixed(1)); });
-  });
-  o += `<rect x="300" y="45" width="260" height="100" fill="${C.ink}"/><text x="318" y="76" font-family="Archivo, Arial, sans-serif" font-size="16" font-weight="800" fill="${C.paper}">Regime rules</text><text x="318" y="98" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.paper}">risk · inflation · volatility</text><text x="318" y="116" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.paper}">eight states, reproducible</text><text x="318" y="134" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.paper}">from the log</text>`;
-  o += `<rect x="300" y="185" width="260" height="100" fill="${C.paper}" stroke="${C.ink}"/><rect x="300" y="185" width="10" height="10" fill="${C.mark}"/><text x="318" y="216" font-family="Archivo, Arial, sans-serif" font-size="16" font-weight="800" fill="${C.ink}">AI briefing</text><text x="318" y="238" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.ink2}">reads the day's sources</text><text x="318" y="256" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.ink2}">every sentence cited</text><text x="318" y="274" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.ink2}">explains, does not decide</text>`;
-  [95, 235].forEach((y, k) => { const d = `M560,${y} C610,${y} 610,165 650,165`; o += `<path d="${d}" fill="none" stroke="${C.ink}" stroke-width="1.5"/>` + flowDot(d, 1.8, k * 0.9); });
-  o += `<rect x="650" y="120" width="140" height="90" fill="${C.warm}" stroke="${C.ink}"/><text x="664" y="152" font-family="Archivo, Arial, sans-serif" font-size="16" font-weight="800" fill="${C.ink}">Principals</text><text x="664" y="174" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.ink2}">approve the</text><text x="664" y="191" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.ink2}">rotation</text>`;
-  FAM.forEach((f, i) => {
-    const y = 18 + i * 33, a = regime < 0 ? 1 : f.alloc[regime];
-    o += `<path d="M790,165 C830,165 830,${y + 10} 860,${y + 10}" fill="none" stroke="${a === 0 ? C.line : gcol(f.group)}" stroke-width="${a === 1 ? 2 : 1}" opacity="${a === 0 ? 0.6 : 1}"/>`;
-    o += `<rect x="862" y="${y + 3}" width="14" height="14" fill="${a === 0 ? 'none' : gcol(f.group)}" stroke="${a === 0 ? C.sep : 'none'}" opacity="${a === .5 ? 0.6 : 1}"/><text x="884" y="${y + 15}" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="${a === 1 && regime >= 0 ? 800 : 600}" fill="${C.ink}" opacity="${a === 0 ? 0.4 : 1}">${f.name}${regime >= 0 ? ' · ' + ALLOC_WORD(a) : ''}</text>`;
-  });
-  s.innerHTML = o;
-}
-
-/* ---------- diversification calculator ---------- */
-const mult = (n, r) => Math.sqrt(n / (1 + (n - 1) * r));
-function drawCalc() {
-  const N = +document.getElementById('calcN').value, rho = +document.getElementById('calcR').value;
-  document.getElementById('vN').textContent = N; document.getElementById('vR').textContent = rho.toFixed(2);
-  document.getElementById('calcOut').textContent = mult(N, rho).toFixed(2) + '×';
-  const x0 = 46, x1 = 500, y0 = 262, y1 = 20, maxM = 4, X = n => x0 + (n - 1) / 14 * (x1 - x0), Y = m => y0 - (m - 1) / (maxM - 1) * (y0 - y1);
-  let o = '';
-  [1, 2, 3, 4].forEach(m => { o += `<line x1="${x0}" x2="${x1}" y1="${Y(m)}" y2="${Y(m)}" stroke="${C.line}"/><text x="${x0 - 8}" y="${Y(m) + 4}" text-anchor="end" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.sub}">${m}×</text>`; });
-  [1, 5, 9, 15].forEach(n => { o += `<text x="${X(n)}" y="${y0 + 18}" text-anchor="middle" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.sub}">${n}</text>`; });
-  o += `<text x="${x1}" y="${y0 + 34}" text-anchor="end" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.sub}">sleeves, N</text>`;
-  const curves = [[0, C.prem], [0.2, C.beh], [0.5, C.str], [rho, C.ink]];
-  curves.forEach(([r, col], k) => {
-    const d = Array.from({ length: 15 }, (_, i) => `${i ? 'L' : 'M'}${X(i + 1).toFixed(1)},${Y(Math.min(mult(i + 1, r), maxM)).toFixed(1)}`).join(' ');
-    o += `<path d="${d}" fill="none" stroke="${col}" stroke-width="${k === 3 ? 3 : 2}" ${k === 3 ? 'stroke-dasharray="6 4"' : ''}/>`;
-    if (k < 3) o += `<text x="${x1 + 4}" y="${(Y(Math.min(mult(15, r), maxM)) + 4).toFixed(1)}" font-family="STIX Two Text, Cambria Math, serif" font-style="italic" font-size="13" fill="${C.ink2}">ρ̄ = ${r}</text>`;
-  });
-  o += `<rect x="${(X(N) - 6).toFixed(1)}" y="${(Y(Math.min(mult(N, rho), maxM)) - 6).toFixed(1)}" width="12" height="12" fill="${C.mark}" stroke="${C.ink}"/>`;
-  document.getElementById('calcSvg').innerHTML = o;
-}
-['calcN', 'calcR'].forEach(id => document.getElementById(id).addEventListener('input', drawCalc));
-
-/* ---------- regime model: Markov chain, transition matrix, filtered regime curves ---------- */
-const PM = [[0.970, 0.010, 0.015, 0.005], [0.015, 0.960, 0.020, 0.005], [0.000, 0.010, 0.950, 0.040], [0.040, 0.010, 0.010, 0.940]];
-const EMIT = [[0.05, 0.6], [0.0, 1.0], [-0.15, 2.2], [0.12, 1.4]]; // daily % mean and volatility per regime (illustrative)
-const RSHORT = ['Calm', 'Inflation', 'Stress', 'Recovery'];
-const rcol = k => [C.line, C.mark, C.ink, C.sep][k];
-const rtext = k => [C.ink, '#000000', C.paper, C.ink][k];
-function sim() {
-  let a = 20261007; const rnd = () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
-  const gauss = () => Math.sqrt(-2 * Math.log(1 - rnd())) * Math.cos(2 * Math.PI * rnd());
-  const T = 520, s = [], r = [], px = [100];
-  let st = 0;
-  for (let i = 0; i < T; i++) {
-    if (i) { const u = rnd(); let c = 0; for (let j = 0; j < 4; j++) { c += PM[st][j]; if (u < c) { st = j; break; } } }
-    s.push(st); const x = EMIT[st][0] + EMIT[st][1] * gauss(); r.push(x); px.push(px[px.length - 1] * (1 + x / 100));
-  }
-  // Hamilton filter
-  let xi = [0.25, 0.25, 0.25, 0.25]; const F = [];
-  r.forEach(x => {
-    const pred = [0, 1, 2, 3].map(j => xi.reduce((acc, v, i) => acc + v * PM[i][j], 0));
-    const eta = EMIT.map(([m, sd]) => Math.exp(-0.5 * ((x - m) / sd) ** 2) / sd);
-    const un = pred.map((v, j) => v * eta[j]), z = un.reduce((a2, b) => a2 + b, 0);
-    xi = un.map(v => v / z); F.push(xi);
-  });
-  return { s, r, px, F, T };
-}
-const SIM = sim();
-function drawChain() {
-  const pos = [[130, 110], [390, 110], [390, 300], [130, 300]], R = 46;
-  const ns = (x, y, k) => { const sel = regime === k, dim = regime >= 0 && !sel; return `<g opacity="${dim ? 0.35 : 1}"><rect x="${x - R}" y="${y - 30}" width="${R * 2}" height="60" fill="${rcol(k)}" stroke="${C.ink}" stroke-width="${sel ? 3 : 1}"/><text x="${x}" y="${y - 3}" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="14" font-weight="800" fill="${rtext(k)}">${RSHORT[k]}</text><text x="${x}" y="${y + 16}" text-anchor="middle" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="${rtext(k)}">E[D] ≈ ${Math.round(1 / (1 - PM[k][k]))} days</text></g>`; };
-  let o = `<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="${C.ink2}"/></marker></defs>`;
-  // edges i -> j (curved, offset so i->j and j->i separate)
-  for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) {
-    if (i === j || PM[i][j] < 0.005) continue;
-    const [x1, y1] = pos[i], [x2, y2] = pos[j], dx = x2 - x1, dy = y2 - y1, L = Math.hypot(dx, dy), ux = dx / L, uy = dy / L, nx = -uy, ny = ux;
-    const off = 14, sx = x1 + ux * (R + 6) + nx * off, sy = y1 + uy * 36 + ny * off, ex = x2 - ux * (R + 10) + nx * off, ey = y2 - uy * 40 + ny * off;
-    const cx = (sx + ex) / 2 + nx * 26, cy = (sy + ey) / 2 + ny * 26, hot = regime === i;
-    const w = 0.8 + PM[i][j] * 90;
-    o += `<path d="M${sx.toFixed(1)},${sy.toFixed(1)} Q${cx.toFixed(1)},${cy.toFixed(1)} ${ex.toFixed(1)},${ey.toFixed(1)}" fill="none" stroke="${hot ? C.ink : C.sep}" stroke-width="${Math.min(w, 4.5).toFixed(1)}" marker-end="url(#ah)" opacity="${regime >= 0 && !hot ? 0.3 : 1}"/>`;
-    const lx = (sx + 2 * cx + ex) / 4 + nx * 10, ly = (sy + 2 * cy + ey) / 4 + ny * 10;
-    o += `<text x="${lx.toFixed(1)}" y="${(ly + 4).toFixed(1)}" text-anchor="middle" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" font-weight="${hot ? 500 : 400}" fill="${hot ? C.ink : C.ink2}" opacity="${regime >= 0 && !hot ? 0.4 : 1}">${PM[i][j].toFixed(3)}</text>`;
-  }
-  // self loops
-  pos.forEach(([x, y], k) => {
-    const up = y < 200, yy = up ? y - 30 : y + 30, dir = up ? -1 : 1;
-    o += `<path d="M${x - 16},${yy} C${x - 30},${yy + dir * 44} ${x + 30},${yy + dir * 44} ${x + 16},${yy + dir * 2}" fill="none" stroke="${C.ink2}" stroke-width="1.5" marker-end="url(#ah)" opacity="${regime >= 0 && regime !== k ? 0.3 : 1}"/>`;
-    o += `<text x="${x}" y="${yy + dir * 48 + (up ? 0 : 8)}" text-anchor="middle" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.ink}" opacity="${regime >= 0 && regime !== k ? 0.4 : 1}">${PM[k][k].toFixed(3)}</text>`;
-  });
-  pos.forEach(([x, y], k) => o += ns(x, y, k));
-  document.getElementById('chain').innerHTML = o;
-  document.getElementById('tmat').innerHTML = `<thead><tr><th>from \\ to</th>${RSHORT.map(n => `<th>${n}</th>`).join('')}</tr></thead><tbody>${PM.map((row, i) => `<tr class="${regime === i ? 'sel' : ''}"><th>${RSHORT[i]}</th>${row.map((v, j) => `<td class="${i === j ? 'd' : ''}">${v.toFixed(3)}</td>`).join('')}</tr>`).join('')}</tbody>`;
-}
-function drawCurves() {
-  const { px, F, T } = SIM, x0 = 56, x1 = 900, X = i => x0 + i / (T - 1) * (x1 - x0);
-  const top = 20, h1 = 160, pTop = 214, h2 = 150;
-  const lo = Math.min(...px), hi = Math.max(...px), Yp = v => top + h1 - (v - lo) / (hi - lo) * h1;
-  let o = '';
-  // shade the price panel by the most likely regime
-  let runStart = 0;
-  const ml = F.map(f => f.indexOf(Math.max(...f)));
-  for (let i = 1; i <= T; i++) if (i === T || ml[i] !== ml[runStart]) { const k = ml[runStart]; o += `<rect x="${X(runStart).toFixed(1)}" y="${top}" width="${(X(Math.min(i, T - 1)) - X(runStart) + 1).toFixed(1)}" height="${h1}" fill="${rcol(k)}" opacity="${regime >= 0 && regime !== k ? 0.06 : (k === 2 ? 0.16 : 0.32)}"/>`; runStart = i; }
-  o += `<path d="${px.slice(1).map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Yp(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${C.ink}" stroke-width="1.6"/>`;
-  o += `<text x="${x0}" y="${top - 6}" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.sub}">SIMULATED INDEX, SHADED BY MOST LIKELY REGIME</text>`;
-  // stacked filtered probabilities
-  const Y = v => pTop + h2 - v * h2;
-  let base = new Array(T).fill(0);
-  [0, 1, 3, 2].forEach(k => {
-    const upper = base.map((b, i) => b + F[i][k]);
-    const d = 'M' + upper.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' L') + ' L' + base.map((v, i) => `${X(T - 1 - i).toFixed(1)},${Y(base[T - 1 - i]).toFixed(1)}`).join(' L') + ' Z';
-    o += `<path d="${d}" fill="${rcol(k)}" stroke="${C.paper}" stroke-width="0.6" opacity="${regime >= 0 && regime !== k ? 0.18 : 1}"/>`;
-    const mid = (upper[T - 1] + base[T - 1]) / 2;
-    base = upper;
-  });
-  [0, 0.5, 1].forEach(v => o += `<line x1="${x0}" x2="${x1}" y1="${Y(v)}" y2="${Y(v)}" stroke="${C.sep}" stroke-dasharray="${v === 0.5 ? '3 4' : ''}" stroke-width="${v === 0.5 ? 1 : 0.8}"/><text x="${x0 - 8}" y="${Y(v) + 4}" text-anchor="end" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.sub}">${v.toFixed(1)}</text>`);
-  o += `<text x="${x0}" y="${pTop - 8}" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.sub}">FILTERED REGIME PROBABILITY, P(s_t = k | r_1 … r_t)</text>`;
-  o += `<text x="${x1}" y="${pTop + h2 + 22}" text-anchor="end" font-family="IBM Plex Mono, Menlo, monospace" font-size="11" fill="${C.sub}">trading days →</text>`;
-  // legend, direct
-  [0, 1, 3, 2].forEach((k, n) => { const y = 40 + n * 30; o += `<rect x="${x1 + 20}" y="${y - 9}" width="12" height="12" fill="${rcol(k)}" stroke="${C.ink}" stroke-width="0.6" opacity="${regime >= 0 && regime !== k ? 0.3 : 1}"/><text x="${x1 + 38}" y="${y + 2}" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="${regime === k ? 800 : 600}" fill="${C.ink}" opacity="${regime >= 0 && regime !== k ? 0.45 : 1}">${RSHORT[k]}</text>`; });
-  o += `<line id="rcx" x1="0" x2="0" y1="${top}" y2="${pTop + h2}" stroke="${C.ink}" stroke-width="1" opacity="0"/>`;
-  const svg = document.getElementById('rcurve'); svg.innerHTML = o;
-  svg.onpointermove = ev => {
-    const r = svg.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width * 1000;
-    if (x < x0 || x > x1) { hideTip(); svg.querySelector('#rcx').setAttribute('opacity', 0); return; }
-    const i = Math.round((x - x0) / (x1 - x0) * (T - 1)), f = F[i], ln = svg.querySelector('#rcx');
-    ln.setAttribute('x1', X(i)); ln.setAttribute('x2', X(i)); ln.setAttribute('opacity', 0.6);
-    showTip(ev, `<b>Day ${i + 1}</b><br>${[0, 1, 2, 3].map(k => `${RSHORT[k]} ${(f[k] * 100).toFixed(0)}%`).join(' · ')}`);
-  };
-  svg.onpointerleave = () => { hideTip(); svg.querySelector('#rcx').setAttribute('opacity', 0); };
-}
-
-/* ---------- example market cycle under the hero ---------- */
-const CYC = (() => {
-  let a = 7102026; const rnd = () => { a |= 0; a = a + 0x6D2B79F5 | 0; let q = Math.imul(a ^ a >>> 15, 1 | a); q = q + Math.imul(q ^ q >>> 7, 61 | q) ^ q; return ((q ^ q >>> 14) >>> 0) / 4294967296; };
-  const gauss = () => Math.sqrt(-2 * Math.log(1 - rnd())) * Math.cos(2 * Math.PI * rnd());
-  const segs = [[0, 100, 0.09, 0.45], [1, 80, -0.08, 0.9], [2, 50, -1.1, 1.9], [3, 65, 0.24, 1.2], [0, 90, 0.03, 0.4]];  // recovery regains about two-thirds of the fall; no new high
-  const px = [100], st = [], ret = [];
-  segs.forEach(([r, n, mu, sd]) => { for (let i = 0; i < n; i++) { const x = mu + sd * gauss(); ret.push(x); st.push(r); px.push(px[px.length - 1] * (1 + x / 100)); } });
-  const vol = ret.map((_, i) => { const w = ret.slice(Math.max(0, i - 19), i + 1), m = w.reduce((s, v) => s + v, 0) / w.length; return Math.sqrt(w.reduce((s, v) => s + (v - m) ** 2, 0) / w.length) * Math.sqrt(252); });
-  const bounds = []; let c = 0; segs.forEach(([r, n]) => { bounds.push([c, c + n, r]); c += n; });
-  return { px: px.slice(1), st, vol, bounds, T: c };
-})();
-const CX0 = 20, CX1 = 980, cX = i => CX0 + i / (CYC.T - 1) * (CX1 - CX0);
-const cPriceTop = 34, cPriceH = 120, cVolTop = 170, cVolH = 40;
-const cLo = Math.min(...CYC.px), cHi = Math.max(...CYC.px), cY = v => cPriceTop + cPriceH - (v - cLo) / (cHi - cLo) * cPriceH;
-const vMax = Math.max(...CYC.vol), vY = v => cVolTop + cVolH - v / vMax * cVolH;
-function drawCycle() {
-  const svg = document.getElementById('cycle');
-  let o = '';
-  CYC.bounds.forEach(([s, e, r]) => {
-    const x = cX(s), w = cX(e - 1) - x + (CX1 - CX0) / CYC.T, sel = regime === r, dim = regime >= 0 && !sel;
-    o += `<g class="band" data-regime="${r}"><rect x="${x.toFixed(1)}" y="${cPriceTop - 22}" width="${w.toFixed(1)}" height="${cVolTop + cVolH - cPriceTop + 22}" fill="${rcol(r)}" opacity="${dim ? 0.08 : r === 2 ? 0.22 : 0.42}"/>`;
-    if (sel) o += `<rect x="${x.toFixed(1)}" y="${cPriceTop - 22}" width="${w.toFixed(1)}" height="4" fill="${C.mark}"/>`;
-    o += `<text x="${(x + 8).toFixed(1)}" y="${cPriceTop - 7}" font-family="Archivo, Arial, sans-serif" font-size="13" font-weight="${sel ? 800 : 700}" fill="${C.ink}" opacity="${dim ? 0.45 : 1}">${REGIMES[r].name}</text></g>`;
-  });
-  o += `<path d="${CYC.px.map((v, i) => `${i ? 'L' : 'M'}${cX(i).toFixed(1)},${cY(v).toFixed(1)}`).join(' ')}" fill="none" stroke="${C.ink}" stroke-width="2" pointer-events="none"/>`;
-  o += `<path d="M${cX(0)},${cVolTop + cVolH} ${CYC.vol.map((v, i) => `L${cX(i).toFixed(1)},${vY(v).toFixed(1)}`).join(' ')} L${cX(CYC.T - 1)},${cVolTop + cVolH} Z" fill="${C.sep}" opacity=".55" pointer-events="none"/>`;
-  o += `<line x1="${CX0}" x2="${CX1}" y1="${cVolTop + cVolH}" y2="${cVolTop + cVolH}" stroke="${C.sep}" pointer-events="none"/>`;
-  o += `<text x="${CX0 + 4}" y="${cVolTop + 12}" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="${C.ink2}" pointer-events="none">REALISED VOLATILITY</text>`;
-  o += `<text x="${CX1 - 4}" y="${cPriceTop + 14}" text-anchor="end" font-family="IBM Plex Mono, Menlo, monospace" font-size="10" fill="${C.ink2}" pointer-events="none">PRICE</text>`;
-  o += `<g id="cyHead" pointer-events="none"><line y1="${cPriceTop - 22}" y2="${cVolTop + cVolH}" x1="0" x2="0" stroke="${C.ink}" stroke-width="1.5"/><rect id="cyDot" x="-6" y="0" width="12" height="12" fill="${C.mark}" stroke="${C.ink}" stroke-width="1.5"/></g>`;
-  svg.innerHTML = o;
-  placeHead(headI);
-}
-let headI = 0, playing = !reduce, lastR = -1, inView = true, holdT = 240;  // each loop opens on the full book for about 4 seconds
-// the cycle drives the page only while the book or the cycle chart is on screen, so the rest of the page holds still while being read
-if ('IntersectionObserver' in window) {
-  const seen = new Map();
-  const io = new IntersectionObserver(es => { es.forEach(e => seen.set(e.target, e.isIntersecting)); inView = [...seen.values()].some(Boolean); });
-  ['web', 'cycle'].forEach(id => io.observe(document.getElementById(id)));
-}
-function placeHead(i) {
-  const g = document.getElementById('cyHead'); if (!g) return;
-  const k = Math.max(0, Math.min(CYC.T - 1, Math.floor(i)));
-  g.setAttribute('transform', `translate(${cX(k).toFixed(1)},0)`);
-  document.getElementById('cyDot').setAttribute('y', (cY(CYC.px[k]) - 6).toFixed(1));
-}
-const playBtn = document.getElementById('playCycle');
-playBtn.addEventListener('click', () => {
-  playing = !playing; playBtn.setAttribute('aria-pressed', String(playing)); playBtn.textContent = playing ? 'Pause the cycle' : 'Play the cycle';
-  if (playing) { lastR = -2; if (reduce) stepReduced(); }
-});
-function stepReduced() { // reduced motion: hop band to band
-  let n = 0; const hop = () => { if (!playing || n >= CYC.bounds.length) { stopPlay(); return; } const [s, e, r] = CYC.bounds[n++]; headI = (s + e) / 2; placeHead(headI); setRegime(r); setTimeout(hop, 2200); }; hop();
-}
-function stopPlay() { playing = false; playBtn.setAttribute('aria-pressed', 'false'); playBtn.textContent = 'Play the cycle'; }
-function cycleTick() {
-  if (playing && inView) {
-    if (holdT > 0) { holdT--; }
-    else {
-      headI += 0.16;                            // about 50 seconds for the whole cycle
-      if (headI >= CYC.T) { headI = 0; holdT = 240; lastR = -1; setRegime(-1); }   // back to the full book, then loop
-      else { const r = CYC.st[Math.floor(headI)]; if (r !== lastR) { lastR = r; setRegime(r); } }
-    }
-  }
-  placeHead(headI);
-  requestAnimationFrame(cycleTick);
-}
-
-function drawAll() { C = css(); drawCycle(); drawCalc(); drawChain(); drawCurves(); drawHeat(); drawBraid(); drawProof(); drawEngine(); layout(); drawWeb(); }
-build3D(); drawAll();
-addEventListener('resize', () => { layout(); drawWeb(); });
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', drawAll);
-new MutationObserver(drawAll).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-if (document.fonts) document.fonts.ready.then(() => { drawWeb(); drawBraid(); });
-if (!reduce) { requestAnimationFrame(tick); requestAnimationFrame(cycleTick); }
-})();
+  const h = (location.hash || '').replace('#', '');
+  if (["home", "approach", "research", "firm", "contact"].includes(h)) show(h);
 </script>
-
-</body>
-</html>

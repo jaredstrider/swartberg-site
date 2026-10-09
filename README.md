@@ -1,5 +1,8 @@
-# Swartberg Capital: portfolio
+# swartbergcapital.com
 
-The public page describing how Swartberg Capital approaches research and portfolio construction.
+The Swartberg Capital website, served by GitHub Pages at https://swartbergcapital.com.
 
-Built from the firm's private source by `build.py` (public version only). Information only: no performance, no advice, no offer.
+- `index.html`: the firm's site (built from the firm's private source by `site/build_site.py`).
+- `portfolio/`: the portfolio page (built by `research/quantum/vision/build.py`); `portfolio/?embed` is the book and market-cycle view embedded on the home page.
+
+Information only: no performance, no advice, no offer.
