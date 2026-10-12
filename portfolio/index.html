@@ -122,7 +122,10 @@ section:last-of-type { border-bottom: 0; }
 
 /* figures */
 .figure { background: var(--paper-warm); padding: 24px; display: grid; gap: 16px; align-content: start; min-width: 0; }
-.scrollx { overflow-x: auto; }
+.scrollx { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.swipe-hint { display: none; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); margin: 0 0 8px; }
+.swipe-hint::after { content: " \2192"; }
+.swipe-hint.on { display: block; }
 #braid { display: block; width: 100%; min-width: 640px; height: auto; }
 .cap { font-size: 13px; color: var(--subtle); max-width: 80ch; }
 .tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--paper); padding: 8px 10px; font-size: 13px; line-height: 1.4; max-width: 300px; z-index: 10; }
@@ -269,8 +272,10 @@ html.embed .hero { padding-block: 0; border-bottom: 0; }
 .sleevelist span.off { opacity: .45; }
 @media (max-width: 620px) {
   #web { height: clamp(360px, 108vw, 430px); }
-  .controls .lbl { flex-basis: 100%; margin-right: 0; }
-  .chip { flex: none; white-space: nowrap; min-height: 44px; }
+  .controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .controls .lbl { grid-column: 1 / -1; margin-right: 0; }
+  .chip { width: 100%; min-width: 0; min-height: 46px; padding: 10px 8px; text-align: center; white-space: nowrap; font-size: 14px; }
+  .chip[data-regime="-1"] { grid-column: 1 / -1; }
   .sleevelist { display: grid; }
   #cycle { min-width: 0; }
   .readout .rc { font-size: 11px; }
@@ -1215,6 +1220,18 @@ function cycleTick() {
 function drawAll() { C = css(); drawCycle(); onTheme.forEach(f => f()); onRegime.forEach(f => f()); layout(); drawWeb(); }
 build3D(); drawAll();
 addEventListener('resize', () => { layout(); drawWeb(); drawCycle(); });
+// a figure wider than the screen scrolls inside its panel; say so above it, only when it actually overflows
+function markSwipe() {
+  document.querySelectorAll('.scrollx').forEach(el => {
+    let hint = el.previousElementSibling;
+    if (!hint || !hint.classList.contains('swipe-hint')) {
+      hint = document.createElement('p'); hint.className = 'swipe-hint'; hint.textContent = 'Swipe to see the whole figure';
+      el.parentNode.insertBefore(hint, el);
+    }
+    hint.classList.toggle('on', el.scrollWidth > el.clientWidth + 2);
+  });
+}
+markSwipe(); addEventListener('resize', markSwipe);
 function renderSleeveList(r) {
   const sl = document.getElementById('sleevelist'); if (!sl) return;
   sl.innerHTML = FAM.map(f => { const a = r < 0 ? 1 : f.alloc[r]; return `<span class="${f.group}${r >= 0 && a === 0 ? ' off' : ''}"><i></i><b>${f.name}</b><small>${r < 0 ? '' : ALLOC_WORD(a).toUpperCase()}</small></span>`; }).join('');

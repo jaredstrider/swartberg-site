@@ -264,7 +264,7 @@ figcaption b { color: var(--ink); font-weight: 600; }
 @media (max-width: 640px) {
   :root { --gutter: 16px; }
   .site-header .wrap { min-height: 55px; }
-  .brand svg { height: 15px; }
+  .brand svg { height: 20px; }
   .menu a { padding: 18px 6px; font-size: 0.78rem; }
   .menu a .long { display: none; }
   .menu a .short { display: inline; }
@@ -272,6 +272,31 @@ figcaption b { color: var(--ink); font-weight: 600; }
   .aside { font-size: 1rem; }
 }
 @media (max-width: 520px) { .site-footer .cols { grid-template-columns: 1fr; } }
+
+/* burger menu: phones and small tablets (owner's request, 12 October 2026); without script the inline menu stays */
+.menu-toggle { display: none; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (max-width: 800px) {
+  .site-header .wrap { position: relative; }
+  .brand svg { height: 21px; }
+  .site-header.has-toggle .menu-toggle { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; margin-right: -12px; background: none; border: 0; color: var(--ink); cursor: pointer; }
+  .menu-toggle .bars { display: grid; gap: 6px; width: 24px; }
+  .menu-toggle .bars i { display: block; height: 2px; background: currentColor; transition: transform .2s, opacity .2s; }
+  .site-header.open .menu-toggle .bars i:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .site-header.open .menu-toggle .bars i:nth-child(2) { opacity: 0; }
+  .site-header.open .menu-toggle .bars i:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .menu-toggle:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
+  .site-header.has-toggle nav { display: none; position: absolute; left: 0; right: 0; top: 100%; background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .site-header.has-toggle.open nav { display: block; }
+  .site-header.has-toggle .menu { flex-direction: column; overflow: visible; padding-block: var(--s1) var(--s2); }
+  .site-header.has-toggle .menu > li:first-child { margin-left: 0; }
+  .site-header.has-toggle .menu a { padding: 16px var(--gutter); font-size: 1.15rem; font-weight: 600; border-bottom: 1px solid var(--line); }
+  .site-header.has-toggle .menu a[aria-current="page"] { border-bottom-color: var(--line); box-shadow: inset 4px 0 0 var(--accent); }
+  .site-header.has-toggle .menu a .long { display: inline; }
+  .site-header.has-toggle .menu a .short { display: none; }
+  html.menu-open { overflow: hidden; }
+}
+@media (max-width: 640px) { .brand svg { height: 20px; } }
 </style>
 <style>
 /* Public site: dark only (owner decision, 12 October 2026). The same brand tokens, inverted: black paper, white
@@ -292,6 +317,23 @@ body { background: #000000; color: #ffffff; }
 .btn { background: #ffffff; color: #000000; border-color: #ffffff; }
 .btn:hover { background: #d9d9d3; border-color: #d9d9d3; }
 .skip { background: #ffffff; color: #000000; }
+
+/* colour on arrival (owner's request, 12 October 2026): the brand accents as light, not decoration.
+   Two soft glows behind the opening statement (teal and violet from the brand system), the facts in teal,
+   a four-colour rule under the hero, and a faint teal glow in the statement band. */
+.page--home .hero { position: relative; overflow: hidden; isolation: isolate;
+  background:
+    radial-gradient(55% 70% at 88% 18%, rgba(0, 207, 186, 0.22), rgba(0, 207, 186, 0) 70%),
+    radial-gradient(45% 60% at 4% 100%, rgba(142, 80, 237, 0.22), rgba(142, 80, 237, 0) 70%),
+    radial-gradient(35% 45% at 55% 110%, rgba(255, 71, 19, 0.10), rgba(255, 71, 19, 0) 70%),
+    #000000; }
+.page--home .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+  background: linear-gradient(90deg, #00cfba 0 25%, #8e50ed 25% 50%, #ff4713 50% 75%, #ffce00 75% 100%); }
+.page--home .hero h1 { background: linear-gradient(100deg, #ffffff 0%, #ffffff 55%, #7fe7dc 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.page--home .fact .n { color: #00cfba; }
+.page--home .facts { border-top-color: #00cfba; }
+.band-ink { background: radial-gradient(60% 120% at 100% 0%, rgba(0, 207, 186, 0.12), rgba(0, 207, 186, 0) 70%), #111110; }
+@media (prefers-reduced-transparency: reduce) { .page--home .hero h1 { background: none; color: #ffffff; } }
 </style>
 </head>
 <body class="page page--contact">
@@ -300,8 +342,9 @@ body { background: #000000; color: #ffffff; }
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="/" aria-label="Swartberg Capital, home"><svg aria-hidden="true" focusable="false" viewBox="0 0 8426 921"><use href="#wm"/></svg></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" hidden><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="sr">Menu</span></button>
     <nav aria-label="Primary">
-      <ul class="menu">
+      <ul class="menu" id="primary-menu">
         <li><a href="/how-we-work/"><span class="long">How we work</span><span class="short">Work</span></a></li>
         <li><a href="/research/"><span class="long">Insights</span><span class="short">Insights</span></a></li>
         <li><a href="/firm/"><span class="long">The firm</span><span class="short">Firm</span></a></li>
@@ -310,6 +353,15 @@ body { background: #000000; color: #ffffff; }
     </nav>
   </div>
 </header>
+<script>(function () {
+  var h = document.querySelector('.site-header'), b = h.querySelector('.menu-toggle');
+  h.classList.add('has-toggle'); b.hidden = false;
+  function set(open) { h.classList.toggle('open', open); b.setAttribute('aria-expanded', String(open)); document.documentElement.classList.toggle('menu-open', open); }
+  b.addEventListener('click', function () { set(!h.classList.contains('open')); });
+  h.querySelectorAll('.menu a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  addEventListener('keydown', function (e) { if (e.key === 'Escape' && h.classList.contains('open')) { set(false); b.focus(); } });
+  matchMedia('(min-width: 801px)').addEventListener('change', function (m) { if (m.matches) set(false); });
+})();</script>
 <main id="main">
 <section>
   <div class="wrap two contact">
