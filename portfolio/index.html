@@ -373,53 +373,6 @@ footer p { max-width: 100ch; }
     </div>
   </section>
 
-  <section aria-labelledby="h-fams">
-    <div class="two">
-      <div class="head">
-        <div class="eyebrow">The nine sleeves</div>
-        <h2 id="h-fams">Every sleeve states who is on the other side, and why the return persists</h2>
-        <p class="lede">A strategy without a published thesis does not enter the portfolio.</p>
-      </div>
-      <div class="rise">
-        <div class="pyr" aria-label="Pyramid: risk premia at the base, behavioural strategies in the middle, structural inefficiencies at the top">
-          <div class="p3">Structural<small>Seasonal · Arbitrage</small></div>
-          <div class="p2">Behavioural<small>Trend · Momentum · Breakout · Mean reversion</small></div>
-          <div class="p1">Risk premia<small>Carry · Value · Volatility</small></div>
-        </div>
-        <div class="pyrnote"><span>Base: most capacity, longest life</span><span>Top: highest quality, shortest life</span></div>
-      </div>
-    </div>
-    <div class="fams" id="fams"></div>
-  </section>
-
-  <section aria-labelledby="h-maths">
-    <div class="head">
-      <div class="eyebrow">The arithmetic of the portfolio</div>
-      <h2 id="h-maths">Every rule has an equation behind it</h2>
-      <p class="lede">The portfolio is managed with a small set of formulas from the published literature. They determine how much evidence a strategy requires, how large it may be, and what diversification contributes.</p>
-    </div>
-    <div class="eqs">
-      <div class="eq rise"><span class="k">Risk-adjusted return</span><div class="f"><i>SR</i> = <span class="frac"><span><i>μ</i> − <i>r<sub>f</sub></i></span><span><i>σ</i></span></span> · √252</div><p>The annualised Sharpe ratio: mean excess daily return over its volatility. The common unit for every comparison in the portfolio.</p><span class="src">Sharpe (1966, 1994)</span></div>
-      <div class="eq rise"><span class="k">Statistical significance</span><div class="f"><i>t</i> ≈ <i>SR</i> · √<i>T</i><sub>years</sub></div><p>Evidence grows with the square root of time. At a Sharpe ratio of 1, a t-statistic of 2 needs about four years of data; at 0.5, sixteen. New factors should clear <span class="m"><i>t</i> &gt; 3</span>.</p><span class="src">Harvey, Liu and Zhu (2016)</span></div>
-      <div class="eq rise"><span class="k">Deflated Sharpe ratio</span><div class="f"><i>DSR</i> = Φ(<i>z</i>)<span class="l2"><i>z</i> = <span class="frac"><span>(<i>SR̂</i> − <i>SR</i><sub>0</sub>)√(<i>T</i> − 1)</span><span>√(1 − <i>γ̂</i><sub>3</sub><i>SR̂</i> + ¼(<i>γ̂</i><sub>4</sub> − 1)<i>SR̂</i><sup>2</sup>)</span></span></span></div><p>The probability the true Sharpe ratio is positive after correcting for skew <span class="m"><i>γ</i><sub>3</sub></span>, kurtosis <span class="m"><i>γ</i><sub>4</sub></span>, and <span class="m"><i>SR</i><sub>0</sub></span>, the highest result expected by chance from the number of trials run.</p><span class="src">Bailey and López de Prado (2014)</span></div>
-      <div class="eq rise"><span class="k">Diversification</span><div class="f"><i>SR</i><sub>portfolio</sub> ≈ <i>SR</i> · <span class="frac"><span>√<i>N</i></span><span>√(1 + (<i>N</i> − 1)<i>ρ̄</i>)</span></span></div><p>For <span class="m"><i>N</i></span> sleeves of equal Sharpe ratio and average correlation <span class="m"><i>ρ̄</i></span>. Nine uncorrelated sleeves triple the ratio; at <span class="m"><i>ρ̄</i> = 0.5</span> the gain is only a third. Try it below.</p><span class="src">Grinold and Kahn (2000); Carver (2015)</span></div>
-      <div class="eq rise"><span class="k">Volatility targeting</span><div class="f"><i>w<sub>i</sub></i> = <span class="frac"><span><i>σ</i>*</span><span><i>σ̂<sub>i</sub></i></span></span><span class="l2"><i>σ̂</i><sup>2</sup><sub><i>t</i></sub> = <i>λ</i> <i>σ̂</i><sup>2</sup><sub><i>t</i>−1</sub> + (1 − <i>λ</i>) <i>r</i><sup>2</sup><sub><i>t</i></sub></span></div><p>Each sleeve is sized to a common volatility target <span class="m"><i>σ</i>*</span>, using an exponentially weighted variance estimate that reacts to changing markets.</p><span class="src">Moreira and Muir (2017); RiskMetrics (1996)</span></div>
-      <div class="eq rise"><span class="k">Portfolio risk and risk contribution</span><div class="f"><i>σ<sub>p</sub></i> = √(<b>w</b><sup>⊤</sup><b>Σ</b><b>w</b>)<span class="l2"><i>RC<sub>i</sub></i> = <span class="frac"><span><i>w<sub>i</sub></i>(<b>Σ</b><b>w</b>)<i><sub>i</sub></i></span><span><i>σ<sub>p</sub></i></span></span></span></div><p>Portfolio volatility from the covariance matrix <span class="m"><b>Σ</b></span>, shrunk toward a structured target. Each sleeve's risk contribution is measured and held near equal.</p><span class="src">Ledoit and Wolf (2004); Maillard, Roncalli and Teïletche (2010)</span></div>
-      <div class="eq rise"><span class="k">Cost speed limit</span><div class="f">turnover<sub>max</sub> = <span class="frac"><span><i>SR</i><sub>pre-cost</sub> / 3</span><span><i>c</i><sub>round trip</sub></span></span></div><p>Costs are measured in Sharpe units: commission plus slippage over the annualised volatility of the instrument. No sleeve may spend more than a third of its expected return on trading.</p><span class="src">Carver (2015), Systematic Trading</span></div>
-      <div class="eq rise"><span class="k">Position size ceiling</span><div class="f"><i>f</i>* = <span class="frac"><span><i>μ</i></span><span><i>σ</i><sup>2</sup></span></span>, &nbsp; <i>f</i> ≤ ½<i>f</i>*</div><p>The growth-optimal Kelly fraction overstates size whenever <span class="m"><i>μ</i></span> is estimated with error, which is always. We cap at half of it.</p><span class="src">Kelly (1956); Thorp (2006)</span></div>
-      <div class="eq rise"><span class="k">Tail risk</span><div class="f"><i>ES</i><sub>95</sub> = 𝔼[<i>L</i> | <i>L</i> ≥ <i>VaR</i><sub>95</sub>]</div><p>Expected shortfall: the average loss on the worst 5% of days, estimated on the bootstrapped distribution. It sees the shape of the tail that value at risk ignores.</p><span class="src">Acerbi and Tasche (2002)</span></div>
-    </div>
-    <div class="calc rise">
-      <div class="head" style="gap:16px">
-        <h3>What diversification is worth</h3>
-        <label for="calcN"><span class="lr"><span>Sleeves running, <span class="m"><i>N</i></span></span><span class="v" id="vN">9</span></span><input type="range" id="calcN" min="1" max="15" step="1" value="9"></label>
-        <label for="calcR"><span class="lr"><span>Average pairwise correlation, <span class="m"><i>ρ̄</i></span></span><span class="v" id="vR">0.10</span></span><input type="range" id="calcR" min="0" max="0.9" step="0.05" value="0.1"></label>
-        <div><div class="out" id="calcOut">2.24×</div><p class="muted" style="font-size:13px;margin-top:6px">Multiplier on a single sleeve's Sharpe ratio, assuming equal Sharpe ratios and equal risk. Arithmetic, not a forecast.</p></div>
-      </div>
-      <svg id="calcSvg" viewBox="0 0 560 300" role="img" aria-label="Line chart of the diversification multiplier against the number of sleeves for four correlation levels, with the current choice marked."></svg>
-    </div>
-  </section>
-
   <section aria-labelledby="h-proof">
     <div class="head">
       <div class="eyebrow">How a strategy proves itself</div>
@@ -443,29 +396,6 @@ footer p { max-width: 100ch; }
         <p class="cap">A stationary block bootstrap resamples history in blocks, keeping volatility clustering and autocorrelation intact, and gives a distribution of maximum drawdowns. Size and the portfolio's stop come from its tail (the 95th percentile and expected shortfall), not from the one path the backtest happened to take.</p>
       </div>
     </div>
-    <div class="sub">
-      <h3>The hurdles a candidate must clear out of sample</h3>
-      <p class="muted" style="font-size:14px">The firm's current thresholds, as recorded in our validation file and reviewed for each sleeve before launch. They are standards, not results.</p>
-    </div>
-    <div class="scrollx"><table class="hurdles">
-      <thead><tr><th scope="col">Test</th><th scope="col">Hurdle</th><th scope="col">Why it is there</th></tr></thead>
-      <tbody>
-        <tr><td>Deflated Sharpe ratio (DSR): probability the true Sharpe ratio is above zero, after trials, skew and kurtosis</td><td class="v">at least 95%</td><td class="w">The strongest of many variants is overstated by construction; deflation removes that effect before the result is assessed. Trials are counted as clusters of similar configurations, and we select the centre of the strongest cluster rather than its single strongest member.</td></tr>
-        <tr><td>Cost speed limit (Carver 2015)</td><td class="v">at most ⅓ of pre-cost Sharpe</td><td class="w">Turnover times round-trip cost, in Sharpe units. A return that must give up more than a third of itself to trading costs is too fragile to run.</td></tr>
-        <tr><td>Walk-forward windows positive after costs</td><td class="v">4 of 6</td><td class="w">One strong period can lift an average; the result must hold in most periods.</td></tr>
-        <tr><td>The combined portfolio</td><td class="v">t of 3 or more</td><td class="w">Sleeves that pass are combined at equal risk, and the portfolio must clear a higher bar than any single sleeve (Harvey, Liu and Zhu 2016).</td></tr>
-        <tr><td>Sealed holdout</td><td class="v">last 25%</td><td class="w">History the research never saw, used once.</td></tr>
-        <tr><td>Permutation test against shuffled returns</td><td class="v">p &lt; 0.05</td><td class="w">The result must beat what luck alone produces on the same rules.</td></tr>
-        <tr><td>Profit at twice the dealing costs</td><td class="v">still positive</td><td class="w">Executed prices are worse than quoted ones; a result that depends on perfect execution is not one we rely on.</td></tr>
-        <tr><td>Parameter stability under ±20% perturbation</td><td class="v">70% of neighbours</td><td class="w">Settings 20% either side must also hold, or the result reflects fitting rather than a durable effect.</td></tr>
-        <tr><td>In-sample to out-of-sample decay</td><td class="v">at most 50%</td><td class="w">A large drop out of sample is the signature of overfitting.</td></tr>
-        <tr><td>Profit factor · tail ratio</td><td class="v">1.3 · 1.0</td><td class="w">Gains must outweigh losses, and the largest losses must not outweigh the largest gains.</td></tr>
-        <tr><td>Drawdown consistency</td><td class="v">within the 95th percentile</td><td class="w">The worst drawdown must be no deeper than a strategy with the same Sharpe ratio and record length would expect (Magdon-Ismail et al. 2004). A fixed return-to-drawdown threshold penalises long records; this test addresses the question directly. MAR and Sortino are reported on every strategy.</td></tr>
-        <tr><td>Sample size</td><td class="v">200 trades</td><td class="w">Fewer trades cannot separate skill from noise; the standard error of a Sharpe estimate shrinks only with the square root of the sample.</td></tr>
-        <tr><td>Probability of backtest overfitting (PBO)</td><td class="v">reported</td><td class="w">How often the in-sample winner ranks below the median out of sample across combinatorial splits (Bailey, Borwein, López de Prado and Zhu 2017).</td></tr>
-        <tr><td>Paper drift flag</td><td class="v">50 trades, 2 weeks</td><td class="w">If paper results fall below the validated range for that long, the candidate goes back down the ladder.</td></tr>
-      </tbody>
-    </table></div>
   </section>
 
   <section aria-labelledby="h-ladder">
@@ -531,40 +461,6 @@ footer p { max-width: 100ch; }
     <div class="scrollx"><table class="heat" id="heat"></table></div>
   </section>
 
-  <section aria-labelledby="h-portfolio">
-    <div class="head">
-      <div class="eyebrow">How the portfolio is managed</div>
-      <h2 id="h-portfolio">A standard of our own, written down in advance</h2>
-    </div>
-    <div class="figure tilt">
-      <h3>The drawdown plan</h3>
-      <svg viewBox="0 0 640 240" role="img" aria-label="Step chart: exposure is 100% up to a 5% drawdown, 75% to 10%, 50% to 15%, and zero beyond 15% until the principals decide." style="width:100%;height:auto;display:block">
-        <g font-family="IBM Plex Mono, Menlo, monospace" font-size="11" style="fill:var(--subtle)">
-          <text x="44" y="34" text-anchor="end">100%</text><text x="44" y="79" text-anchor="end">75%</text><text x="44" y="124" text-anchor="end">50%</text><text x="44" y="194" text-anchor="end">0%</text>
-          <text x="52" y="214">0%</text><text x="192" y="214" text-anchor="middle">5%</text><text x="332" y="214" text-anchor="middle">10%</text><text x="472" y="214" text-anchor="middle">15%</text><text x="612" y="234" text-anchor="end">fall from the portfolio's peak</text>
-        </g>
-        <g style="stroke:var(--line)" stroke-width="1"><line x1="52" x2="612" y1="30" y2="30"/><line x1="52" x2="612" y1="75" y2="75"/><line x1="52" x2="612" y1="120" y2="120"/><line x1="52" x2="612" y1="190" y2="190"/></g>
-        <path d="M52,30 H192 V75 H332 V120 H472 V190 H612" fill="none" style="stroke:var(--ink)" stroke-width="3"/>
-        <path d="M136,75 H192 M276,120 H332 M416,190 H472" fill="none" style="stroke:var(--mark)" stroke-width="3" stroke-dasharray="5 4"/>
-        <rect x="466" y="184" width="12" height="12" style="fill:var(--mark);stroke:var(--ink)"/>
-        <text x="484" y="182" font-family="Archivo, Arial, sans-serif" font-size="12" font-weight="700" style="fill:var(--ink)">Principals decide</text>
-      </svg>
-      <p class="cap">Exposure steps down as the portfolio falls from its peak and rebuilds only once the fall has recovered past the step by two points (dashed). The levels are the firm's written plan, not a forecast.</p>
-    </div>
-    <div class="rules">
-      <div class="rule rise"><h3>Equal risk contribution</h3><p>Every active sleeve is scaled to the same ex-ante volatility, <span class="m"><i>w<sub>i</sub></i> = <i>σ</i>* / <i>σ̂<sub>i</sub></i></span>, with <span class="m"><i>σ̂</i></span> from an exponentially weighted estimator. No sleeve can dominate the portfolio's risk budget.</p></div>
-      <div class="rule rise"><h3>A correlation budget</h3><p>The covariance matrix is re-estimated daily with Ledoit–Wolf shrinkage, which steadies the estimate when history is short. When two sleeves start to co-move, one is cut back. One month of correlation is a prompt for review, not a verdict.</p></div>
-      <div class="rule rise"><h3>A speed limit on costs</h3><p>No sleeve spends more than a third of its pre-cost Sharpe ratio on costs, which caps annual turnover at <span class="m">(<i>SR</i>/3) / <i>c</i></span>, where <span class="m"><i>c</i></span> is the round-trip cost in Sharpe units (Carver 2015). It favours daily and weekly horizons over minutes.</p></div>
-      <div class="rule rise"><h3>Know who pays</h3><p>If we cannot state who is on the other side of a position and why the return should persist, we do not hold it. Every sleeve's thesis is in the published record.</p></div>
-      <div class="rule rise"><h3>Inefficiencies on top</h3><p>Mispricings earn the most per unit of risk, hold the least capacity and close the soonest. They sit above the core of the portfolio, never in place of it.</p></div>
-      <div class="rule rise"><h3>Sized from the tail, not the average</h3><p>Size and the crash budget come from the 95th percentile of thousands of resampled drawdowns, never the median, and never above half the Kelly fraction. Expected shortfall at 95% is reported daily.</p></div>
-      <div class="rule rise"><h3>A drawdown plan written in advance</h3><p>Risk steps down to 75% at a 5% fall from the portfolio's peak, 50% at 10%, and new risk stops at 15% until the principals decide. It rebuilds only after a genuine recovery, so that no decision is improvised during a drawdown (Grossman and Zhou 1993).</p></div>
-      <div class="rule rise"><h3>Smaller limits around known events</h3><p>Risk is halved the day before and the day of scheduled gap events: central-bank decisions, elections, referendums. A sleeve whose return arises from the event itself is exempt.</p></div>
-      <div class="rule rise"><h3>Exchange data only</h3><p>Research, paper trading and live trading run on exchange and index data. We do not use prices set by a broker that is also the counterparty to the trade.</p></div>
-    </div>
-    <p class="lede rise" style="margin-top:8px">That is how the portfolio is managed.</p>
-  </section>
-
   <footer>
     <p><b>This page is published by Swartberg Capital for information.</b> It illustrates the principles by which the firm's portfolio is constructed and managed. It contains no performance, simulated or actual, and nothing on it is a forecast, a recommendation, advice, an offer, or a solicitation. The example market is an illustration of method, not market history.</p>
     <p><b>Status.</b> Swartberg Capital is a private firm based in South Africa. It is not an authorised financial services provider under the Financial Advisory and Intermediary Services Act, 2002 (Act 37 of 2002), is not registered with the Financial Sector Conduct Authority, and does not offer financial services to, or accept funds from, the public.</p>
@@ -593,78 +489,78 @@ const FORCES = [
 ];
 // glyph: illustrative sketch of the mechanism (not data)
 const FAM = [
-  { id: 'carry', name: 'Carry', group: 'prem', forces: ['rates', 'usd', 'yld', 'curves'],
-    mechanism: 'Own the higher-yielding asset and fund it with the lower-yielding one; collect the gap.',
-    lead: 'Koijen, Moskowitz, Pedersen and Vrugt (2018)',
+  { id: 'carry', name: 'Line 1', group: 'prem', forces: ['rates', 'usd', 'yld', 'curves'],
+    mechanism: '',
+    lead: '',
     glyph: '<path class="gh" d="M4,52 L216,52"/><path class="ln" d="M4,16 L216,16"/><path class="ink" d="M60,20 L60,48 M56,44 L60,48 L64,44 M140,20 L140,48 M136,44 L140,48 L144,44"/>',
-    pays: 'Investors pay to borrow in low-yielding assets and to hedge. Carry collects that payment and gives some back in sharp, rare crashes.',
+    pays: '',
     cands: [],
     alloc: [1, .5, 0, .5],
-    why: ['Carry earns steadily while risk appetite holds.', 'Rate moves in inflationary periods disturb carry; half size.', 'Carry crashes when investors cut risk (Brunnermeier, Nagel and Pedersen 2008); off.', 'Back at half size while volatility is still high.'] },
-  { id: 'value', name: 'Value', group: 'prem', forces: ['infl', 'usd', 'curves', 'eq'],
-    mechanism: 'Buy what is cheap against fundamentals and wait for the price to come back.',
-    lead: 'Asness, Moskowitz and Pedersen (2013)',
+    why: ['', '', '', ''] },
+  { id: 'value', name: 'Line 2', group: 'prem', forces: ['infl', 'usd', 'curves', 'eq'],
+    mechanism: '',
+    lead: '',
     glyph: '<path class="gh" d="M4,44 C80,38 150,32 216,28"/><path class="ln" d="M4,44 C26,30 42,10 66,10 S100,34 118,46 S150,58 166,40 S198,28 216,28"/>',
-    pays: 'Prices overshoot away from fundamentals and return slowly. Holding the cheap asset is uncomfortable, and that discomfort is paid.',
+    pays: '',
     cands: [],
     alloc: [.5, .5, .5, 1],
-    why: ['Value is slow; a steady half weight.', 'Half weight; the inflation evidence for value is mixed.', 'Half weight; cheap assets can get cheaper in stress.', 'Value and momentum move against each other; value carries the rebound that hurts momentum (Asness, Moskowitz and Pedersen 2013).'] },
-  { id: 'vp', name: 'Volatility', group: 'prem', forces: ['vol', 'credit', 'eq'],
-    mechanism: 'Sell part of the insurance investors pay a premium for, within a written loss budget.',
-    lead: 'Carr and Wu (2009)',
+    why: ['', '', '', ''] },
+  { id: 'vp', name: 'Line 3', group: 'prem', forces: ['vol', 'credit', 'eq'],
+    mechanism: '',
+    lead: '',
     glyph: '<path class="ln" d="M4,18 C50,12 90,22 130,16 S190,14 216,18"/><path class="ink" d="M4,46 C24,34 40,56 62,44 S100,34 120,48 S170,38 190,46 L216,42"/><path class="gh" d="M40,20 L40,48 M110,20 L110,46 M180,18 L180,44"/>',
-    pays: 'Investors pay for insurance against falls. Selling part of it, within a written crash budget, collects the premium.',
+    pays: '',
     cands: [],
     alloc: [1, .5, 0, 1],
-    why: ['The premium is collected while VIX futures are in contango.', 'Half size while inflation shocks move volatility.', 'Off the day VIX futures invert (Johnson 2017).', 'Back on after five days of contango.'] },
-  { id: 'trend', name: 'Trend following', group: 'beh', forces: ['rates', 'yld', 'oil', 'gold', 'usd', 'eq'],
-    mechanism: 'Follow sustained moves in any market, long or short, sized to its volatility.',
-    lead: 'Moskowitz, Ooi and Pedersen (2012)',
+    why: ['', '', '', ''] },
+  { id: 'trend', name: 'Line 4', group: 'beh', forces: ['rates', 'yld', 'oil', 'gold', 'usd', 'eq'],
+    mechanism: '',
+    lead: '',
     glyph: '<path class="gh" d="M4,58 C70,48 140,30 216,10"/><path class="ln" d="M4,58 L22,50 L32,55 L52,42 L64,47 L84,34 L96,39 L118,26 L130,30 L152,20 L166,24 L190,12 L216,6"/>',
-    pays: 'Information spreads slowly and hedgers must trade whatever the price, so moves persist. The oldest documented effect in the portfolio.',
+    pays: '',
     cands: [],
     alloc: [1, 1, 1, .5],
-    why: ['On in every state as the core of the portfolio.', 'Trend and commodities have worked in high and rising inflation (Neville et al. 2021).', 'Trend has earned returns in large equity and bond drawdowns for a century (Hurst, Ooi and Pedersen 2017).', 'Trends reverse at turning points; half size in recoveries (Daniel and Moskowitz 2016).'] },
-  { id: 'mom', name: 'Momentum', group: 'beh', forces: ['eq', 'news', 'curves'],
-    mechanism: 'Rank markets by recent strength; hold the leaders against the laggards.',
-    lead: 'Asness, Moskowitz and Pedersen (2013)',
+    why: ['', '', '', ''] },
+  { id: 'mom', name: 'Line 5', group: 'beh', forces: ['eq', 'news', 'curves'],
+    mechanism: '',
+    lead: '',
     glyph: '<rect class="fs" x="8" y="48" width="26" height="12"/><rect class="fs" x="50" y="40" width="26" height="20"/><rect class="fs" x="92" y="32" width="26" height="28"/><rect class="fl" x="134" y="20" width="26" height="40"/><rect class="fl" x="176" y="8" width="26" height="52"/><path class="ink" d="M8,64 L210,64"/>',
-    pays: 'Investors under-react to news, and hedgers rebalance into the close. Winners keep winning for a while.',
+    pays: '',
     cands: [],
     alloc: [1, 1, .5, 0],
-    why: ['On while trends in relative strength persist.', 'On; news-driven moves extend.', 'The intraday leg stays on; the cross-sectional leg halves.', 'Momentum crashes in rebounds after stress (Daniel and Moskowitz 2016); off.'] },
-  { id: 'brk', name: 'Breakout', group: 'beh', forces: ['eq', 'vol', 'news'],
-    mechanism: 'Enter when price clears a level the market has been watching, as volatility expands.',
-    lead: 'George and Hwang (2004)',
+    why: ['', '', '', ''] },
+  { id: 'brk', name: 'Line 6', group: 'beh', forces: ['eq', 'vol', 'news'],
+    mechanism: '',
+    lead: '',
     glyph: '<rect class="fs" x="4" y="28" width="124" height="24" stroke-dasharray="3 4"/><path class="ln" d="M4,40 L18,32 L32,48 L46,33 L60,47 L74,31 L88,46 L102,34 L118,44 L130,30 L150,18 L176,12 L216,4"/>',
-    pays: 'Ranges break when positioning is forced to cover past a level everyone watches. Breakouts pay when volatility expands.',
+    pays: '',
     cands: [],
     alloc: [.5, 1, 1, .5],
-    why: ['Quiet ranges give false breaks; half size.', 'On; inflation surprises move prices out of ranges.', 'Intraday momentum is strongest in high volatility (Gao et al. 2018).', 'Half size while ranges reset.'] },
-  { id: 'mr', name: 'Mean reversion', group: 'beh', forces: ['eq', 'vol'],
-    mechanism: 'Provide liquidity to forced sellers and buyers; earn as prices return to fair levels.',
-    lead: 'Nagel (2012)',
+    why: ['', '', '', ''] },
+  { id: 'mr', name: 'Line 7', group: 'beh', forces: ['eq', 'vol'],
+    mechanism: '',
+    lead: '',
     glyph: '<path class="gh" d="M4,34 L216,34 M4,12 L216,12 M4,56 L216,56"/><path class="ln" d="M4,34 C16,8 30,8 42,34 S68,60 80,34 S106,10 118,34 S144,58 156,34 S182,14 194,34 L216,30"/>',
-    pays: 'Traders who need to trade now pay those who provide liquidity, and pay most when markets are stressed.',
+    pays: '',
     cands: [],
     alloc: [.5, .5, 1, 1],
-    why: ['Half size; little is paid for liquidity in calm markets.', 'Half size.', 'Reversal returns rise with volatility as liquidity providers are paid more (Nagel 2012).', 'On while liquidity is still expensive.'] },
-  { id: 'seas', name: 'Seasonal', group: 'str', forces: ['rates', 'eq', 'gold'],
-    mechanism: 'Hold only in the windows where scheduled flows push prices: overnight, before central-bank decisions, at month end.',
-    lead: 'Lucca and Moench (2015)',
+    why: ['', '', '', ''] },
+  { id: 'seas', name: 'Line 8', group: 'str', forces: ['rates', 'eq', 'gold'],
+    mechanism: '',
+    lead: '',
     glyph: [0,1,2,3,4,5,6,7,8,9,10,11].map(i => `<rect class="${i % 4 === 3 ? 'fl' : 'fs'}" x="${4 + i * 18}" y="${i % 4 === 3 ? 10 : 22}" width="13" height="${i % 4 === 3 ? 50 : 38}"/>`).join(''),
-    pays: 'Flows arrive on a calendar: overnight order imbalance, central-bank meetings, month-end pay and rebalancing.',
+    pays: '',
     cands: [],
     alloc: [1, 1, .5, 1],
-    why: ['On; calendar flows are steady.', 'On.', 'Half size; calendar effects are small against stressed volatility.', 'On.'] },
-  { id: 'arb', name: 'Arbitrage', group: 'str', forces: ['crypto', 'usd', 'eq'],
-    mechanism: 'Buy the same exposure where it is cheap and sell it where it is dear; earn as the gap closes.',
-    lead: 'Makarov and Schoar (2020)',
+    why: ['', '', '', ''] },
+  { id: 'arb', name: 'Line 9', group: 'str', forces: ['crypto', 'usd', 'eq'],
+    mechanism: '',
+    lead: '',
     glyph: '<path class="ln" d="M4,10 C80,12 150,28 216,32"/><path class="ink" d="M4,58 C80,54 150,38 216,34"/><path class="gh" d="M30,12 L30,56 M90,16 L90,50 M150,26 L150,40"/>',
-    pays: 'The same exposure is priced differently in two places. The return with the least risk per unit, and the first to close.',
+    pays: '',
     cands: [],
     alloc: [1, 1, 1, 1],
-    why: ['On; capacity, not regime, is the limit.', 'On.', 'On; dislocations widen in stress.', 'On.'] },
+    why: ['', '', '', ''] },
 ];
 const ST = {};   // status labels belong to the strategy lists, which the website does not carry
 const ALLOC_WORD = a => a === 1 ? 'On' : a === 0.5 ? 'Half' : 'Off';
@@ -696,7 +592,7 @@ document.getElementById('styles').innerHTML = FAM.map(f => `
   </article>`).join('');
 
 /* ---------- sleeve cards ---------- */
-document.getElementById('fams').innerHTML = FAM.map(f => `
+(document.getElementById('fams') || {}).innerHTML = FAM.map(f => `
   <article class="fam rise ${f.group}">
     <div class="fh"><i class="sw"></i><h3>${f.name}</h3></div>
     <div class="grp">${GROUPS[f.group]}</div>
@@ -713,7 +609,7 @@ function drawHeat() {
 heat.addEventListener('pointermove', e => {
   const c = e.target.closest('.cell'); if (!c) return hideTip();
   const f = FAM.find(x => x.id === c.dataset.f), r = +c.dataset.r;
-  showTip(e, `<b>${f.name} · ${REGIMES[r].name}: ${ALLOC_WORD(f.alloc[r])}</b><br>${esc(f.why[r])}`);
+  showTip(e, `<b>${f.name} · ${REGIMES[r].name}: ${ALLOC_WORD(f.alloc[r])}</b>${f.why[r] ? '<br>' + esc(f.why[r]) : ''}`);
 });
 heat.addEventListener('pointerleave', hideTip);
 onRegime.push(drawHeat);
@@ -916,7 +812,7 @@ function drawBraid() {
     let best = null, bd = 14; FAM.forEach((f, i) => { const d = Math.abs(yOf(i, x) - y); if (d < bd) { bd = d; best = f; } });
     if (!best) return hideTip();
     const k = Math.min(SEQ.length - 1, Math.floor((x - x0) / seg)), rr = SEQ[k];
-    showTip(ev, `<b>${best.name} · ${REGIMES[rr].name}: ${ALLOC_WORD(best.alloc[rr])}</b><br>${esc(best.why[rr])}`);
+    showTip(ev, `<b>${best.name} · ${REGIMES[rr].name}: ${ALLOC_WORD(best.alloc[rr])}</b>${best.why[rr] ? '<br>' + esc(best.why[rr]) : ''}`);
   };
   svg.onpointerleave = hideTip;
 }
@@ -979,7 +875,7 @@ const RUNGS = [
   ['Costs', 'Net of spread, commission, slippage and financing; positive at 2x costs and inside the cost speed limit.', 'Research'],
   ['Walk-forward', 'Six purged, embargoed folds, at least four positive after costs; the centre of the winning cluster is selected.', 'Research'],
   ['Permutation', 'Beats the null distribution of shuffled returns at p < 0.05.', 'Research'],
-  ['Hurdles', 'Deflated Sharpe probability of at least 95%, PBO reported, and the full hurdle table.', 'Research, checked by risk'],
+  ['Hurdles', 'Clears every hurdle the firm wrote down before the test.', 'Research, checked by risk'],
   ['Sealed holdout', 'The last quarter of history, touched once.', 'Research'],
   ['Challenge', 'A structured debate: one agent argues for, one against, ending with the evidence that would change the verdict.', 'Risk, then principals'],
   ['Paper league', 'Simulated money on exchange data; each day declared at 06:00; overrides logged and scored.', 'Runs continuously'],
@@ -1053,8 +949,10 @@ function drawCalc() {
   o += `<rect x="${(X(N) - 6).toFixed(1)}" y="${(Y(Math.min(mult(N, rho), maxM)) - 6).toFixed(1)}" width="12" height="12" fill="${C.mark}" stroke="${C.ink}"/>`;
   document.getElementById('calcSvg').innerHTML = o;
 }
-['calcN', 'calcR'].forEach(id => document.getElementById(id).addEventListener('input', drawCalc));
-onTheme.push(drawCalc);
+if (document.getElementById('calcSvg')) {   // the diversification calculator sat in the equations section
+  ['calcN', 'calcR'].forEach(id => document.getElementById(id).addEventListener('input', drawCalc));
+  onTheme.push(drawCalc);
+}
 
 /* ---------- regime model: Markov chain, transition matrix, filtered regime curves ---------- */
 const PM = [[0.970, 0.010, 0.015, 0.005], [0.015, 0.960, 0.020, 0.005], [0.000, 0.010, 0.950, 0.040], [0.040, 0.010, 0.010, 0.940]];
